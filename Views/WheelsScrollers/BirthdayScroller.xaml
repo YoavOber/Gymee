@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="GymeeDestkopApp.Views.BirthdayScroller"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:GymeeDestkopApp.Views" xmlns:viewmodels="clr-namespace:GymeeDestkopApp.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:SignupViewModel}"
+             mc:Ignorable="d" 
+             Height="660" Width="1080">
+    <UserControl.Resources>
+        <Style x:Key="ListViewTemplate" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Width" Value="148"/>
+            <Setter Property="Height" Value="65"/>
+            <Setter Property="Background" Value="#2d2e2d"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="48"/>
+            <Setter Property="FontFamily" Value="OpenSans"/>
+            <Setter Property="FlowDirection" Value="RightToLeft"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#4D959595"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Foreground" Value="#FFFFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>      
+    </UserControl.Resources>
+    <Grid>
+        <ItemsControl Height="660" Width="1080" Name="HeightSelection" Background="#2d2e2d">
+            <TextBlock FlowDirection="RightToLeft" Height="115" Padding="29" TextAlignment="Center" Background="#ff9b53" FontSize="48" FontStyle="Normal"
+           FontWeight="Medium" FontFamily="OpenSans" Foreground="#FFFFFFFF" Text="תאריך לידה"
+                       Margin="0,0,0,30"></TextBlock>
+            <ListView Margin="0,0,-600,0" HorizontalContentAlignment="Center" FlowDirection="RightToLeft"
+                x:Name="Days"
+                SelectionMode="Single" Height="462" 
+                BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      ItemContainerStyle="{StaticResource ListViewTemplate}"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden" Width="204" SelectionChanged="day_SelectionChanged">
+            </ListView>
+            <ListView Margin="0,-462,100,0" HorizontalContentAlignment="Center"
+                      FlowDirection="RightToLeft" x:Name="Month"
+                  SelectionMode="Single" Height="462" 
+                  BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden" Width="324" 
+                      SelectionChanged="month_SelectionChanged">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem" BasedOn="{StaticResource ResourceKey=ListViewTemplate}">
+                        <Setter Property="Width" Value="194"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <ListView Margin="0,-462,700,0" HorizontalContentAlignment="Center" FlowDirection="RightToLeft" x:Name="year"
+                SelectionMode="Single" Height="462"  BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                ItemsSource="{Binding YearList}"  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                Width="240" ItemContainerStyle="{StaticResource ListViewTemplate}" SelectionChanged="year_SelectionChanged">
+            </ListView>
+        </ItemsControl>
+    </Grid>
+</UserControl>

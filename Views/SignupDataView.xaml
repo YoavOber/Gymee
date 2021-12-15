@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="GymeeDesktopApp.Views.SignupDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:model="clr-namespace:GymeeDesktopApp.Models" 
+             xmlns:viewmodels="clr-namespace:GymeeDesktopApp.ViewModels" 
+             mc:Ignorable="d" 
+             Height="1920" Width="1080">
+
+    <UserControl.DataContext>
+        <viewmodels:SignupDetailsViewModel></viewmodels:SignupDetailsViewModel>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <model:BoolToVisibilityConverter x:Key="BoolToVisibility" TrueValue="Collapsed" FalseValue="Visible">
+        </model:BoolToVisibilityConverter>
+        <model:BoolToVisibilityConverter x:Key="BoolToVisibilityRev" TrueValue="Visible" FalseValue="Collapsed">
+        </model:BoolToVisibilityConverter>
+        <model:BoolToFillConverter x:Key="BoolToFill"></model:BoolToFillConverter>
+    </UserControl.Resources>
+    <Grid Background="Black" Height="1920" Width="1080" VerticalAlignment="Top">
+        <!--<Image  Source="/Views/Logo.png" Margin="299,71,299,1724" Height="139" ></Image>-->
+        <Image  Source="pack://siteoforigin:,,/Views/Media/Logo.png"
+                Margin="299,71,299,1724" Height="139" ></Image>
+        <TextBlock Text="הרשמה" FontFamily="OpenSans" FontSize="82" FontStyle="Normal"
+           FontWeight="Bold" Foreground="#FFFFFFFF" LineHeight="103" Margin="661,443,132,1365"/>
+
+        <TextBox x:Name="FullName" Margin="0,607,0,1172" Width="816" VerticalContentAlignment="Bottom" 
+            Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
+            FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="שם מלא" FontWeight="Light"
+            materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50" 
+            FontFamily="{DynamicResource MaterialDesignFont}"
+            BorderBrush="#FFF" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+        <TextBox x:Name="EmailAddr"  Margin="0,800,0,979" Width="816"  VerticalContentAlignment="Bottom"
+            Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
+            FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="כתובת אימייל" 
+            materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50" FontWeight="Light"
+                 Text="{Binding EmailAddr , UpdateSourceTrigger=PropertyChanged}"
+            FontFamily="{DynamicResource MaterialDesignFont}"  
+           BorderBrush="#FFF"/>
+
+        <TextBox x:Name="PhoneNumber"  Margin="0,994,0,785" Width="816"  VerticalContentAlignment="Bottom"
+            Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
+            FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="טלפון נייד" 
+            materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50"
+                 Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
+            FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
+                  BorderBrush="#FFF"/>
+        <PasswordBox x:Name="Password" Margin="0,1188,0,596.5" Width="816"  VerticalContentAlignment="Bottom"
+            Foreground="#FFF" Style="{StaticResource MaterialDesignFilledPasswordBox}" PasswordChanged="Password_PasswordChanged" 
+            FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="סיסמא" 
+            materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50"
+            FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
+            BorderBrush="#FFF" Visibility="Visible"/>
+        <TextBox x:Name="ShowPassTxtBox"  Margin="132,1182,132,596" Width="816"  VerticalContentAlignment="Bottom"
+            Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
+            FlowDirection="RightToLeft" TextChanged="ShowPassTxtBox_TextChanged"
+            materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50"
+            Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"
+            FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
+            BorderBrush="#FFF"/>
+        <CheckBox Margin="110,1328,804,540" Content="הצג סיסמא" FontWeight="UltraLight" HorizontalContentAlignment="Left"
+                  Style="{StaticResource MaterialDesignAccentCheckBox}" Foreground="White" FontSize="25" Checked="CheckBox_Checked" 
+                  Unchecked="CheckBox_UnChecked" Background="Black"></CheckBox>
+        <Button
+            IsEnabled="{Binding CanMoveNext}"
+            Command="{Binding MoveNextCmd}"
+            Style="{StaticResource MaterialDesignRaisedAccentButton}" materialDesign:ButtonAssist.CornerRadius="58"
+            Background="{Binding CanMoveNext,Converter={StaticResource BoolToFill}}" Margin="329,1584,328,220" Height="116">
+            <TextBlock Text="הבא" FontFamily="OpenSans" FontSize="41" FontStyle="Normal" FontWeight="Medium" 
+                Foreground="#FFFFFFFF" LineHeight="49" TextAlignment="Center"
+                Height="58"/>
+        </Button>
+        <Button Content="?משתמש קיים" Style="{StaticResource MaterialDesignFlatButton}"
+                FontFamily="OpenSans" FontSize="41"
+                Command="{Binding UserExistsCmd}"
+                Foreground="#FF999999" Margin="329,1728,328,136" Height="56" FontWeight="Light"/>
+
+
+        <ProgressBar Panel.ZIndex="0"
+            Style="{StaticResource MaterialDesignCircularProgressBar}"
+            Value="0" Foreground="White" Height="100" Width="100"
+            IsIndeterminate="{Binding IsLoading}" Margin="490,1377,490,443"  >
+        </ProgressBar>
+        <TextBlock x:Name="NameErrTxt" Text="שדה חובה" FontFamily="OpenSans" TextAlignment="Right" 
+           FontSize="40"  FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" LineHeight="103" Height="55" Margin="132,753,132,1120"  
+             Visibility="{Binding IsValidFullName,Converter={StaticResource BoolToVisibility}}"/>
+        <TextBlock x:Name="EmailErrTxt" Text="כתובת אימייל לא תקינה" FontFamily="OpenSans" TextAlignment="Right" Margin="132,941,132,924"
+           FontSize="40"  FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" LineHeight="103"  
+             Visibility="{Binding IsValidEmail,Converter={StaticResource BoolToVisibility}}"/>
+        <TextBlock x:Name="EmailExistsErr" Text="המייל כבר קיים במערכת" FontFamily="OpenSans" TextAlignment="Right" 
+                   Visibility="{Binding EmailExists,Converter={StaticResource BoolToVisibilityRev}}"
+            FontSize="40" FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" LineHeight="103" Height="55"  Margin="132,941,132,924"/>
+
+        <TextBlock x:Name="PhoneErrTxt" Text="מספר טלפון לא תקין" FontFamily="OpenSans" TextAlignment="Right" 
+            FontSize="40" FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" LineHeight="103" Height="55"  Margin="132,1135,132,730"
+                   Visibility="{Binding IsValidPhone,Converter={StaticResource BoolToVisibility}}"/>
+        <TextBlock x:Name="PassErrTxt" Text="על הסיסמה להכיל לפחות 6 תווים" FontFamily="OpenSans" TextAlignment="Right" 
+                   Visibility="{Binding IsValidPassword,Converter={StaticResource BoolToVisibility}}"
+            FontSize="40" FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" LineHeight="103" Height="55"  Margin="132,1328,132,536"/>
+        <Button x:Name="BackBtn" Margin="936,7,0,1813" Height="100" FontFamily="OpenSans" FontWeight="Light"
+            Foreground="#FFF" FontSize="37" Background="Black"
+            BorderThickness="0" materialDesign:ShadowAssist.ShadowDepth="Depth0"
+            materialDesign:RippleAssist.IsDisabled="True" Command="{Binding GoBackCmd}">
+            <materialDesign:PackIcon Kind="ArrowRightCircleOutline" materialDesign:RippleAssist.IsDisabled="False" Background="Black" Height="80" Width="116" VerticalAlignment="Center" />
+        </Button>
+
+
+    </Grid>
+</UserControl>

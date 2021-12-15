@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="GymeeDesktopApp.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:GymeeDesktopApp.Views" 
+             xmlns:viewmodels="clr-namespace:GymeeDesktopApp.ViewModels"
+             xmlns:model="clr-namespace:GymeeDesktopApp.Models"
+             mc:Ignorable="d" 
+             Height="1920" Width="1080">
+    <UserControl.DataContext>
+        <viewmodels:LoginViewModel></viewmodels:LoginViewModel>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <model:BoolToVisibilityConverter x:Key="BoolToVisibility" TrueValue="Collapsed" FalseValue="Visible">
+        </model:BoolToVisibilityConverter>
+        <model:BoolToFillConverter x:Key="BoolToFill"></model:BoolToFillConverter>
+    </UserControl.Resources>
+    <Grid Background="Black" Height="1920" Width="1080" VerticalAlignment="Top">
+        <Image Source="pack://siteoforigin:,,/Views/Media/Logo.png"
+               Margin="299,71,299,1724" Height="139" ></Image>
+        <!--<Image Source="/Views/Logo.png" Margin="299,71,299,1724" Height="139" ></Image>-->
+        <TextBlock Text="התחברות" FontFamily="OpenSans" FontSize="82" FontStyle="Normal"
+           FontWeight="Bold" Foreground="#FFFFFFFF" LineHeight="103" Margin="576,443,132,1365" RenderTransformOrigin="0.847,0.366"/>
+        <TextBox x:Name="EmailAddr"  Margin="132,620,132,1178" Width="816"  VerticalContentAlignment="Bottom"
+            Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
+            FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="כתובת אימייל" 
+            materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50" 
+                 Text="{Binding EmailAddr,UpdateSourceTrigger=PropertyChanged}"
+            FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
+           BorderBrush="#FFF">
+        </TextBox>
+        <TextBox x:Name="PhoneNumber"  Margin="132,805,132,985" Width="816"  VerticalContentAlignment="Bottom"
+            Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
+            FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="טלפון נייד" 
+            materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50" FontWeight="Light"
+                 Text="{Binding PhoneNumber,UpdateSourceTrigger=PropertyChanged}"
+            FontFamily="{DynamicResource MaterialDesignFont}" 
+                  BorderBrush="#FFF"/>
+        <ProgressBar
+         Style="{StaticResource MaterialDesignCircularProgressBar}"
+         Value="0" Foreground="White" Height="300" Width="300"
+         IsIndeterminate="{Binding IsLoading}" Margin="390,1132,390,488"  >
+        </ProgressBar>
+        <Button IsEnabled="{Binding CanMoveNext}"
+            Style="{StaticResource MaterialDesignRaisedAccentButton}" materialDesign:ButtonAssist.CornerRadius="58"
+            Background="{Binding CanMoveNext,Converter={StaticResource BoolToFill}}" Margin="329,1584,328,220"
+                Height="116" Command="{Binding LoginCmd}">
+            <TextBlock Text="הבא" FontFamily="OpenSans" FontSize="41" FontStyle="Normal" FontWeight="Medium" 
+                Foreground="#FFFFFFFF" LineHeight="49" TextAlignment="Center"
+                Height="58"/>
+        </Button>
+        <Button Content="?משתמש חדש" Style="{StaticResource MaterialDesignFlatButton}" FontFamily="OpenSans" 
+                FontSize="41"
+            FontStyle="Normal" FontWeight="Light" Foreground="#FF999999" Margin="329,1728,328,136" Height="56"
+                Command="{Binding NewUserCmd}"/>
+        <TextBlock x:Name="EmailErrTxt" Text="כתובת אימייל לא תקינה" FontFamily="OpenSans" TextAlignment="Right" Margin="132,753,132,1120"  
+           FontSize="40"  FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" LineHeight="103"  
+             Visibility="{Binding IsValidEmail,Converter={StaticResource BoolToVisibility}}"/>
+        <TextBlock x:Name="PhoneErrTxt" Text="מספר טלפון לא תקין" FontFamily="OpenSans" TextAlignment="Right" 
+            FontSize="40" FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" LineHeight="103" Height="55" Margin="132,940,132,925"  
+                   Visibility="{Binding IsValidPhone,Converter={StaticResource BoolToVisibility}}"/>
+        <TextBlock Text="משתמש לא נמצא" FontFamily="OpenSans" TextAlignment="Center" 
+            FontSize="40" FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" 
+                   LineHeight="103" Height="55" Margin="132,1276,132,589"  
+                   Visibility="{Binding UserExists,Converter={StaticResource BoolToVisibility}}"/>
+        <Button x:Name="BackBtn" Margin="936,7,0,1813" Height="100" FontFamily="OpenSans" FontWeight="Light"
+            Foreground="#FFF" FontSize="37" Background="Black"
+            BorderThickness="0" materialDesign:ShadowAssist.ShadowDepth="Depth0"
+            materialDesign:RippleAssist.IsDisabled="True" Command="{Binding GoBackCmd}">
+            <materialDesign:PackIcon Kind="ArrowRightCircleOutline" materialDesign:RippleAssist.IsDisabled="False" Background="Black" Height="80" Width="116" VerticalAlignment="Center" />
+        </Button>
+    </Grid>
+</UserControl>

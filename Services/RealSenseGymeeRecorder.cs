@@ -1,0 +1,147 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using Intel.RealSense;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.Timers;
+using System.IO;
+
+
+namespace GymeeDestkopApp.Services
+{
+    
+    public class RealSenseGymeeRecorder : IGymeeRecorder
+    {
+        RecordingState recording = RecordingState.BEFORE;
+        Pipeline pipeline;
+        bool processing = false;
+        string pngDirectory = "pngs";
+        string depthDirectory = "depths";
+        string videosDirectory = "videos";
+        int fps;
+        string pngPrefix = "rgb";
+        string recordId;
+        int pngCount = 1;
+        FrameQueue queue;
+
+        public RealSenseGymeeRecorder(int width = 1280, int height = 720, int fps = 30)
+        {
+            Directory.CreateDirectory(this.pngDirectory);
+            Directory.CreateDirectory(this.depthDirectory);
+            Directory.CreateDirectory(this.videosDirectory);
+            this.fps = fps;
+            Config cfg = new Config();
+            cfg.EnableStream(Intel.RealSense.Stream.Depth, width, height, Format.Z16, fps);
+            cfg.EnableStream(Intel.RealSense.Stream.Color, width, height, Format.Rgb8, fps);
+            this.pipeline = new Pipeline();
+            this.queue = new FrameQueue();
+            this.pipeline.Start(cfg);
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    FrameSet frames;
+                    if (queue.PollForFrame(out frames))
+                    {
+                        using (frames)
+                        using (var color = frames.ColorFrame)
+                        using (var depth = frames.DepthFrame)
+                        //we save the least processed color and depth outputs and store them for post record processing
+                        {
+                            Trace.WriteLine("Processing frame");
+                            using var bitmap = GymeeTransforms.GenerateRGBBitmap(color);
+                            bitmap.Save($"{this.pngDirectory}/{this.recordId}/{this.pngPrefix}{this.pngCount}.png");
+                            GymeeTransforms.WriteDepthFrameToFile(depth, $"{this.depthDirectory}/{this.recordId}/depth{pngCount++}");
+                        }
+                    }
+                }
+            });
+        }
+
+        public RecordingState GetRecordingState() {
+            return this.recording;
+        }
+
+        public bool IsProcessing() {
+            return this.processing;
+        }
+
+        public string GetDepthFramesPath() {
+            var depthFramesPath = $"{this.depthDirectory}/{this.recordId}";
+            if (Directory.Exists(depthFramesPath)) {
+                return depthFramesPath;
+            }
+            return null;
+        }
+
+        public string GetVideoPath() {
+            var videoPath = $"{this.videosDirectory}/{this.recordId}.mp4";
+            if(File.Exists(videoPath)) {
+                return videoPath;
+            }
+            return null;
+        }
+
+        public void Start(string recordId)
+        {
+            if (this.recording != RecordingState.BEFORE) {
+                return;
+            }
+            //RecordButton.Content = "Pause";
+            this.recording = RecordingState.RECORDING;
+            this.recordId = recordId;
+            Directory.CreateDirectory($"{this.depthDirectory}/{this.recordId}");
+            Directory.CreateDirectory($"{this.pngDirectory}/{this.recordId}");
+
+            //run recording in another thread which is dependent on the recording state
+            Task.Run(() => {
+                while (this.recording == RecordingState.RECORDING) {
+                    using (var frames = pipeline.WaitForFrames()) {
+                        Trace.WriteLine("Queuing frame..");
+                        queue.Enqueue(frames);
+                    }
+                }
+            });
+        }
+
+
+        public void End()
+        {
+            if (this.recording != RecordingState.RECORDING) {
+                return;
+            }
+            this.recording = RecordingState.DONE;
+            this.pipeline.Stop();
+            Task.Run(() => {
+                this.processing = true;
+                var pngFiles = Directory.GetFiles($"{this.pngDirectory}/{this.recordId}", "*.png");
+                foreach (var pngFileName in pngFiles) {
+                    using (var bitmap = new Bitmap(pngFileName)) {
+                        GymeeTransforms.FixRealSenseBitmap(bitmap);
+                        bitmap.Save(pngFileName);
+                    }
+                }
+                this.pngCount = 1;
+                Process.Start("ffmpeg.exe", $"-framerate {this.fps} -i {this.pngDirectory}/{this.recordId}/{this.pngPrefix}%d.png -c:v libx264 -pix_fmt yuv420p -crf 25 {this.videosDirectory}/{this.recordId}.mp4");
+                this.processing = false;
+                this.recording = RecordingState.BEFORE;
+            });
+        }
+
+
+        
+    }
+}

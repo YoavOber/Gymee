@@ -1,0 +1,38 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GymeeDestkopApp.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             x:Class="GymeeDestkopApp.Views.PostWorkoutQR"
+             mc:Ignorable="d" Height="1920" Width="1080">
+    <Grid Background="Black">
+        <Image  Source="C:\Users\test\Documents\GitHub\Gymee-Workstation\Views\Logo.png" Margin="299,71,299,1724" Height="139"/>
+        <!--<Image Source="/Views/Logo.png" Margin="299,71,299,1724" Height="139"/>-->
+        <Rectangle Fill="White"  Margin="822,692,133,1212"/>
+        <TextBlock Text="כל הכבוד!" FlowDirection="RightToLeft"
+           FontFamily="OpenSans" Margin="515,719,134,1089"
+           FontSize="82"
+           FontStyle="Normal"
+           FontWeight="Bold"
+           Foreground="#FFFFFFFF"
+           LineHeight="103" />
+        <TextBlock TextWrapping="WrapWithOverflow"  FlowDirection="RightToLeft" TextAlignment="Left"
+           FontFamily="OpenSans" FontSize="41" Margin="132,873,133,640"  FontStyle="Normal"
+           FontWeight="Light" Foreground="#FFFFFFFF" LineHeight="52">
+           <Run Text="כעת ניתן להתחבר לאפליקציה של GYMEE על ידי לחיצה על הקישור שנשלח אלייך במייל או סריקת הQR Code שמופיע מטה, ולבצע אימון היכרות."/>
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="במהלך 24 השעות הקרובות GYMEE יסיים לנתח את היכולת שהצגת באימון וכלל האימונים שלך יהיו מותאמים אלייך אישית."/>
+        </TextBlock>
+        <Image Source="C:\Users\USER\projects\GymeeFinal\Views\Media\QRCode.png" Margin="440,1303,440,417"/>
+        <Button IsEnabled="True" Width="423"
+            Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="329,1584,328,220"
+            materialDesign:ButtonAssist.CornerRadius="58"
+            Background="#ff9b53" Height="116" Click="Button_Click">
+            <TextBlock Text="סיום" FontFamily="OpenSans" FontSize="41" FontStyle="Normal"
+           FontWeight="Medium" Foreground="#FFFFFFFF" LineHeight="49" />
+        </Button>
+    </Grid>
+</UserControl>

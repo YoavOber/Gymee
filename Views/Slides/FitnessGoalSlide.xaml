@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="GymeeDestkopApp.Views.FitnessGoalSlide"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:GymeeDestkopApp.Views"
+             xmlns:model="clr-namespace:GymeeDesktopApp.Models"
+             mc:Ignorable="d" 
+             Width="1080" Height="1042">
+    <UserControl.Resources>
+        <model:BoolToFillConverter x:Key="BoolToFill"></model:BoolToFillConverter>
+    </UserControl.Resources>
+    <Grid  Width="1080" Height="1042">
+        <ListBox HorizontalContentAlignment="Center" x:Name="Btns" SelectionMode="Single" Background="Black">
+            <TextBlock TextAlignment="Left" FontFamily="OpenSans" FontSize="82"
+           FontStyle="Normal" FontWeight="Bold" FlowDirection="RightToLeft" Foreground="#FFFFFFFF" 
+                   LineHeight="103" Height="215" Width="755">
+                <Run Text="לשם מה עשית"/><LineBreak/>
+                <Run Text="מנוי לחדר כושר?"/>
+            </TextBlock>
+            <Button x:Name="Muscle" Height="173" Width="812" Margin="30"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    Background="#2d2e2d" Click="Begginer_Click">
+                <TextBlock x:Name="MuscleTxt" Text="להגדיל מסת שריר" FontFamily="OpenSans" FontSize="48" FontStyle="Normal"
+           FontWeight="Bold" Foreground="#FF959595" LineHeight="65" Width="778"
+             TextAlignment="Right" Height="69"/>
+            </Button>
+            <Button x:Name="Weight" Height="173" Width="812" Margin="30"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    Background="#2d2e2d" Click="Intermediate_Click">
+                <TextBlock x:Name="WeightTxt" Text="להתחטב ולהוריד במשקל" FontFamily="OpenSans" FontSize="48" FontStyle="Normal"
+                    FontWeight="Bold" Foreground="#FF959595" LineHeight="65" Width="778"
+                    TextAlignment="Right" Height="69"/>
+            </Button>
+            <Button x:Name="Overall" Height="173" Width="812" Margin="30"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    Background="#2d2e2d" Click="Advanced_Click">
+                <TextBlock x:Name="OverallTxt" Text="כושר כללי" FontFamily="OpenSans" FontSize="48" FontStyle="Normal"
+                    FontWeight="Bold" Foreground="#FF959595" LineHeight="65" Width="778"
+                    TextAlignment="Right" Height="69"/>
+
+            </Button>
+        </ListBox>
+
+    </Grid>
+</UserControl>

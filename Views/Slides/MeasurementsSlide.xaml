@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="GymeeDestkopApp.Views.MeasurementsSlide"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:GymeeDestkopApp.Views" xmlns:model="clr-namespace:GymeeDesktopApp.Models" 
+             xmlns:viewmodels="clr-namespace:GymeeDestkopApp.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:SignupViewModel}"
+             mc:Ignorable="d" 
+             Width="1080" Height="1042">
+
+    <UserControl.Resources>
+        <Style x:Key="V_BtnStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
+            <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0"/>
+            <Setter Property="Width" Value="36"/>
+            <Setter Property="Height" Value="39"/>
+            <Setter Property="materialDesign:RippleAssist.IsDisabled" Value="True"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Background" Value="#2d2e2d"/>
+            <Setter Property="FontStretch" Value="UltraExpanded"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+        </Style>
+        <model:IntToFillConverter x:Key="IntToFill"/>
+        <model:StringToFlowDirection x:Key="StrToFlow" DefaultVal="לא הוזן" DefaultDirection="RightToLeft" NewDirection="LeftToRight"/>
+        <model:StringToFillConverter x:Key="StrToFill" DefaultVal="לא הוזן"/>
+        <model:SelectionToStringConverter x:Key="HeightSelectionToStr" IntValue="-1" DefaultString="לא הוזן" NewString="ס''מ"/>
+        <model:SelectionToStringConverter x:Key="WeightSelectionToStr" IntValue="-1" DefaultString="לא הוזן" NewString="ק''ג"/>
+    </UserControl.Resources>
+
+    <Grid Background="Black">
+        <TextBlock Panel.ZIndex="0" TextAlignment="Left" FontFamily="OpenSans" FontSize="82"
+            FontStyle="Normal" FontWeight="Bold" FlowDirection="RightToLeft" Foreground="#FFFFFFFF" 
+            LineHeight="103" Margin="108,0,132,849" >
+            <Run Text="יש להזין את"/><LineBreak/>
+            <Run Text="הנתונים הבאים"/>
+        </TextBlock>
+        <Border BorderBrush="Black" Margin="125,262,129,37" BorderThickness="8" Panel.ZIndex="1" CornerRadius="20,20,0,0"/>
+        <Border BorderBrush="Black" Margin="125,262,129,84" BorderThickness="8" Panel.ZIndex="1" CornerRadius="0,0,20,20"/>
+
+        <StackPanel Margin="0,265,0,37"  HorizontalAlignment="Center">
+            <ItemsControl materialDesign:TextFieldAssist.TextFieldCornerRadius="20,20,0,0" Width="812" Height="163" 
+                          Background="#2d2e2d" Margin="5">
+                <TextBlock Text="גובה" Width="228" Foreground="{Binding SelectedHeight,Converter={StaticResource IntToFill}}" 
+                           FontFamily="OpenSans" FontSize="48" FontStyle="Normal" Margin="530,50,0,0"
+                         FontWeight="Bold"  FlowDirection="RightToLeft" />
+                <TextBlock Margin="-585,-50,0,0" FontFamily="OpenSans" FontSize="32"
+                           FontStyle="Normal" FontWeight="Bold" Foreground="{Binding SelectedHeight,Converter={StaticResource IntToFill}}"
+                           LineHeight="58" Width="154" FlowDirection="RightToLeft"
+                           Text="{Binding SelectedHeight,Converter={StaticResource HeightSelectionToStr}}"/>
+                <Button Margin="-390,-110,0,0" Command="{Binding ShowSelectionWheelCmd}" CommandParameter="height"
+                       Foreground="{Binding SelectedHeight,Converter={StaticResource IntToFill}}" 
+                          Style="{StaticResource V_BtnStyle}" Width="32">
+                    <materialDesign:PackIcon Kind="ChevronDown" Height="39" Width="36" />
+                </Button>
+            </ItemsControl>
+            <ItemsControl materialDesign:TextFieldAssist.TextFieldCornerRadius="20,20,0,0" Width="812" Height="163" 
+                          Background="#2d2e2d" Margin="5">
+                <TextBlock Text="משקל" Width="228" Foreground="{Binding SelectedWeight,Converter={StaticResource IntToFill}}" 
+                          FontFamily="OpenSans" FontSize="48" FontStyle="Normal" Margin="530,50,0,0"
+                         FontWeight="Bold"  FlowDirection="RightToLeft" />
+                <TextBlock Margin="-585,-50,0,0" FontFamily="OpenSans" FontSize="32"
+                           FontStyle="Normal" FontWeight="Bold" Foreground="{Binding SelectedWeight,Converter={StaticResource IntToFill}}" 
+                           LineHeight="58" Width="154" FlowDirection="RightToLeft"
+                           Text="{Binding SelectedWeight,Converter={StaticResource WeightSelectionToStr}}"/>
+                <Button Margin="-390,-110,0,0" Command="{Binding ShowSelectionWheelCmd}" CommandParameter="weight"
+                        Foreground="{Binding SelectedWeight,Converter={StaticResource IntToFill}}" 
+                          Style="{StaticResource V_BtnStyle}">
+                    <materialDesign:PackIcon Kind="ChevronDown" Height="39" Width="36" />
+                </Button>
+            </ItemsControl>
+            <ItemsControl materialDesign:TextFieldAssist.TextFieldCornerRadius="20,20,0,0" Width="812" Height="163" 
+                          Background="#2d2e2d" Margin="5">
+                <TextBlock Text="מין" Width="228" Foreground="{Binding SelectedGender,Converter={StaticResource StrToFill}}"
+                           FontFamily="OpenSans" FontSize="48" FontStyle="Normal" Margin="530,50,0,0"
+                         FontWeight="Bold"  FlowDirection="RightToLeft" />
+                <TextBlock Margin="-585,-50,0,0" FontFamily="OpenSans" FontSize="32"  
+                           FontStyle="Normal" FontWeight="Bold" Foreground="{Binding SelectedGender,Converter={StaticResource StrToFill}}"
+                           LineHeight="58" Width="147" FlowDirection="RightToLeft"
+                           Text="{Binding SelectedGender}"/>
+                <Button VerticalContentAlignment="Bottom" 
+                        Margin="-390,-110,0,0" Command="{Binding ShowSelectionWheelCmd}" CommandParameter="gender"
+                         Foreground="{Binding SelectedGender,Converter={StaticResource StrToFill}}" 
+                          Style="{StaticResource V_BtnStyle}">
+                    <materialDesign:PackIcon Kind="ChevronDown" Height="39" Width="36" />
+                </Button>
+            </ItemsControl>
+            <ItemsControl materialDesign:TextFieldAssist.TextFieldCornerRadius="20,20,0,0" Width="812" Height="163" 
+                          Background="#2d2e2d" Margin="5">
+                <TextBlock Text="תאריך לידה" Width="284" Foreground="{Binding DateStr,Converter={StaticResource StrToFill}}"
+                           FontFamily="OpenSans" FontSize="48" FontStyle="Normal" Margin="482,50,0,0"
+                         FontWeight="Bold"  FlowDirection="RightToLeft" />
+                <TextBlock Margin="-620,-50,0,0" FontFamily="OpenSans" FontSize="27.5"
+                           FontStyle="Normal" FontWeight="Bold" Foreground="{Binding DateStr,Converter={StaticResource StrToFill}}"
+                           LineHeight="58" Width="181" FlowDirection="RightToLeft"
+                           Text="{Binding DateStr}">
+                </TextBlock>
+                <Button  Margin="-400,-110,0,0" Command="{Binding ShowSelectionWheelCmd}" CommandParameter="age"
+                        Foreground="{Binding DateStr,Converter={StaticResource StrToFill}}" 
+                          Style="{StaticResource V_BtnStyle}" Width="27" Height="39">
+                    <materialDesign:PackIcon Kind="ChevronDown" Height="39" Width="36" />
+                </Button>
+            </ItemsControl>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

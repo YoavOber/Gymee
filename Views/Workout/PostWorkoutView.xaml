@@ -1,0 +1,36 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GymeeDestkopApp.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             x:Class="GymeeDestkopApp.Views.PostWorkoutView"
+             mc:Ignorable="d" 
+              Height="1920" Width="1080">
+    <Grid Background="Black">
+        <Image Source="C:\Users\test\Documents\GitHub\Gymee-Workstation\Views\Logo.png" Margin="299,71,299,1724" Height="139" />
+        <!--<Image Source="/Views/Logo.png" Margin="299,71,299,1724" Height="139" />-->
+        <TextBlock Text="כל הכבוד!" FontFamily="OpenSans" FontSize="82" FontStyle="Normal" 
+           TextAlignment="Center" FlowDirection="RightToLeft"
+           FontWeight="Bold" Foreground="#FFFFFFFF" LineHeight="103" Margin="0,706,0,1102" />
+
+        <TextBlock Margin="0,962,0,758" TextAlignment="Center" FlowDirection="RightToLeft"
+           FontFamily="OpenSans" FontSize="39"  FontWeight="Light"
+           Foreground="#FFFFFFFF" LineHeight="49">
+        במהלך 24 השעות הקרובות GYMEE יסיים לנתח את<LineBreak/>
+            היכולת שהצגת באימון, ולאחר מכן ישלח אליך מייל<LineBreak/>
+            עם פרטי הכניסה והגישה לתוכנית האימונים ולתוצאות<LineBreak/>
+            המבדק החודשי שלך
+        </TextBlock>
+        <Button IsEnabled="True"
+            Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="329,1584,328,220"
+            materialDesign:ButtonAssist.CornerRadius="58"
+            Background="#ff9b53" Height="116" Click="Button_Click" >
+            <!--Command="{x:Static materialDesign:Transitioner.MoveNextCommand}"-->
+            <TextBlock Text="הבא" FontFamily="Montserrat" FontSize="45"
+                FontStyle="Normal"  FontWeight="Medium" Foreground="#FFFFFFFF"
+                LineHeight="49" TextAlignment="Left" />
+        </Button>
+    </Grid>
+</UserControl>

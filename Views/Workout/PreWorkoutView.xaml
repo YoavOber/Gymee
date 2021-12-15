@@ -1,0 +1,27 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GymeeDestkopApp.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="GymeeDestkopApp.Views.PreWorkoutView"
+             mc:Ignorable="d" 
+              Height="1920" Width="1080">
+    <Grid Background="Black">
+        <Image Source="C:\Users\test\Documents\GitHub\Gymee-Workstation\Views\Logo.png" Margin="299,71,299,1724" Height="139" />
+        <!--<Image Source="/Views/Logo.png" Margin="299,71,299,1724" Height="139" />-->
+        <TextBlock TextAlignment="Center" FontFamily="OpenSans" TextWrapping="WrapWithOverflow" FontSize="82"
+            LineHeight="103" Margin="210,648,165,954">
+            <Run Foreground="#FFFFFFFF" FontWeight="Bold" Text="הכל מוכן"/><LineBreak/>
+            <Run Foreground="#FF959595" FontWeight="Light" Text="לתחילת ההערכה הגופנית לחץ התחל"/><LineBreak/>
+        </TextBlock>
+        <Button IsEnabled="True"
+            Style="{StaticResource MaterialDesignRaisedAccentButton}"
+            Margin="132,1120,131,647" Width="815" Height="153" materialDesign:ButtonAssist.CornerRadius="77"
+            Background="#ff9b53" 
+            Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" Click="Button_Click">
+            <TextBlock Text="התחל עכשיו" FontFamily="OpenSans"  FontSize="68"   FontStyle="Normal"
+           FontWeight="Medium"  Foreground="#FFFFFFFF" LineHeight="49" />
+        </Button>
+    </Grid>
+</UserControl>
