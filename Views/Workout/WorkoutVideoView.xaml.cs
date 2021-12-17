@@ -55,7 +55,7 @@ namespace GymeeDestkopApp.Views
         {
             //TODO: Yoav insert some record id here based on user
             //Yoav : meanwhile lets use random id
-            var id = Guid.NewGuid().ToString();
+           // var id = Guid.NewGuid().ToString();
             //GymeeRecorder.Start(id);
             string uri = "pack://siteoforigin:,,/Views/Media/";
             switch (Level)
@@ -75,7 +75,9 @@ namespace GymeeDestkopApp.Views
             }
             Video.Source = new Uri(uri);
             Video.Position = TimeSpan.Zero;
-            Video.Loaded += Video_Loaded; 
+            Video.Loaded += Video_Loaded;
+            if (Video.IsLoaded)
+                Video_Loaded(null, null);
         }
 
         private void Video_Loaded(object sender, RoutedEventArgs e) //used to synchronize sound and picture
@@ -93,6 +95,7 @@ namespace GymeeDestkopApp.Views
             //   uploader.Upload
             SoundPlayer.Stop();
             Messenger.Send(new ChangePageMessage(PageIndex.POST_WORKOUT_VIEW));
+            Video.Loaded -= Video_Loaded;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -100,6 +103,10 @@ namespace GymeeDestkopApp.Views
             Video.Stop();
             SoundPlayer.Stop();
             Messenger.Send(new ChangePageMessage(PageIndex.INTRO_PAGE));
+            muteBtn.Content = new PackIcon
+            {
+                Kind = PackIconKind.VolumeHigh
+            };
         }
 
         private void muteBtnClick(object sender, RoutedEventArgs e)

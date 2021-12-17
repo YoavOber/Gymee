@@ -14,7 +14,7 @@
             <materialDesign:PackIcon Foreground="#959595" Kind="CloseCircleOutline" Height="70" Width="70" VerticalAlignment="Center" />
         </Button>
         <Button Margin="10,20,970,1800" Height="80" Background="Black" Panel.ZIndex="2" Click="muteBtnClick"
-              BorderThickness="0">
+              BorderThickness="0" Name="muteBtn">
             <materialDesign:PackIcon Foreground="#959595" Kind="VolumeHigh" Height="70" Width="70"
                                      VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True"/>
         </Button>
@@ -22,7 +22,6 @@
         <!--C:\Users\test\Documents\GitHub\Gymee-Workstation\Views\Media-->
         <!--shorter video for tests , keep as comment-->
         <MediaElement Panel.ZIndex="1" IsMuted="True" LoadedBehavior="Manual" Name="Video"
-                      Source="pack://siteoforigin:,,/Views/Media/Workout Video.mov" 
                       MediaEnded="Video_MediaEnded"></MediaElement>
         <!--shorter video for tests-->
     </Grid>

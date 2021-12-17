@@ -67,7 +67,11 @@
             <materialDesign:PackIcon Kind="ArrowRightCircleOutline" materialDesign:RippleAssist.IsDisabled="False"
                                      Background="Black" Height="80" Width="116" VerticalAlignment="Center" />
         </Button>
-
+        <Button Margin="0,18,950,1822" Height="80" Background="Black" Panel.ZIndex="2"
+            BorderThickness="0" x:Name="muteBtn" Command="{Binding GoHomeCmd}">
+            <materialDesign:PackIcon Foreground="#FFF" Kind="CloseCircleOutline" Height="80" Width="100"
+                VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True"/>
+        </Button>
         <materialDesign:Transitioner Panel.ZIndex="2" Height="660" Width="1080" Margin="0,1260,0,0" x:Name="WheelSelector" SelectedIndex="{Binding WheelSelectorIndex}">
             <materialDesign:TransitionerSlide x:Name="HeightScroller" OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromBottom}" >
                 <local:HeightScroller />
@@ -91,6 +95,7 @@
         <TextBlock Text="{Binding ErrorMessage}" FontFamily="OpenSans" TextAlignment="Center" 
             FontSize="40" FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" 
                    LineHeight="103" Margin="132,1473,132,389" Panel.ZIndex="1"/>
+        
 
 
     </Grid>

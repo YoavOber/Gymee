@@ -71,7 +71,7 @@ namespace GymeeDestkopApp.ViewModels
             }
         }
 
-        public string [] GenderList { get; set; } = { "נקבה", "זכר" };
+        public string[] GenderList { get; set; } = { "נקבה", "זכר" };
 
 
         public string selectedGender;//גבר,אישה,אחר
@@ -149,6 +149,8 @@ namespace GymeeDestkopApp.ViewModels
         public ICommand MoveNextCmd { get; set; }
         public ICommand ShowSelectionWheelCmd { get; set; }
         public ICommand GoBackCmd { get; set; }
+        public ICommand GoHomeCmd { get; set; }
+
         private StrongReferenceMessenger Messenger { get; set; } = StrongReferenceMessenger.Default;
 
         public SignupViewModel()
@@ -166,6 +168,7 @@ namespace GymeeDestkopApp.ViewModels
             MoveNextCmd = new RelayCommand(async () => await MoveNext());
             ShowSelectionWheelCmd = new RelayCommand<string>(param => ShowSelectionWheel(param));
             GoBackCmd = new RelayCommand(() => PerformGoBackCmd());
+            GoHomeCmd = new RelayCommand(() => { Messenger.Send(new ChangePageMessage(PageIndex.INTRO_PAGE)); });
 
         }
 
@@ -175,7 +178,7 @@ namespace GymeeDestkopApp.ViewModels
             {
                 TransitionerIndex++;
                 CanMoveNext = false;
-                switch(TransitionerIndex)
+                switch (TransitionerIndex)
                 {
                     case 0:
                         if (FitnessLevel != FitnessLevel.NULL)
@@ -190,7 +193,7 @@ namespace GymeeDestkopApp.ViewModels
                             CanMoveNext = true;
                         break;
                     case 3:
-                        CanMoveNext = SelectedHeight != -1 && SelectedWeight != -1 && 
+                        CanMoveNext = SelectedHeight != -1 && SelectedWeight != -1 &&
                                       GenderList.Contains(SelectedGender) && DateStr.Contains("/");
                         break;
                 }
@@ -350,18 +353,6 @@ namespace GymeeDestkopApp.ViewModels
                 Messenger.Send(new ChangePageMessage(PageIndex.SIGNUP_DATA));
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
