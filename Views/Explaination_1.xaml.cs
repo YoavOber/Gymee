@@ -59,6 +59,7 @@ namespace GymeeDesktopApp.Views
 
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
         {
+            ExplainationSequence.SelectedIndex = 0;
             StrongReferenceMessenger.Default.Send(new ChangePageMessage(PageIndex.INTRO_PAGE));
         }
 

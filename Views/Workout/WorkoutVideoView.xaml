@@ -10,7 +10,7 @@
     </UserControl.Resources>
     <Grid Height="1920" Width="1080">
         <Button Margin="970,20,10,1800" Height="80" Background="Black" Panel.ZIndex="2" 
-              BorderThickness="0" Click="Button_Click">
+              BorderThickness="0" Click="exitButton_Click">
             <materialDesign:PackIcon Foreground="#959595" Kind="CloseCircleOutline" Height="70" Width="70" VerticalAlignment="Center" />
         </Button>
         <Button Margin="10,20,970,1800" Height="80" Background="Black" Panel.ZIndex="2" Click="muteBtnClick"
@@ -24,5 +24,45 @@
         <MediaElement Panel.ZIndex="1" IsMuted="True" LoadedBehavior="Manual" Name="Video"
                       MediaEnded="Video_MediaEnded"></MediaElement>
         <!--shorter video for tests-->
+        <materialDesign:DialogHost IsOpen="False" Margin="0,0,0,300" Name="QuitDialogBox"  Height="403" Width="815" BorderThickness="0">
+            <Grid Background="#1c1c1c">
+                <TextBlock Text="לסיים את האימון?" FlowDirection="RightToLeft" TextWrapping="Wrap"
+           FontFamily="OpenSans" FontSize="60" FontStyle="Normal" FontWeight="Bold"
+           Foreground="#FFFFFFFF" LineHeight="82" Margin="38,13,36,308" TextAlignment="Center"/>
+                <TextBlock Text="לא ניתן יהיה לקבל
+                   
+                   תוכנית אימונים מעודכנת" FontFamily="OpenSans" Height="153"
+           FontSize="40" FontStyle="Normal" FontWeight="Medium" Foreground="#FFC7C7C7"
+           TextWrapping="WrapWithOverflow" FlowDirection="RightToLeft" TextAlignment="Center" LineHeight="49"
+           Width="673" Margin="71,95,71,153"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,254,0,0" Width="815">
+                    <Button BorderBrush="#707070" BorderThickness="2" Background="#1c1c1c"
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Height="150" Width="407">
+                        <Button.CommandParameter>
+                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                True
+                            </system:Boolean>
+                        </Button.CommandParameter>
+                        <Button.Content>
+                            <TextBlock Text="סיום" FontFamily="OpenSans" FontSize="40"  FontStyle="Normal"
+                            FontWeight="SemiBold" Foreground="#c7c7c7" LineHeight="49" />
+                        </Button.Content>
+                    </Button>
+                    <Button  BorderBrush="#707070" BorderThickness="2" Background="#1c1c1c"  
+                             Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Height="150" Width="407">
+                        <Button.CommandParameter>
+                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                False
+                            </system:Boolean>
+                        </Button.CommandParameter>
+                        <Button.Content>
+                            <TextBlock Text="ביטול" FontFamily="OpenSans" FontSize="40" FontStyle="Normal"
+                                    FontWeight="SemiBold" Foreground="#FFFF0000" LineHeight="49" />
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </materialDesign:DialogHost>
+
     </Grid>
 </UserControl>

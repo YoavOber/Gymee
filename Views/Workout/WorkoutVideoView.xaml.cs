@@ -1,25 +1,15 @@
 ﻿using GymeeDestkopApp.Models;
 using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using GymeeDestkopApp.Services;
 using GymeeDesktopApp.Models;
 using MaterialDesignThemes.Wpf;
 using NAudio.CoreAudioApi;
 using System.Media;
 using System.IO;
+using System.Windows.Media;
 
 namespace GymeeDestkopApp.Views
 {
@@ -34,20 +24,19 @@ namespace GymeeDestkopApp.Views
         const string ADVENCED_VID = "Workout Video.mov";
 
         private IGymeeRecorder GymeeRecorder { get; set; }
-        private SoundPlayer SoundPlayer { get; set; }
+        private MediaPlayer SoundPlayer { get; set; }
         public static FitnessLevel Level { get; set; }
         private StrongReferenceMessenger Messenger { get; set; } = StrongReferenceMessenger.Default;
         public WorkoutVideoView()
         {
             InitializeComponent();
             //GymeeRecorder = new RealSenseGymeeRecorder();
-            SoundPlayer = new SoundPlayer();
+            SoundPlayer = new MediaPlayer();
             Messenger.Register<WorkoutVideoView, ChangePageMessage>(this, (r, m) =>
              {
                  if (m.Index == PageIndex.WORKOUT_VIDEO)
                      Start();
              });
-       //     Start();
         }
 
         //as Tamir and Omri asked - video source uri is loaded according to level
@@ -55,7 +44,7 @@ namespace GymeeDestkopApp.Views
         {
             //TODO: Yoav insert some record id here based on user
             //Yoav : meanwhile lets use random id
-           // var id = Guid.NewGuid().ToString();
+            // var id = Guid.NewGuid().ToString();
             //GymeeRecorder.Start(id);
             string uri = "pack://siteoforigin:,,/Views/Media/";
             switch (Level)
@@ -98,7 +87,21 @@ namespace GymeeDestkopApp.Views
             Video.Loaded -= Video_Loaded;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void exitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Video.Pause();
+            SoundPlayer.Pause();
+            bool result = (bool)await QuitDialogBox.ShowDialog(QuitDialogBox.Content);
+            if (result)
+                Terminate();
+            else
+            {
+                Video.Play();
+                SoundPlayer.Play();
+            }
+        }
+
+        private void Terminate()
         {
             Video.Stop();
             SoundPlayer.Stop();
@@ -107,6 +110,7 @@ namespace GymeeDestkopApp.Views
             {
                 Kind = PackIconKind.VolumeHigh
             };
+            //UnMuteVideo();
         }
 
         private void muteBtnClick(object sender, RoutedEventArgs e)
@@ -117,48 +121,39 @@ namespace GymeeDestkopApp.Views
             bool isMuted = icon.Kind == PackIconKind.VolumeOff;
             icon.Kind = isMuted ? PackIconKind.VolumeHigh : PackIconKind.VolumeOff;
 
-            if (!isMuted)
-                MuteVideo();
-            else
-                UnMuteVideo();
+            SoundPlayer.IsMuted = !isMuted;
             //  Video.IsMuted = !isMuted; //unmute if muted, nute uf unmuted
         }
 
         private void PlayRandomTrack()
         {
-            string[] soundList = Directory.GetFiles("Views//Media//Sounds");
-            Random random = new Random();
-            SoundPlayer.SoundLocation = soundList[random.Next(soundList.Length - 1)];
+            //string baseUri = ;
+            string[] soundList = Directory.GetFiles("Views\\Media\\Sounds");
+            string fname = soundList[new Random().Next(soundList.Length - 1)];
+            SoundPlayer.Open(new Uri(Directory.GetCurrentDirectory()+ '/' + fname));
             SoundPlayer.Play();
         }
 
-        private void MuteVideo()
-        {
-            using (var enumerator = new MMDeviceEnumerator())
-            {
-                foreach (var device in enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
-                {
-                    if (device.AudioEndpointVolume?.HardwareSupport.HasFlag(EEndpointHardwareSupport.Mute) == true)
-                    {
-                        //  Console.WriteLine(device.FriendlyName);
-                        device.AudioEndpointVolume.Mute = true;
-                    }
-                }
-            }
-        }
-        private void UnMuteVideo()
-        {
-            using (var enumerator = new MMDeviceEnumerator())
-            {
-                foreach (var device in enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
-                {
-                    if (device.AudioEndpointVolume?.HardwareSupport.HasFlag(EEndpointHardwareSupport.Mute) == true)
-                    {
-                        //   Console.WriteLine(device.FriendlyName);
-                        device.AudioEndpointVolume.Mute = false;
-                    }
-                }
-            }
-        }
+        //private void MuteVideo()
+        //{
+        //    using (var enumerator = new MMDeviceEnumerator())
+        //    {
+        //        foreach (var device in enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
+        //        {
+        //            device.AudioEndpointVolume.Mute = true;
+        //        }
+        //    }
+        //}
+
+        //private void UnMuteVideo()
+        //{
+        //    using (var enumerator = new MMDeviceEnumerator())
+        //    {
+        //        foreach (var device in enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
+        //        {
+        //            device.AudioEndpointVolume.Mute = false;
+        //        }
+        //    }
+        //}
     }
 }
