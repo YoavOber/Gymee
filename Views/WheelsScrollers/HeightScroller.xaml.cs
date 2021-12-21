@@ -1,7 +1,9 @@
 ﻿using GymeeDestkopApp.Models;
 using Microsoft.Toolkit.Mvvm.Messaging;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace GymeeDestkopApp.Views
 {
@@ -16,12 +18,19 @@ namespace GymeeDestkopApp.Views
             InitializeComponent();
             var ls = Enumerable.Range(130, 90);
             heights.ItemsSource = ls;
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                heights.ScrollIntoView(190);
-            });
+            ViewModels.SignupViewModel.OnChangeScreen += OnScrollerLoaded;
         }
 
+
+        public void OnScrollerLoaded(string name) //makes sure listview is on sensible value when opened
+        {
+            if (name != "height")
+                return;
+            if (heights.SelectedIndex == -1)
+                heights.ScrollIntoView(heights.Items.GetItemAt(45));
+            else
+                heights.ScrollIntoView(heights.SelectedItem);
+        }
 
         private void heights_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {

@@ -52,7 +52,7 @@
                            Text="{Binding SelectedHeight,Converter={StaticResource HeightSelectionToStr}}"/>
                 <Button Margin="-390,-110,0,0" Command="{Binding ShowSelectionWheelCmd}" CommandParameter="height"
                        Foreground="{Binding SelectedHeight,Converter={StaticResource IntToFill}}" 
-                          Style="{StaticResource V_BtnStyle}" Width="32">
+                          Style="{StaticResource V_BtnStyle}" Width="32" Name="heightSelector">
                     <materialDesign:PackIcon Kind="ChevronDown" Height="39" Width="36" />
                 </Button>
             </ItemsControl>

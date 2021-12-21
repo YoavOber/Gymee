@@ -21,7 +21,7 @@
         <!--<MediaElement LoadedBehavior="Manual" Name="Video" Source="C:\Users\USER\projects\GymeeFinal\Views\Media\Copy of Background Video.mov" MediaEnded="Video_MediaEnded"></MediaElement>-->
         <!--C:\Users\test\Documents\GitHub\Gymee-Workstation\Views\Media-->
         <!--shorter video for tests , keep as comment-->
-        <MediaElement Panel.ZIndex="1" IsMuted="True" LoadedBehavior="Manual" Name="Video"
+        <MediaElement Panel.ZIndex="1" IsMuted="True" LoadedBehavior="Manual" Name="VideoPlayer"
                       MediaEnded="Video_MediaEnded"></MediaElement>
         <!--shorter video for tests-->
         <materialDesign:DialogHost IsOpen="False" Margin="0,0,0,300" Name="QuitDialogBox"  Height="403" Width="815" BorderThickness="0">

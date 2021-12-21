@@ -26,9 +26,6 @@ namespace GymeeDestkopApp.Views
             InitializeComponent();
         }
 
-        public void Dispose()
-        {
-            
-        }
+
     }
 }

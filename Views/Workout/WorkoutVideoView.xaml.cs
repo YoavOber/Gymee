@@ -25,11 +25,14 @@ namespace GymeeDestkopApp.Views
 
         private IGymeeRecorder GymeeRecorder { get; set; }
         private MediaPlayer SoundPlayer { get; set; }
-        public static FitnessLevel Level { get; set; }
         private StrongReferenceMessenger Messenger { get; set; } = StrongReferenceMessenger.Default;
+
+        public static FitnessLevel Level { get; set; } 
+
         public WorkoutVideoView()
         {
             InitializeComponent();
+            QuitDialogBox.Visibility = Visibility.Collapsed;
             //GymeeRecorder = new RealSenseGymeeRecorder();
             SoundPlayer = new MediaPlayer();
             Messenger.Register<WorkoutVideoView, ChangePageMessage>(this, (r, m) =>
@@ -62,17 +65,24 @@ namespace GymeeDestkopApp.Views
                     uri += BEGGINER_VID;
                     break;
             }
-            Video.Source = new Uri(uri);
-            Video.Position = TimeSpan.Zero;
-            Video.Loaded += Video_Loaded;
-            if (Video.IsLoaded)
+            VideoPlayer.Source = new Uri(uri);
+            VideoPlayer.Position = TimeSpan.Zero;
+            VideoPlayer.Loaded += Video_Loaded;
+            if (VideoPlayer.IsLoaded)
                 Video_Loaded(null, null);
         }
 
         private void Video_Loaded(object sender, RoutedEventArgs e) //used to synchronize sound and picture
         {
-            Video.Play();
+            VideoPlayer.Play();
             PlayRandomTrack();
+        }
+        private void PlayRandomTrack()
+        {
+            string[] soundList = Directory.GetFiles("Views\\Media\\Sounds");
+            string fname = soundList[new Random().Next(soundList.Length - 1)];
+            SoundPlayer.Open(new Uri(Directory.GetCurrentDirectory() + '/' + fname));
+            SoundPlayer.Play();
         }
 
         private void Video_MediaEnded(object sender, RoutedEventArgs e)
@@ -84,33 +94,34 @@ namespace GymeeDestkopApp.Views
             //   uploader.Upload
             SoundPlayer.Stop();
             Messenger.Send(new ChangePageMessage(PageIndex.POST_WORKOUT_VIEW));
-            Video.Loaded -= Video_Loaded;
+            VideoPlayer.Loaded -= Video_Loaded;
         }
 
         private async void exitButton_Click(object sender, RoutedEventArgs e)
         {
-            Video.Pause();
+            QuitDialogBox.Visibility = Visibility.Visible;
+            VideoPlayer.Pause();
             SoundPlayer.Pause();
             bool result = (bool)await QuitDialogBox.ShowDialog(QuitDialogBox.Content);
             if (result)
-                Terminate();
+                TerminateWorkout();
             else
             {
-                Video.Play();
+                VideoPlayer.Play();
                 SoundPlayer.Play();
             }
         }
 
-        private void Terminate()
+        private void TerminateWorkout()
         {
-            Video.Stop();
+            VideoPlayer.Stop();
             SoundPlayer.Stop();
             Messenger.Send(new ChangePageMessage(PageIndex.INTRO_PAGE));
-            muteBtn.Content = new PackIcon
-            {
-                Kind = PackIconKind.VolumeHigh
-            };
-            //UnMuteVideo();
+            //reset icon and unmute
+            PackIcon icon = muteBtn.Content as PackIcon;
+            icon.Kind = PackIconKind.VolumeHigh;
+            SoundPlayer.IsMuted = false;
+            QuitDialogBox.Visibility = Visibility.Collapsed;
         }
 
         private void muteBtnClick(object sender, RoutedEventArgs e)
@@ -122,38 +133,8 @@ namespace GymeeDestkopApp.Views
             icon.Kind = isMuted ? PackIconKind.VolumeHigh : PackIconKind.VolumeOff;
 
             SoundPlayer.IsMuted = !isMuted;
-            //  Video.IsMuted = !isMuted; //unmute if muted, nute uf unmuted
         }
 
-        private void PlayRandomTrack()
-        {
-            //string baseUri = ;
-            string[] soundList = Directory.GetFiles("Views\\Media\\Sounds");
-            string fname = soundList[new Random().Next(soundList.Length - 1)];
-            SoundPlayer.Open(new Uri(Directory.GetCurrentDirectory()+ '/' + fname));
-            SoundPlayer.Play();
-        }
-
-        //private void MuteVideo()
-        //{
-        //    using (var enumerator = new MMDeviceEnumerator())
-        //    {
-        //        foreach (var device in enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
-        //        {
-        //            device.AudioEndpointVolume.Mute = true;
-        //        }
-        //    }
-        //}
-
-        //private void UnMuteVideo()
-        //{
-        //    using (var enumerator = new MMDeviceEnumerator())
-        //    {
-        //        foreach (var device in enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
-        //        {
-        //            device.AudioEndpointVolume.Mute = false;
-        //        }
-        //    }
-        //}
+        
     }
 }

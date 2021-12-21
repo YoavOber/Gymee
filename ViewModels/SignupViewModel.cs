@@ -272,21 +272,28 @@ namespace GymeeDestkopApp.ViewModels
             WeeklyWorkouts = WeeklyWorkouts.NULL;
         }
 
+        public delegate void ChangeScrollerEvent(string scrollerChanegd);//delegate ued by MAINWINDOW to know to switch between pages
+        public static ChangeScrollerEvent OnChangeScreen { get; set; }
+
+
         private void ShowSelectionWheel(string cmd)
         {
             switch (cmd)
             {
                 case "height":
                     WheelSelectorIndex = 0;
+                    OnChangeScreen.Invoke("height");
                     break;
                 case "weight":
                     WheelSelectorIndex = 1;
+                    OnChangeScreen.Invoke("weight");
                     break;
                 case "gender":
                     WheelSelectorIndex = 2;
                     break;
                 case "age":
                     WheelSelectorIndex = 3;
+                    OnChangeScreen.Invoke("age");
                     break;
                 case "collapse":
                 default:

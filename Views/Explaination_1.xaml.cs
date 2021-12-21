@@ -47,20 +47,27 @@ namespace GymeeDesktopApp.Views
 
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
-            ExplainationSequence.SelectedIndex = 0;
+            ResetTransitioner();
             StrongReferenceMessenger.Default.Send(new ChangePageMessage(PageIndex.START_SIGNUP_OR_LOGIN));
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            ExplainationSequence.SelectedIndex = 0;
+            ResetTransitioner();
             StrongReferenceMessenger.Default.Send(new ChangePageMessage(PageIndex.LOGIN));
         }
 
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
         {
-            ExplainationSequence.SelectedIndex = 0;
+            ResetTransitioner();
             StrongReferenceMessenger.Default.Send(new ChangePageMessage(PageIndex.INTRO_PAGE));
+        }
+
+        private void ResetTransitioner()
+        {
+            ExplainationSequence.SelectedIndex = 0;
+            MovePrev.Visibility = Visibility.Collapsed;
+            MoveNext.Visibility = Visibility.Visible;
         }
 
         //private void BackBtn_Click(object sender, RoutedEventArgs e)

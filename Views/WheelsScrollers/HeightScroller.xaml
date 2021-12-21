@@ -13,9 +13,8 @@
            FontWeight="Medium" FontFamily="OpenSans" Foreground="#FFFFFFFF" Text="גובה"
                         Margin="0,0,0,30"></TextBlock>
             <ListView Margin="0,0,65,0" HorizontalContentAlignment="Center" FlowDirection="RightToLeft" x:Name="heights"
-                  SelectionMode="Single" 
-                  Height="462"
-                  BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                  SelectionMode="Single" Height="462" BorderThickness="0" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" 
                   SelectionChanged="heights_SelectionChanged_1" Width="148">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">

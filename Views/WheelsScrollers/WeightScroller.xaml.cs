@@ -27,18 +27,26 @@ namespace GymeeDestkopApp.Views
             InitializeComponent();
             var ls = Enumerable.Range(40, 90);
             weights.ItemsSource = ls;
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                weights.ScrollIntoView(weights.Items[weights.Items.Count / 2]);
-            });
+            ViewModels.SignupViewModel.OnChangeScreen += OnScrollerLoaded;
         }
+
+        public void OnScrollerLoaded(string name)//makes sure listview is on sensible value when opened
+        {
+            if (name != "weight")
+                return;
+            if (weights.SelectedIndex == -1)
+                weights.ScrollIntoView(weights.Items.GetItemAt(30));
+            else
+                weights.ScrollIntoView(weights.SelectedItem);
+        }
+
 
         private void heights_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             App.Current.Dispatcher.Invoke(() =>
             {
                 ListView view = sender as ListView;
-                view.ScrollIntoView(e.AddedItems[0]);
+                view.ScrollIntoView(weights.SelectedItem);
             });
             StrongReferenceMessenger.Default.Send(new SignupVMMessage(SignupProperty.Weight, weights.SelectedItem));
         }

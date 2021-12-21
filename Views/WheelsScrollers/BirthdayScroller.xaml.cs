@@ -37,20 +37,25 @@ namespace GymeeDestkopApp.Views
             Month.ItemsSource = ls;
 
             List<int> years = Enumerable.Range(1940, 80).ToList();
-            year.ItemsSource = years;
+            Years.ItemsSource = years;
 
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                Days.ScrollIntoView(Days.Items[Days.Items.Count / 2]);
-                year.ScrollIntoView(year.Items[year.Items.Count / 2]);
-                Month.ScrollIntoView(Month.Items[Month.Items.Count / 2]);
-            });
+            ViewModels.SignupViewModel.OnChangeScreen += OnScrollerLoaded;
         }
 
-        public void Reset()
+        private void OnScrollerLoaded(string name)//makes sure listview is on sensible value when opened
         {
-
+            if (name != "age")
+                return;
+            if (Years.SelectedIndex == -1)
+                Years.ScrollIntoView(Years.Items.GetItemAt(60));
+            else
+            {
+                Years.ScrollIntoView(Years.SelectedItem);
+                Month.ScrollIntoView(Month.SelectedItem);
+                Days.ScrollIntoView(Days.SelectedItem);
+            }
         }
+
         private void day_SelectionChanged(object sender, SelectionChangedEventArgs e) //naming is bad due to copy-paste
         {
             App.Current.Dispatcher.Invoke(() =>
@@ -78,7 +83,7 @@ namespace GymeeDestkopApp.Views
                 ListView view = sender as ListView;
                 view.ScrollIntoView(e.AddedItems[0]);
             });
-            Messenger.Send(new SignupVMMessage(SignupProperty.BdYear, year.SelectedItem));
+            Messenger.Send(new SignupVMMessage(SignupProperty.BdYear, Years.SelectedItem));
         }
     }
 }

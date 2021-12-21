@@ -74,7 +74,7 @@
         </Button>
         <materialDesign:Transitioner Panel.ZIndex="2" Height="660" Width="1080" Margin="0,1260,0,0" x:Name="WheelSelector" SelectedIndex="{Binding WheelSelectorIndex}">
             <materialDesign:TransitionerSlide x:Name="HeightScroller" OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromBottom}" >
-                <local:HeightScroller />
+                <local:HeightScroller/>
             </materialDesign:TransitionerSlide>
             <materialDesign:TransitionerSlide x:Name="WeightScroller" OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromBottom}" >
                 <local:WeightScroller/>

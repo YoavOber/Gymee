@@ -58,7 +58,7 @@
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
-            <ListView Margin="0,-462,700,0" HorizontalContentAlignment="Center" FlowDirection="RightToLeft" x:Name="year"
+            <ListView Margin="0,-462,700,0" HorizontalContentAlignment="Center" FlowDirection="RightToLeft" x:Name="Years"
                 SelectionMode="Single" Height="462"  BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                 ItemsSource="{Binding YearList}"  ScrollViewer.VerticalScrollBarVisibility="Hidden"
                 Width="240" ItemContainerStyle="{StaticResource ListViewTemplate}" SelectionChanged="year_SelectionChanged">

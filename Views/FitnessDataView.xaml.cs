@@ -49,5 +49,6 @@ namespace GymeeDestkopApp.Views
             HeightScroller.Content = new HeightScroller();
             WeightScroller.Content = new WeightScroller();
         }
+
     }
 }
