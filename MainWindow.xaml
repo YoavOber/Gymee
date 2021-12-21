@@ -12,7 +12,7 @@
 
     </Window.Resources>
     <Grid Height="1920" Width="1080" Background="Black">
-        <materialDesign:Transitioner SelectedIndex="5" AutoApplyTransitionOrigins="False"
+        <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="False"
                                      x:Name="MainHost">
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect Kind=FadeIn}">
                 <local1:IntroPage></local1:IntroPage>
