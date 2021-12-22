@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text.Json;
 using GymeeDesktopApp.Models;
 using System.Net;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace GymeeDestkopApp.Services
@@ -41,7 +42,7 @@ namespace GymeeDestkopApp.Services
             request.AddHeader("Content-Type", "application/json");
             request.AddJsonBody(loginBody);
             IRestResponse response = await client.ExecuteAsync(request);
-            return JsonSerializer.Deserialize<LoginResult>(response.Content);         
+            return JsonConvert.DeserializeObject<LoginResult>(response.Content);         
         }
 
         private static string parseWeeklyWorkout(WeeklyWorkouts workouts)
@@ -100,7 +101,7 @@ namespace GymeeDestkopApp.Services
             request.AddHeader("Content-Type", "application/json");
             request.AddJsonBody(registerBody);
             IRestResponse response = await client.ExecuteAsync(request);
-            return JsonSerializer.Deserialize<SignUpResult>(response.Content);
+            return JsonConvert.DeserializeObject<SignUpResult>(response.Content);
         }
 
         public static async Task<bool> userExists(string email)
