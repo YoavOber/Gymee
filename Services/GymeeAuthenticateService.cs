@@ -73,7 +73,11 @@ namespace GymeeDestkopApp.Services
             }
         }
 
-        public static async Task<bool> SignUp(User user)
+        public struct SignUpResult {
+            public bool success;
+            public string error;
+        }
+        public static async Task<SignUpResult> SignUp(User user)
         {
             var registerBody = new
             {
@@ -96,7 +100,7 @@ namespace GymeeDestkopApp.Services
             request.AddHeader("Content-Type", "application/json");
             request.AddJsonBody(registerBody);
             IRestResponse response = await client.ExecuteAsync(request);
-            return response.StatusCode == HttpStatusCode.OK;
+            return JsonSerializer.Deserialize<SignUpResult>(response.Content);
         }
 
         public static async Task<bool> userExists(string email)

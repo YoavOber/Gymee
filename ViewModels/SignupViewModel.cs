@@ -235,7 +235,8 @@ namespace GymeeDestkopApp.ViewModels
 
                 ErrorMessage = string.Empty;
                 IsLoading = true;
-                var signedUp = await GymeeAuthenticateService.SignUp(user);
+                var signUpResult = await GymeeAuthenticateService.SignUp(user);
+                var signedUp = signUpResult.success;
                 IsLoading = false;
                 if (signedUp)
                 {
@@ -244,7 +245,7 @@ namespace GymeeDestkopApp.ViewModels
                 }
                 else
                 {
-                    ErrorMessage = "Failed.."; //temp - swith to rael error message
+                    ErrorMessage = signUpResult.error; //temp - swith to rael error message
                 }
             }
         }
