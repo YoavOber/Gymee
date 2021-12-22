@@ -33,7 +33,7 @@ namespace GymeeDestkopApp.Views
         {
             InitializeComponent();
             QuitDialogBox.Visibility = Visibility.Collapsed;
-            //GymeeRecorder = new RealSenseGymeeRecorder();
+            GymeeRecorder = new RealSenseGymeeRecorder();
             SoundPlayer = new MediaPlayer();
             Messenger.Register<WorkoutVideoView, ChangePageMessage>(this, (r, m) =>
              {
@@ -47,8 +47,8 @@ namespace GymeeDestkopApp.Views
         {
             //TODO: Yoav insert some record id here based on user
             //Yoav : meanwhile lets use random id
-            // var id = Guid.NewGuid().ToString();
-            //GymeeRecorder.Start(id);
+            var id = Guid.NewGuid().ToString();
+            GymeeRecorder.Start(id);
             string uri = "pack://siteoforigin:,,/Views/Media/";
             switch (Level)
             {
@@ -87,7 +87,7 @@ namespace GymeeDestkopApp.Views
 
         private void Video_MediaEnded(object sender, RoutedEventArgs e)
         {
-            //GymeeRecorder.End();
+            GymeeRecorder.End();
             //var videoPath = GymeeRecorder.GetVideoPath();
             //   UploadVideo(vid_path)
             //  var uploader = new GoogleDriveUploader(videoPath);
