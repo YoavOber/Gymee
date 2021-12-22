@@ -60,8 +60,23 @@ namespace GymeeDestkopApp.Services
             }
         }
 
-        public async Task<IList<Google.Apis.Drive.v3.Data.File>> GetFiles()
-        {
+
+        public void MoveFolder(string folderId) {
+            this.folderId = folderId;
+        }
+
+        public async Task<string> CreateFolder(string folderName) {
+            var folderRequest = this.drive.Files.Create(new Google.Apis.Drive.v3.Data.File {
+                Name = folderName,
+                Parents = this.folderId == null ? null : new List<string>() { folderId },
+                MimeType = "application/vnd.google-apps.folder"
+            });
+
+            var file = await folderRequest.ExecuteAsync();
+            return file.Id;
+        }
+
+        public async Task<IList<Google.Apis.Drive.v3.Data.File>> GetFiles() {
             var files = await drive.Files.List().ExecuteAsync();
             return files.Files;
         }
