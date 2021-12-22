@@ -19,7 +19,17 @@ namespace GymeeDestkopApp.Services
         {
             Timeout = -1
         };
-        public static async Task<bool> Login(string phone, string email)
+
+        public struct LoginResult {
+            public bool loggedIn;
+            public string email;
+            public string name;
+            public FitnessLevel fitnessLevel;
+            public string token;
+        }
+
+
+        public static async Task<LoginResult> Login(string phone, string email)
         {
             var loginBody = new
             {
@@ -31,26 +41,35 @@ namespace GymeeDestkopApp.Services
             request.AddHeader("Content-Type", "application/json");
             request.AddJsonBody(loginBody);
             IRestResponse response = await client.ExecuteAsync(request);
-            return response.StatusCode == HttpStatusCode.OK;
+            return JsonSerializer.Deserialize<LoginResult>(response.Content);         
         }
 
         private static string parseWeeklyWorkout(WeeklyWorkouts workouts)
         {
             if (workouts == WeeklyWorkouts.ONE_OR_TWO)
             {
-                return "1_OR_2";
+                return "1-2 Days";
             }
             else if (workouts == WeeklyWorkouts.THREE_OR_FOUR)
             {
-                return "3_OR_4";
+                return "3-4 Days";
             }
             else if (workouts == WeeklyWorkouts.FIVE_OR_MORE)
             {
-                return "5_OR_MORE";
+                return "5+ Days";
             }
             else
             {
-                return "5_OR_MORE";
+                return "5+ Days";
+            }
+        }
+
+        private static string parseFitnessGoal(Goal g) {
+            switch(g) {
+                case Goal.GENERAL: return "General Fitness";
+                case Goal.INCREASE_MUSCLE: return "Muscle Mass";
+                case Goal.TONE_MUSCLE: return "Sculpt Body";
+                default: return "General Fitness";
             }
         }
 
@@ -63,13 +82,13 @@ namespace GymeeDestkopApp.Services
                 email = user.Email.ToLower(),
                 phoneNumber = user.PhoneNumber,
                 password = user.Password,//problem - encode ?
-                age = (int)user.Age,
+                dob = user.DateOfBirth,
                 gender = user.Gender.ToString(),
                 height = user.Height,
                 weight = user.Weight,
                 injuries = user.Injuries.Select(injury => injury.ToString()),
                 fitnessLevel = user.FitnessLevel.ToString(),
-                fitnessGoal = user.FitnessGoals.ToString(),
+                fitnessGoal = parseFitnessGoal(user.FitnessGoals),
                 weeklyWorkouts = parseWeeklyWorkout(user.WeeklyWorkouts)
             };
 
@@ -90,6 +109,20 @@ namespace GymeeDestkopApp.Services
             var request = new RestRequest("userExists", Method.POST);
             request.AddHeader("Content-Type", "application/json");
             request.AddJsonBody(searchBody);
+
+            IRestResponse response = await client.ExecuteAsync(request);
+            return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        public static async Task<bool> onAssessmentDone(string email, string name) {
+            var body = new {
+                email = email,
+                name = name
+            };
+
+            var request = new RestRequest("assessmentDone", Method.POST);
+            request.AddHeader("Content-Type", "application/json");
+            request.AddJsonBody(body);
 
             IRestResponse response = await client.ExecuteAsync(request);
             return response.StatusCode == HttpStatusCode.OK;

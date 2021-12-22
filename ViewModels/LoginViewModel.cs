@@ -67,7 +67,7 @@ namespace GymeeDesktopApp.ViewModels
             {
                 IsLoading = true;
                 UserExists = true;
-                UserExists = await GymeeAuthenticateService.Login(PhoneNumber, EmailAddr.ToLower());
+                UserExists = (await GymeeAuthenticateService.Login(PhoneNumber, EmailAddr.ToLower())).loggedIn;
                 //note - email is tolower.
                 IsLoading = false;
                 if (UserExists)

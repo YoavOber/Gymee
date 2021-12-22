@@ -206,13 +206,13 @@ namespace GymeeDestkopApp.ViewModels
                 switch (selectedGender)
                 {
                     case "זכר":
-                        gender = Gender.M;
+                        gender = Gender.Male;
                         break;
                     case "נקבה":
-                        gender = Gender.F;
+                        gender = Gender.Female;
                         break;
                     default:
-                        gender = Gender.O;
+                        gender = Gender.Other;
                         break;
                 }
 
@@ -223,7 +223,7 @@ namespace GymeeDestkopApp.ViewModels
                     Email = UserCredentials.EmailAddr,
                     PhoneNumber = UserCredentials.PhoneNumber,
                     Password = UserCredentials.Password,
-                    Age = AgeService.CalculateAge(new DateTime(bdyear, bdmonth, bdday)),
+                    DateOfBirth = new DateTime(bdyear, bdmonth, bdday),
                     FitnessGoals = Goal,
                     FitnessLevel = this.FitnessLevel,//'this' for clarity,unnecessary
                     Height = (uint)selectedHeight,

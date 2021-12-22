@@ -14,7 +14,7 @@ namespace GymeeDesktopApp.Models
     public enum FitnessLevel
     {
         NULL,
-        BEGINNER, INTERMEDIATE, ADVANCED
+        Beginner, Intermediate, Advanced
     };
     public enum Goal
     {
@@ -25,9 +25,9 @@ namespace GymeeDesktopApp.Models
     public enum Gender
     {
         NULL,
-        M,
-        F,
-        O
+        Male,
+        Female,
+        Other
     }
 
     public enum WeeklyWorkouts
@@ -45,7 +45,7 @@ namespace GymeeDesktopApp.Models
         public string Email { get; set; }//Email
         public string PhoneNumber { get; set; }//Phone Number
         public string Password { get; set; }//User Password
-        public float Age { get; set; }//Age
+        public DateTime DateOfBirth { get; set; }//DOB
         public Gender Gender { get; set; }// Gender
         public uint Height { get; set; }//height in centimeters
         public float Weight { get; set; }//weight in kilograms
