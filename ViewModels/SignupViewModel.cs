@@ -219,7 +219,7 @@ namespace GymeeDestkopApp.ViewModels
                 var user = new User
                 {
                     FullName = UserCredentials.FullName,
-                    Branch = "YES",
+                    Branch = ConfigurationService.GetConfiguration().Branch,
                     Email = UserCredentials.EmailAddr,
                     PhoneNumber = UserCredentials.PhoneNumber,
                     Password = UserCredentials.Password,

@@ -33,7 +33,8 @@ namespace GymeeDestkopApp.Views
         {
             InitializeComponent();
             QuitDialogBox.Visibility = Visibility.Collapsed;
-            GymeeRecorder = new RealSenseGymeeRecorder();
+            var config = ConfigurationService.GetConfiguration();
+            GymeeRecorder = new RealSenseGymeeRecorder(config.Width, config.Height, config.Fps);
             SoundPlayer = new MediaPlayer();
             Messenger.Register<WorkoutVideoView, ChangePageMessage>(this, (r, m) =>
              {
