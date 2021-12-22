@@ -52,13 +52,13 @@ namespace GymeeDestkopApp.Views
             string uri = "pack://siteoforigin:,,/Views/Media/";
             switch (Level)
             {
-                case FitnessLevel.BEGINNER:
+                case FitnessLevel.Beginner:
                     uri += BEGGINER_VID;
                     break;
-                case FitnessLevel.INTERMEDIATE:
+                case FitnessLevel.Intermediate:
                     uri += INTERMEDIATE_VID;
                     break;
-                case FitnessLevel.ADVANCED:
+                case FitnessLevel.Advanced:
                     uri += ADVENCED_VID;
                     break;
                 default:

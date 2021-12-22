@@ -47,7 +47,7 @@ namespace GymeeDestkopApp.Views
             IntermTxt.Foreground = (SolidColorBrush)converter.ConvertFromString("#FF959595");
             AdvancedTxt.Foreground = (SolidColorBrush)converter.ConvertFromString("#FF959595");
 
-            Messanger.Send(new SignupVMMessage(SignupProperty.FitnessLevel, FitnessLevel.BEGINNER));
+            Messanger.Send(new SignupVMMessage(SignupProperty.FitnessLevel, FitnessLevel.Beginner));
             // FitnessExperienceViewModel.FitnessLevel = FitnessLevel.BEGINNER;
         }
 
@@ -60,7 +60,7 @@ namespace GymeeDestkopApp.Views
             IntermTxt.Foreground = Brushes.White;
             AdvancedTxt.Foreground = (SolidColorBrush)converter.ConvertFromString("#FF959595");
 
-            Messanger.Send(new SignupVMMessage(SignupProperty.FitnessLevel, FitnessLevel.INTERMEDIATE));
+            Messanger.Send(new SignupVMMessage(SignupProperty.FitnessLevel, FitnessLevel.Intermediate));
 
             // FitnessExperienceViewModel.FitnessLevel = FitnessLevel.INTERMEDIATE;
         }
@@ -74,7 +74,7 @@ namespace GymeeDestkopApp.Views
             IntermTxt.Foreground = (SolidColorBrush)converter.ConvertFromString("#FF959595");
             AdvancedTxt.Foreground = Brushes.White;
 
-            Messanger.Send(new SignupVMMessage(SignupProperty.FitnessLevel, FitnessLevel.ADVANCED));
+            Messanger.Send(new SignupVMMessage(SignupProperty.FitnessLevel, FitnessLevel.Advanced));
             //   FitnessExperienceViewModel.FitnessLevel = FitnessLevel.ADVANCED;
         }
 
