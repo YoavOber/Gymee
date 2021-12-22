@@ -71,6 +71,7 @@ namespace GymeeDestkopApp.ViewModels
             }
         }
 
+        //if you change the genderlist you need to change the relevant Gender selection code
         public string[] GenderList { get; set; } = { "נקבה", "זכר" };
 
 
@@ -204,13 +205,12 @@ namespace GymeeDestkopApp.ViewModels
                 Gender gender;
                 switch (selectedGender)
                 {
-                    case "גבר":
+                    case "זכר":
                         gender = Gender.M;
                         break;
-                    case "אישה":
+                    case "נקבה":
                         gender = Gender.F;
                         break;
-                    case "אחר":
                     default:
                         gender = Gender.O;
                         break;
