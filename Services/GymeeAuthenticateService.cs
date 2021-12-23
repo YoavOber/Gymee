@@ -21,7 +21,8 @@ namespace GymeeDestkopApp.Services
             Timeout = -1
         };
 
-        public struct LoginResult {
+        public struct LoginResult
+        {
             public bool loggedIn;
             public string email;
             public string name;
@@ -34,15 +35,15 @@ namespace GymeeDestkopApp.Services
         {
             var loginBody = new
             {
-                phoneNumber = phone,
-                email = email.ToLower()
+                email = email.ToLower(),
+                phoneNumber = phone
             };
 
             var request = new RestRequest("loginStation", Method.POST);
             request.AddHeader("Content-Type", "application/json");
             request.AddJsonBody(loginBody);
             IRestResponse response = await client.ExecuteAsync(request);
-            return JsonConvert.DeserializeObject<LoginResult>(response.Content);         
+            return JsonConvert.DeserializeObject<LoginResult>(response.Content);
         }
 
         private static string parseWeeklyWorkout(WeeklyWorkouts workouts)
@@ -65,8 +66,10 @@ namespace GymeeDestkopApp.Services
             }
         }
 
-        private static string parseFitnessGoal(Goal g) {
-            switch(g) {
+        private static string parseFitnessGoal(Goal g)
+        {
+            switch (g)
+            {
                 case Goal.GENERAL: return "General Fitness";
                 case Goal.INCREASE_MUSCLE: return "Muscle Mass";
                 case Goal.TONE_MUSCLE: return "Sculpt Body";
@@ -74,10 +77,12 @@ namespace GymeeDestkopApp.Services
             }
         }
 
-        public struct SignUpResult {
+        public struct SignUpResult
+        {
             public bool success;
             public string error;
         }
+
         public static async Task<SignUpResult> SignUp(User user)
         {
             var registerBody = new
@@ -101,6 +106,7 @@ namespace GymeeDestkopApp.Services
             request.AddHeader("Content-Type", "application/json");
             request.AddJsonBody(registerBody);
             IRestResponse response = await client.ExecuteAsync(request);
+            //todo nadav ?- extract exact error message from server
             return JsonConvert.DeserializeObject<SignUpResult>(response.Content);
         }
 
@@ -119,9 +125,11 @@ namespace GymeeDestkopApp.Services
             return response.StatusCode == HttpStatusCode.OK;
         }
 
-        public static async Task<bool> onAssessmentDone(string email, string name) {
-            var body = new {
-                email = email,
+        public static async Task<bool> onAssessmentDone(string email, string name)
+        {
+            var body = new
+            {
+                email = email.ToLower(),
                 name = name
             };
 

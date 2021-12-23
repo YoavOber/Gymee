@@ -24,19 +24,20 @@ namespace GymeeDestkopApp.Views
     /// </summary>
     public partial class CountDown : UserControl
     {
-        public const string START_CMD_STR = "start countdown";
+        private StrongReferenceMessenger Messenger { get; set; } = StrongReferenceMessenger.Default;
+
+        //public const string START_COUNTDOWN_CMD = "start countdown";
         private DispatcherTimer dt { get; set; }
 
         public CountDown()
         {
             InitializeComponent();
-            Messenger.Register<CountDown, string>(this, (r, m) => r.Receive(m));
+            Messenger.Register<CountDown, ChangePageMessage>(this, (r, m) => r.Receive(m));
         }
-        private StrongReferenceMessenger Messenger { get; set; } = StrongReferenceMessenger.Default;
 
-        private void Receive(string m)
+        private void Receive(ChangePageMessage m)
         {
-            if (m == START_CMD_STR)
+            if (m.Index == PageIndex.COUNT_DOWN_WORKOUT)
                 Countdown(5, TimeSpan.FromSeconds(1), cur => Digit.Text = cur.ToString());
         }
 

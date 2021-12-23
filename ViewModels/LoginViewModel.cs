@@ -67,12 +67,14 @@ namespace GymeeDesktopApp.ViewModels
             {
                 IsLoading = true;
                 UserExists = true;
-                UserExists = (await GymeeAuthenticateService.Login(PhoneNumber, EmailAddr.ToLower())).loggedIn;
+                var result = await GymeeAuthenticateService.Login(PhoneNumber, EmailAddr.ToLower());
+                UserExists = result.loggedIn;
                 //note - email is tolower.
                 IsLoading = false;
                 if (UserExists)
                 {
-                    Messenger.Send(new ChangePageMessage(PageIndex.PRE_WORKOUT));
+                    
+                    Messenger.Send(new ChangePageMessage(PageIndex.PRE_WORKOUT,result));
                     return;
                 }
             });

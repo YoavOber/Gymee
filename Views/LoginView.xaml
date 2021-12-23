@@ -61,9 +61,9 @@
         <TextBlock x:Name="PhoneErrTxt" Text="מספר טלפון לא תקין" FontFamily="OpenSans" TextAlignment="Right" 
             FontSize="40" FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" LineHeight="103" Height="55" Margin="132,940,132,925"  
                    Visibility="{Binding IsValidPhone,Converter={StaticResource BoolToVisibility}}"/>
-        <TextBlock Text="משתמש לא נמצא" FontFamily="OpenSans" TextAlignment="Center" 
+        <TextBlock Text="משתמש לא נמצא - מייל או טלפון לא נכונים" FontFamily="OpenSans" TextAlignment="Center" 
             FontSize="40" FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" 
-                   LineHeight="103" Height="55" Margin="132,1276,132,589"  
+             FlowDirection="RightToLeft" LineHeight="103" Height="55" Margin="132,1276,132,589"  
                    Visibility="{Binding UserExists,Converter={StaticResource BoolToVisibility}}"/>
         <Button x:Name="BackBtn" Margin="936,7,0,1813" Height="100" FontFamily="OpenSans" FontWeight="Light"
             Foreground="#FFF" FontSize="37" Background="Black"

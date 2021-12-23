@@ -1,14 +1,12 @@
-﻿using GymeeDestkopApp.Models;
+﻿using GymeeDesktopApp.Models;
+using GymeeDestkopApp.Models;
+using GymeeDestkopApp.Services;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using GymeeDestkopApp.Services;
-using GymeeDesktopApp.Models;
-using MaterialDesignThemes.Wpf;
-using NAudio.CoreAudioApi;
-using System.Media;
-using System.IO;
 using System.Windows.Media;
 
 namespace GymeeDestkopApp.Views
@@ -27,7 +25,7 @@ namespace GymeeDestkopApp.Views
         private MediaPlayer SoundPlayer { get; set; }
         private StrongReferenceMessenger Messenger { get; set; } = StrongReferenceMessenger.Default;
 
-        public static FitnessLevel Level { get; set; } 
+        private GymeeAuthenticateService.LoginResult userData { get; set; }
 
         public WorkoutVideoView()
         {
@@ -38,20 +36,28 @@ namespace GymeeDestkopApp.Views
             SoundPlayer = new MediaPlayer();
             Messenger.Register<WorkoutVideoView, ChangePageMessage>(this, (r, m) =>
              {
-                 if (m.Index == PageIndex.WORKOUT_VIDEO)
+                 if(m.Index == PageIndex.PRE_WORKOUT)
+                 {
+                     var data = (GymeeAuthenticateService.LoginResult)m.Data;
+                     userData = new GymeeAuthenticateService.LoginResult
+                     {
+                         email = data.email,
+                         name = data.name,
+                         fitnessLevel = data.fitnessLevel
+                     };
+                 }
+                 else if (m.Index == PageIndex.WORKOUT_VIDEO)
+                 {
                      Start();
+                 }
              });
         }
 
         //as Tamir and Omri asked - video source uri is loaded according to level
         private void Start()
         {
-            //TODO: Yoav insert some record id here based on user
-            //Yoav : meanwhile lets use random id
-            var id = Guid.NewGuid().ToString();
-            GymeeRecorder.Start(id);
             string uri = "pack://siteoforigin:,,/Views/Media/";
-            switch (Level)
+            switch (userData.fitnessLevel)
             {
                 case FitnessLevel.Beginner:
                     uri += BEGGINER_VID;
@@ -75,6 +81,10 @@ namespace GymeeDestkopApp.Views
 
         private void Video_Loaded(object sender, RoutedEventArgs e) //used to synchronize sound and picture
         {
+            //TODO: Yoav insert some record id here based on user
+            //Yoav : meanwhile lets use random id
+            var id = Guid.NewGuid().ToString();
+            GymeeRecorder.Start(id);
             VideoPlayer.Play();
             PlayRandomTrack();
         }
@@ -86,7 +96,7 @@ namespace GymeeDestkopApp.Views
             SoundPlayer.Play();
         }
 
-        private void Video_MediaEnded(object sender, RoutedEventArgs e)
+        private async void Video_MediaEnded(object sender, RoutedEventArgs e)
         {
             GymeeRecorder.End();
             //var videoPath = GymeeRecorder.GetVideoPath();
@@ -94,8 +104,16 @@ namespace GymeeDestkopApp.Views
             //  var uploader = new GoogleDriveUploader(videoPath);
             //   uploader.Upload
             SoundPlayer.Stop();
-            Messenger.Send(new ChangePageMessage(PageIndex.POST_WORKOUT_VIEW));
-            VideoPlayer.Loaded -= Video_Loaded;
+            var result = await GymeeAuthenticateService.onAssessmentDone(userData.email, userData.name);
+            if (result)
+            {
+                Messenger.Send(new ChangePageMessage(PageIndex.POST_WORKOUT_VIEW));
+                VideoPlayer.Loaded -= Video_Loaded;
+            }
+            else
+            {
+                //handle ?
+            }
         }
 
         private async void exitButton_Click(object sender, RoutedEventArgs e)

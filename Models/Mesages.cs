@@ -50,9 +50,11 @@ namespace GymeeDestkopApp.Models
     public class ChangePageMessage //messages used to change page in mainwindow transitioner when next/prev buttons are clicked
     {
         public PageIndex Index { get; set; }
-        public ChangePageMessage(PageIndex index)
+        public object Data { get; set; }//additional data on user
+        public ChangePageMessage(PageIndex index, object data = null)
         {
             Index = index;
+            Data = data;
         }
     }
 

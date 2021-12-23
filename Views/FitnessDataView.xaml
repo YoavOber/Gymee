@@ -93,10 +93,7 @@
             IsIndeterminate="{Binding IsLoading}" Margin="490,1424,490,396" Height="100" Width="100"  >
         </ProgressBar>
         <TextBlock Text="{Binding ErrorMessage}" FontFamily="OpenSans" TextAlignment="Center" 
-            FontSize="40" FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" 
-                   LineHeight="103" Margin="132,1473,132,389" Panel.ZIndex="1"/>
-        
-
-
+            FontSize="20" FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" 
+                TextWrapping="WrapWithOverflow" LineHeight="103" Margin="10,1424,0,323" Panel.ZIndex="1"/>
     </Grid>
 </UserControl>

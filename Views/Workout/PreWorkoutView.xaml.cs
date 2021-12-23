@@ -29,8 +29,7 @@ namespace GymeeDestkopApp.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            StrongReferenceMessenger.Default.Send(CountDown.START_CMD_STR);
+            StrongReferenceMessenger.Default.Send(new ChangePageMessage(PageIndex.COUNT_DOWN_WORKOUT));//starts countdown timer
         }
-
     }
 }

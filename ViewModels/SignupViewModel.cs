@@ -219,7 +219,7 @@ namespace GymeeDestkopApp.ViewModels
                 var user = new User
                 {
                     FullName = UserCredentials.FullName,
-                    Branch = ConfigurationService.GetConfiguration().Branch,
+                    Branch = "",//ConfigurationService.GetConfiguration().Branch,
                     Email = UserCredentials.EmailAddr,
                     PhoneNumber = UserCredentials.PhoneNumber,
                     Password = UserCredentials.Password,
@@ -236,16 +236,21 @@ namespace GymeeDestkopApp.ViewModels
                 ErrorMessage = string.Empty;
                 IsLoading = true;
                 var signUpResult = await GymeeAuthenticateService.SignUp(user);
-                var signedUp = signUpResult.success;
                 IsLoading = false;
-                if (signedUp)
+                if (signUpResult.success)
                 {
-                    Messenger.Send(new ChangePageMessage(PageIndex.PRE_WORKOUT));
+                    var toLoginResult = new GymeeAuthenticateService.LoginResult //used by workout view
+                    {
+                        email = UserCredentials.EmailAddr,
+                        name = UserCredentials.FullName,
+                        fitnessLevel = FitnessLevel.Beginner //on sign up - user is always a beginner
+                    };
+                    Messenger.Send(new ChangePageMessage(PageIndex.PRE_WORKOUT,toLoginResult));
                     return;
                 }
                 else
                 {
-                    ErrorMessage = signUpResult.error; //temp - swith to rael error message
+                    ErrorMessage = signUpResult.error; 
                 }
             }
         }

@@ -18,8 +18,8 @@
         <Button IsEnabled="True"
             Style="{StaticResource MaterialDesignRaisedAccentButton}"
             Margin="132,1120,131,647" Width="815" Height="153" materialDesign:ButtonAssist.CornerRadius="77"
-            Background="#ff9b53" 
-            Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" Click="Button_Click">
+            Background="#ff9b53" Click="Button_Click"
+            >
             <TextBlock Text="התחל עכשיו" FontFamily="OpenSans"  FontSize="68"   FontStyle="Normal"
            FontWeight="Medium"  Foreground="#FFFFFFFF" LineHeight="49" />
         </Button>
