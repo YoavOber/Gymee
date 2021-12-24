@@ -31,8 +31,8 @@ namespace GymeeDestkopApp.Views
         {
             InitializeComponent();
             QuitDialogBox.Visibility = Visibility.Collapsed;
-            var config = ConfigurationService.GetConfiguration();
-            GymeeRecorder = new RealSenseGymeeRecorder(config.Width, config.Height, config.Fps);
+            //var config = ConfigurationService.GetConfiguration();
+            //GymeeRecorder = new RealSenseGymeeRecorder(config.Width, config.Height, config.Fps);
             SoundPlayer = new MediaPlayer();
             Messenger.Register<WorkoutVideoView, ChangePageMessage>(this, (r, m) =>
              {
@@ -84,7 +84,7 @@ namespace GymeeDestkopApp.Views
             //TODO: Yoav insert some record id here based on user
             //Yoav : meanwhile lets use random id
             var id = Guid.NewGuid().ToString();
-            GymeeRecorder.Start(id);
+            //GymeeRecorder.Start(id);
             VideoPlayer.Play();
             PlayRandomTrack();
         }
@@ -98,13 +98,13 @@ namespace GymeeDestkopApp.Views
 
         private async void Video_MediaEnded(object sender, RoutedEventArgs e)
         {
-            GymeeRecorder.End();
+            //GymeeRecorder.End();
             //var videoPath = GymeeRecorder.GetVideoPath();
             //   UploadVideo(vid_path)
             //  var uploader = new GoogleDriveUploader(videoPath);
             //   uploader.Upload
             SoundPlayer.Stop();
-            var result = await GymeeAuthenticateService.onAssessmentDone(userData.email, userData.name);
+            var result = true;// await GymeeAuthenticateService.onAssessmentDone(userData.email, userData.name);
             if (result)
             {
                 Messenger.Send(new ChangePageMessage(PageIndex.POST_WORKOUT_VIEW));
