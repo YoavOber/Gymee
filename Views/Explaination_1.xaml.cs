@@ -27,10 +27,7 @@ namespace GymeeDesktopApp.Views
                 ExplainationSequence.SelectedIndex++;
             MovePrev.Visibility = ExplainationSequence.SelectedIndex != 0 ? Visibility.Visible : Visibility.Collapsed;
             MoveNext.Visibility = ExplainationSequence.SelectedIndex != ExplainationSequence.Items.Count - 1 ? Visibility.Visible : Visibility.Collapsed;
-            for (int i = 0; i < ProgressBtns.Length; i++)
-            {
-                ProgressBtns[i].Fill = i == ExplainationSequence.SelectedIndex ? Brushes.White : Brushes.Black;
-            }
+            ResetProgressButtons();
         }
 
         private void MovePrev_Click(object sender, RoutedEventArgs e)
@@ -39,10 +36,7 @@ namespace GymeeDesktopApp.Views
                 ExplainationSequence.SelectedIndex--;
             MovePrev.Visibility = ExplainationSequence.SelectedIndex != 0 ? Visibility.Visible : Visibility.Collapsed;
             MoveNext.Visibility = ExplainationSequence.SelectedIndex != ExplainationSequence.Items.Count - 1 ? Visibility.Visible : Visibility.Collapsed;
-            for (int i = 0; i < ProgressBtns.Length; i++)
-            {
-                ProgressBtns[i].Fill = i == ExplainationSequence.SelectedIndex ? Brushes.White : Brushes.Black;
-            }
+            ResetProgressButtons();
         }
 
         private void StartBtn_Click(object sender, RoutedEventArgs e)
@@ -68,14 +62,17 @@ namespace GymeeDesktopApp.Views
             ExplainationSequence.SelectedIndex = 0;
             MovePrev.Visibility = Visibility.Collapsed;
             MoveNext.Visibility = Visibility.Visible;
+            ResetProgressButtons();
+
         }
 
-        //private void BackBtn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ExplainationSequence.SelectedIndex = 0;
-        //    StrongReferenceMessenger.Default.Send(new ChangePageMessage(PageIndex.INTRO_PAGE));
-        //}
-
+        private void ResetProgressButtons()
+        {
+            for (int i = 0; i < ProgressBtns.Length; i++)
+            {
+                ProgressBtns[i].Fill = i == ExplainationSequence.SelectedIndex ? Brushes.White : Brushes.Black;
+            }
+        }
 
     }
 }

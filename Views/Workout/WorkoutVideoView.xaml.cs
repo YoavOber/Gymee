@@ -16,7 +16,7 @@ namespace GymeeDestkopApp.Views
     /// </summary>
     public partial class WorkoutVideoView : UserControl
     {
-        //video filenames by user experience
+        //video filenames by trainee's experience
         const string BEGGINER_VID = "Workout Video.mov";
         const string INTERMEDIATE_VID = "Workout Video.mov";
         const string ADVENCED_VID = "Workout Video.mov";
@@ -107,7 +107,7 @@ namespace GymeeDestkopApp.Views
             var result = true;// await GymeeAuthenticateService.onAssessmentDone(userData.email, userData.name);
             if (result)
             {
-                Messenger.Send(new ChangePageMessage(PageIndex.POST_WORKOUT_VIEW));
+                TerminateWorkout(false);
                 VideoPlayer.Loaded -= Video_Loaded;
             }
             else
@@ -123,7 +123,7 @@ namespace GymeeDestkopApp.Views
             SoundPlayer.Pause();
             bool result = (bool)await QuitDialogBox.ShowDialog(QuitDialogBox.Content);
             if (result)
-                TerminateWorkout();
+                TerminateWorkout(true);
             else
             {
                 VideoPlayer.Play();
@@ -131,11 +131,12 @@ namespace GymeeDestkopApp.Views
             }
         }
 
-        private void TerminateWorkout()
+        private void TerminateWorkout(bool workoutTerminated)
+        //workoutTerminated - was workout terminated manually by user or ended due to video ended
         {
             VideoPlayer.Stop();
             SoundPlayer.Stop();
-            Messenger.Send(new ChangePageMessage(PageIndex.INTRO_PAGE));
+            Messenger.Send(new ChangePageMessage(workoutTerminated ? PageIndex.INTRO_PAGE : PageIndex.POST_WORKOUT_VIEW));
             //reset icon and unmute
             PackIcon icon = muteBtn.Content as PackIcon;
             icon.Kind = PackIconKind.VolumeHigh;
@@ -154,6 +155,5 @@ namespace GymeeDestkopApp.Views
             SoundPlayer.IsMuted = !isMuted;
         }
 
-        
     }
 }
