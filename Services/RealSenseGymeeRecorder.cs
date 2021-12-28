@@ -52,25 +52,31 @@ namespace GymeeDestkopApp.Services
 
         }
 
-        public RecordingState GetRecordingState() {
+        public RecordingState GetRecordingState()
+        {
             return this.recording;
         }
 
-        public bool IsProcessing() {
+        public bool IsProcessing()
+        {
             return this.processing;
         }
 
-        public string GetDepthFramesPath() {
+        public string GetDepthFramesPath()
+        {
             var depthFramesPath = $"{this.depthDirectory}/{this.recordId}";
-            if (Directory.Exists(depthFramesPath)) {
+            if (Directory.Exists(depthFramesPath))
+            {
                 return depthFramesPath;
             }
             return null;
         }
 
-        public string GetVideoPath() {
+        public string GetVideoPath()
+        {
             var videoPath = $"{this.videosDirectory}/{this.recordId}.mp4";
-            if (File.Exists(videoPath)) {
+            if (File.Exists(videoPath))
+            {
                 return videoPath;
             }
             return null;
@@ -82,7 +88,8 @@ namespace GymeeDestkopApp.Services
         }
         public void Start(string recordId)
         {
-            if (this.recording != RecordingState.BEFORE) {
+            if (this.recording != RecordingState.BEFORE)
+            {
                 return;
             }
 
@@ -92,10 +99,13 @@ namespace GymeeDestkopApp.Services
             Directory.CreateDirectory($"{this.pngDirectory}/{this.recordId}");
 
             this.pipeline.Start(cfg);
-            Task.Run(() => {
-                while (true) {
+            Task.Run(() =>
+            {
+                while (true)
+                {
                     FrameSet frames;
-                    if (queue.PollForFrame(out frames)) {
+                    if (queue.PollForFrame(out frames))
+                    {
                         using (frames)
                         using (var color = frames.ColorFrame)
                         using (var depth = frames.DepthFrame)
@@ -110,9 +120,12 @@ namespace GymeeDestkopApp.Services
                 }
             });
             //run recording in another thread which is dependent on the recording state
-            Task.Run(() => {
-                while (this.recording == RecordingState.RECORDING) {
-                    using (var frames = pipeline.WaitForFrames()) {
+            Task.Run(() =>
+            {
+                while (this.recording == RecordingState.RECORDING)
+                {
+                    using (var frames = pipeline.WaitForFrames())
+                    {
                         Trace.WriteLine("Queuing frame..");
                         queue.Enqueue(frames);
                     }
@@ -123,41 +136,60 @@ namespace GymeeDestkopApp.Services
 
         public void End()
         {
-            if (this.recording != RecordingState.RECORDING) {
+            if (this.recording != RecordingState.RECORDING)
+            {
                 return;
             }
             this.recording = RecordingState.DONE;
             this.pipeline.Stop();
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 this.processing = true;
                 var pngFiles = Directory.GetFiles($"{this.pngDirectory}/{this.recordId}", "*.png");
-                foreach (var pngFileName in pngFiles) {
-                    using (var bitmap = new Bitmap(pngFileName)) {
+                foreach (var pngFileName in pngFiles)
+                {
+                    using (var bitmap = new Bitmap(pngFileName))
+                    {
                         GymeeTransforms.FixRealSenseBitmap(bitmap);
                         bitmap.Save(pngFileName);
                     }
                 }
                 this.pngCount = 1;
-                Process.Start("ffmpeg.exe", $"-framerate {this.fps} -i {this.pngDirectory}/{this.recordId}/{this.pngPrefix}%d.png -c:v libx264 -pix_fmt yuv420p -crf 25 {this.videosDirectory}/{this.recordId}.mp4");
+                ProcessStartInfo processStartInfo = new()
+                {
+                    FileName = "ffmpeg.exe",
+                    Arguments = $"-framerate {this.fps} -i {this.pngDirectory}/{this.recordId}/{this.pngPrefix}%d.png " +
+                    $"-c:v libx264 -pix_fmt yuv420p -crf 25 {this.videosDirectory}/{this.recordId}.mp4",
+                };
+                Process.Start(processStartInfo);
                 this.processing = false;
                 this.recording = RecordingState.BEFORE;
             });
+            EditFileNames();
         }
 
         public void EditFileNames()
         {
+            char mark = '$';
+            string pdnDirectory = GetDepthFramesPath();
             var stamps = FFmpegVideoService.GetAllStamps();
             foreach (var st in stamps)
             {
                 TimeSpan timeSpan = TimeSpan.Parse(st.InitTimeStamp);
-                long start = timeSpan.Ticks;//this is the first file
+                long start = timeSpan.Ticks + 1;//this is the first file - +1 since pngCount is initialized to 1
                 long end = (long)(start + st.Duration * fps);
                 int fileNameIndex = 1;
-               // for (var i = start; i <= end; i++, fileNameIndex++) 
-                //    File.Move(/*this file name - use i*/, destFileName: $"{st.VidName}_{fileNameIndex}");//rename
+                for (var i = start; i <= end; i++, fileNameIndex++)
+                {
+                    File.Move($"{pdnDirectory}/depth{i}.pdn",
+                              $"{pdnDirectory}/{st.VidName}_{fileNameIndex}{mark}.pdn");//rename
+                }
             }
-            //delete all other files
-            //upload everything
+            foreach(var f in Directory.GetFiles(pdnDirectory))
+            {
+                if (!f.Contains(mark))
+                    File.Delete($"{pdnDirectory}/{f}");
+            }
         }
     }
 }
