@@ -85,7 +85,7 @@ namespace GymeeDestkopApp.Views
             //TODO: Yoav insert some record id here based on user
             //Yoav : meanwhile lets use random id
             var id = Guid.NewGuid().ToString();
-            //GymeeRecorder.Start(id);
+            GymeeRecorder.Start(id);
             VideoPlayer.Play();
             PlayRandomTrack();
         }

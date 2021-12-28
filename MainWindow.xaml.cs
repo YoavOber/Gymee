@@ -1,20 +1,8 @@
 ﻿using GymeeDestkopApp.Models;
 using Microsoft.Toolkit.Mvvm.Messaging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GymeeDestkopApp
 {
@@ -37,27 +25,30 @@ namespace GymeeDestkopApp
             Messenger.Register<MainWindow, ChangePageMessage>(this, (r, m) => r.Receive(m));
         }
 
-        private void ResetTimerMouseTouch(object sender, MouseEventArgs e) 
+        private void ResetTimerMouseTouch(object sender, MouseEventArgs e)
         {
+            if (MainHost.SelectedIndex == (int)PageIndex.WORKOUT_VIDEO)
+                return;
             Timer.Stop();
             Timer.Start();
         }
 
         private void ResetTimerFingerTouch(object sender, TouchEventArgs e)
         {
+            if (MainHost.SelectedIndex == (int)PageIndex.WORKOUT_VIDEO)
+                return;
             Timer.Stop();
             Timer.Start();
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                MainHost.SelectedIndex = 0;
-                ResetAllViews();
-                Messenger.Send("resetVM");
-                Osklib.OnScreenKeyboard.Close();
-            });
+            if (MainHost.SelectedIndex == (int)PageIndex.WORKOUT_VIDEO)
+                return;
+            MainHost.SelectedIndex = 0;
+            ResetAllViews();
+            Messenger.Send("resetVM");
+            Osklib.OnScreenKeyboard.Close();
         }
 
         ~MainWindow()
@@ -92,22 +83,6 @@ namespace GymeeDestkopApp
 
             MainHost.SelectedIndex = index;
         }
-          /*if (message.Index == PageIndex.INTRO_PAGE)
-            {
-                Messenger.Send("resetVM");
-                Reset();
-                Timer.Start();
-                Osklib.OnScreenKeyboard.Close();
-                RandomSoundPlayer.PlayShuffle();
-            }
-            else if (message.Index == PageIndex.WORKOUT_VIDEO)
-            {
-                Timer.Stop();
-            }
-            else if (message.Index == PageIndex.POST_WORKOUT_VIEW)
-            {
-                Timer.Start();
-            }*/
 
         private void ResetAllViews()
         {
