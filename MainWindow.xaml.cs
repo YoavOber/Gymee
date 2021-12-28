@@ -85,6 +85,7 @@ namespace GymeeDestkopApp
                     break;
 
                 default:
+                    Timer.Stop();
                     Timer.Start();
                     break;
             }
