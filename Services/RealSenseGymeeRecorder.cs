@@ -22,7 +22,7 @@ using System.IO;
 
 namespace GymeeDestkopApp.Services
 {
-    
+
     public class RealSenseGymeeRecorder : IGymeeRecorder
     {
         RecordingState recording = RecordingState.BEFORE;
@@ -49,7 +49,7 @@ namespace GymeeDestkopApp.Services
             cfg.EnableStream(Intel.RealSense.Stream.Color, width, height, Format.Rgb8, fps);
             this.pipeline = new Pipeline();
             this.queue = new FrameQueue();
-            
+
         }
 
         public RecordingState GetRecordingState() {
@@ -70,12 +70,16 @@ namespace GymeeDestkopApp.Services
 
         public string GetVideoPath() {
             var videoPath = $"{this.videosDirectory}/{this.recordId}.mp4";
-            if(File.Exists(videoPath)) {
+            if (File.Exists(videoPath)) {
                 return videoPath;
             }
             return null;
         }
 
+        public string GetVideoFilePath()
+        {
+            return this.videosDirectory;
+        }
         public void Start(string recordId)
         {
             if (this.recording != RecordingState.BEFORE) {
@@ -140,7 +144,20 @@ namespace GymeeDestkopApp.Services
             });
         }
 
-
-        
+        public void EditFileNames()
+        {
+            var stamps = FFmpegVideoService.GetAllStamps();
+            foreach (var st in stamps)
+            {
+                TimeSpan timeSpan = TimeSpan.Parse(st.InitTimeStamp);
+                long start = timeSpan.Ticks;//this is the first file
+                long end = (long)(start + st.Duration * fps);
+                int fileNameIndex = 1;
+               // for (var i = start; i <= end; i++, fileNameIndex++) 
+                //    File.Move(/*this file name - use i*/, destFileName: $"{st.VidName}_{fileNameIndex}");//rename
+            }
+            //delete all other files
+            //upload everything
+        }
     }
 }

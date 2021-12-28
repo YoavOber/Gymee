@@ -23,7 +23,7 @@
         <!--<Image Source="/Views/Logo.png" Margin="299,71,299,1724" Height="139" ></Image>-->
         <TextBlock Text="התחברות" FontFamily="OpenSans" FontSize="82" FontStyle="Normal"
            FontWeight="Bold" Foreground="#FFFFFFFF" LineHeight="103" Margin="576,443,132,1365" RenderTransformOrigin="0.847,0.366"/>
-        <TextBox x:Name="EmailAddr"  Margin="132,620,132,1178" Width="816"  VerticalContentAlignment="Bottom"
+        <TextBox InputScope="EmailSmtpAddress" x:Name="EmailAddr"  Margin="132,620,132,1178" Width="816"  VerticalContentAlignment="Bottom"
             Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
             FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="כתובת אימייל" 
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50" 
@@ -31,7 +31,7 @@
             FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
            BorderBrush="#FFF">
         </TextBox>
-        <TextBox x:Name="PhoneNumber"  Margin="132,805,132,985" Width="816"  VerticalContentAlignment="Bottom"
+        <TextBox InputScope="TelephoneNumber" x:Name="PhoneNumber"  Margin="132,805,132,985" Width="816"  VerticalContentAlignment="Bottom"
             Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
             FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="טלפון נייד" 
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50" FontWeight="Light"

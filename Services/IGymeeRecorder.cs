@@ -18,6 +18,7 @@ namespace GymeeDestkopApp.Services
         RecordingState GetRecordingState();
         string GetDepthFramesPath();
         string GetVideoPath();
+        public string GetVideoFilePath();
         bool IsProcessing();
         void Start(string recordId);
         void End();

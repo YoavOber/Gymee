@@ -25,23 +25,29 @@ namespace GymeeDesktopApp.Views
         public SignupDataView()
         {
             InitializeComponent();
-            FullName.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            Password.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            EmailAddr.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            PhoneNumber.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            PreviewTouchDown += (object sender, TouchEventArgs e) => { renderView(); };
+            //   FullName.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            //  Password.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            //  EmailAddr.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            // PhoneNumber.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            PreviewTouchDown += (object sender, TouchEventArgs e) =>
+            {
+                renderView();
+            };
 
-            FullName.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            Password.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            EmailAddr.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            PhoneNumber.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            ShowPassTxtBox.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            MouseDown += (object sender, MouseButtonEventArgs e) => { renderView(); };
+            //   FullName.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            //   Password.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            //  EmailAddr.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            //   PhoneNumber.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            //    ShowPassTxtBox.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            MouseDown += (object sender, MouseButtonEventArgs e) =>
+            {
+                renderView();
+            };
         }
 
         private void renderView()
         {
-            Osklib.OnScreenKeyboard.Close();
+           // Osklib.OnScreenKeyboard.Close();
         }
 
         private void Password_PasswordChanged(object sender, RoutedEventArgs e)

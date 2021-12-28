@@ -5,6 +5,7 @@ using MaterialDesignThemes.Wpf;
 using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -31,12 +32,12 @@ namespace GymeeDestkopApp.Views
         {
             InitializeComponent();
             QuitDialogBox.Visibility = Visibility.Collapsed;
-            //var config = ConfigurationService.GetConfiguration();
-            //GymeeRecorder = new RealSenseGymeeRecorder(config.Width, config.Height, config.Fps);
+        //    var config = ConfigurationService.GetConfiguration();
+         //   GymeeRecorder = new RealSenseGymeeRecorder(config.Width, config.Height, config.Fps);
             SoundPlayer = new MediaPlayer();
             Messenger.Register<WorkoutVideoView, ChangePageMessage>(this, (r, m) =>
              {
-                 if(m.Index == PageIndex.PRE_WORKOUT)
+                 if (m.Index == PageIndex.PRE_WORKOUT)
                  {
                      var data = (GymeeAuthenticateService.LoginResult)m.Data;
                      userData = new GymeeAuthenticateService.LoginResult
@@ -98,13 +99,18 @@ namespace GymeeDestkopApp.Views
 
         private async void Video_MediaEnded(object sender, RoutedEventArgs e)
         {
-            //GymeeRecorder.End();
-            //var videoPath = GymeeRecorder.GetVideoPath();
-            //   UploadVideo(vid_path)
-            //  var uploader = new GoogleDriveUploader(videoPath);
-            //   uploader.Upload
             SoundPlayer.Stop();
-            var result = true;// await GymeeAuthenticateService.onAssessmentDone(userData.email, userData.name);
+            GymeeRecorder.End();
+
+            string directory = GymeeRecorder.GetVideoFilePath();
+            var outputs = FFmpegVideoService.CutVideo(directory);
+            var uploader = new GoogleDriveUploader(directory);
+            foreach(var vid in outputs)
+            {
+                await uploader.Upload($"{directory}/{vid}", vid, "video/mp4");//content type ?
+            }
+           //uploader.upload_frames(path: GymeeRecorder.GetDepthFramesPath());
+            var result = await GymeeAuthenticateService.onAssessmentDone(userData.email, userData.name);
             if (result)
             {
                 TerminateWorkout(false);
