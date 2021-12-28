@@ -32,8 +32,8 @@ namespace GymeeDestkopApp.Views
         {
             InitializeComponent();
             QuitDialogBox.Visibility = Visibility.Collapsed;
-        //    var config = ConfigurationService.GetConfiguration();
-         //   GymeeRecorder = new RealSenseGymeeRecorder(config.Width, config.Height, config.Fps);
+            var config = ConfigurationService.GetConfiguration();
+            GymeeRecorder = new RealSenseGymeeRecorder(config.Width, config.Height, config.Fps);
             SoundPlayer = new MediaPlayer();
             Messenger.Register<WorkoutVideoView, ChangePageMessage>(this, (r, m) =>
              {
@@ -102,13 +102,13 @@ namespace GymeeDestkopApp.Views
             SoundPlayer.Stop();
             GymeeRecorder.End();
 
-            string directory = GymeeRecorder.GetVideoFilePath();
-            var outputs = FFmpegVideoService.CutVideo(directory);
-            var uploader = new GoogleDriveUploader(directory);
-            foreach(var vid in outputs)
-            {
-                await uploader.Upload($"{directory}/{vid}", vid, "video/mp4");//content type ?
-            }
+            //string directory = GymeeRecorder.GetVideoFilePath();
+            //var outputs = FFmpegVideoService.CutVideo(directory);
+            //var uploader = new GoogleDriveUploader(directory);
+            //foreach(var vid in outputs)
+            //{
+            //    await uploader.Upload($"{directory}/{vid}", vid, "video/mp4");//content type ?
+            //}
            //uploader.upload_frames(path: GymeeRecorder.GetDepthFramesPath());
             var result = await GymeeAuthenticateService.onAssessmentDone(userData.email, userData.name);
             if (result)
