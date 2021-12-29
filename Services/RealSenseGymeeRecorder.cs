@@ -18,7 +18,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Timers;
 using System.IO;
-
+using GymeeDestkopApp.Models;
 
 namespace GymeeDestkopApp.Services
 {
@@ -122,9 +122,14 @@ namespace GymeeDestkopApp.Services
             //run recording in another thread which is dependent on the recording state
             Task.Run(() =>
             {
+                int fCount = 1;//frame count
+                var ls_frames = FrameListHelper.GetCropRanges(this.fps);
+                var comparer = new FrameListHelper();
                 while (this.recording == RecordingState.RECORDING)
                 {
-                    using (var frames = pipeline.WaitForFrames())
+                    if (ls_frames.BinarySearch(new Tuple<long, long>(fCount++, 0), comparer) != 0)
+                        continue;
+                    using (var frames = pipeline.WaitForFrames(timeout_ms: uint.MaxValue))
                     {
                         Trace.WriteLine("Queuing frame..");
                         queue.Enqueue(frames);

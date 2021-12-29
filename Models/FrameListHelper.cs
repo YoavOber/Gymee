@@ -7,18 +7,19 @@ using System.Threading.Tasks;
 
 namespace GymeeDestkopApp.Models
 {
-    public class BinarySearchComparer : IComparer<Tuple<long, long>>
+    public class FrameListHelper : IComparer<Tuple<long, long>>
     {
 
-        public int Compare(Tuple<long, long> x, Tuple<long, long> y)
+        public int Compare(Tuple<long, long> x, Tuple<long, long> y)//compare function
         {
             if (x.Item1 > y.Item1)
-                return -1;
-            if (x.Item2 < y.Item1)
                 return 1;
+            if (x.Item2 < y.Item1)
+                return -1;
             return 0;
         }
-        private List<Tuple<long, long>> getCropRanges(int fps)
+
+        public static List<Tuple<long, long>> GetCropRanges(int fps)
         {
             var stamps = FFmpegVideoService.GetAllStamps();
             var converter = new Converter<FFmpegStamps, Tuple<long, long>>(st =>
