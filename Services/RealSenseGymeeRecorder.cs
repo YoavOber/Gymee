@@ -186,7 +186,7 @@ namespace GymeeDestkopApp.Services
             {
                 TimeSpan timeSpan = TimeSpan.Parse(st.InitTimeStamp);
 
-                long start = timeSpan.Ticks + 1;//this is the first file - +1 since pngCount is initialized to 1
+                long start = fps * timeSpan.Ticks + 1;//this is the first file - +1 since pngCount is initialized to 1
                 long end = (long)(start + st.Duration * fps);
                 return new Tuple<long, long>(start, end);
             });
