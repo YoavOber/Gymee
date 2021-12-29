@@ -82,10 +82,7 @@ namespace GymeeDestkopApp.Views
 
         private void Video_Loaded(object sender, RoutedEventArgs e) //used to synchronize sound and picture
         {
-            //TODO: Yoav insert some record id here based on user
-            //Yoav : meanwhile lets use random id
-            var id = Guid.NewGuid().ToString();
-            GymeeRecorder.Start(id);
+            GymeeRecorder.Start(userData.email);
             VideoPlayer.Play();
             PlayRandomTrack();
         }
