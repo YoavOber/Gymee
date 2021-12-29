@@ -101,11 +101,18 @@ namespace GymeeDestkopApp.Services
             this.pipeline.Start(cfg);
             Task.Run(() =>
             {
+                var comparer = new BinarySearchComparer();
+                var ranges = getCropRanges();
                 while (true)
                 {
                     FrameSet frames;
                     if (queue.PollForFrame(out frames))
                     {
+                        if (ranges.BinarySearch(new Tuple<long, long>(pngCount, 0), comparer) != 0)
+                        {
+                            pngCount++;
+                            continue;
+                        }
                         using (frames)
                         using (var color = frames.ColorFrame)
                         using (var depth = frames.DepthFrame)
@@ -143,21 +150,13 @@ namespace GymeeDestkopApp.Services
             }
             this.recording = RecordingState.DONE;
             this.pipeline.Stop();
-          //  Task.Run(() =>
-        //    {
-                long index = 1;
-                var comparer = new BinarySearchComparer();
-                var ranges = getCropRanges();
+            Task.Run(() =>
+            {
                 this.processing = true;
                 var pngFiles = Directory.GetFiles($"{this.pngDirectory}/{this.recordId}", "*.png");
                 foreach (var pngFileName in pngFiles)
                 {
-                    Tuple<long, long> compareTuple = new(index++, 0);
-                    if (ranges.BinarySearch(compareTuple, comparer) != 0)
-                    {
-                        File.Delete($"{this.pngDirectory}/{this.recordId}/{pngFileName}");
-                        continue;
-                    }
+
                     using (var bitmap = new Bitmap(pngFileName))
                     {
                         GymeeTransforms.FixRealSenseBitmap(bitmap);
@@ -174,7 +173,7 @@ namespace GymeeDestkopApp.Services
                 Process.Start(processStartInfo);
                 this.processing = false;
                 this.recording = RecordingState.BEFORE;
-        //    });
+            });
             //      EditFileNames();
         }
 
