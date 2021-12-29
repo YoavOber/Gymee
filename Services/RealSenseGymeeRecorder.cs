@@ -122,15 +122,20 @@ namespace GymeeDestkopApp.Services
             //run recording in another thread which is dependent on the recording state
             Task.Run(() =>
             {
-                int fCount = 1;//frame count
+                int fCount = 0;//frame count
                 var ls_frames = FrameListHelper.GetCropRanges(this.fps);
                 var comparer = new FrameListHelper();
                 while (this.recording == RecordingState.RECORDING)
                 {
-                    if (ls_frames.BinarySearch(new Tuple<long, long>(fCount++, 0), comparer) != 0)
-                        continue;
-                    using (var frames = pipeline.WaitForFrames(timeout_ms: uint.MaxValue))
+
+                    using (var frames = pipeline.WaitForFrames())
                     {
+                        fCount++;
+                        if (ls_frames.BinarySearch(new Tuple<long, long>(fCount, 0), comparer) != 0)
+                        {
+                            Console.WriteLine($"Skipping frame {fCount}.Not {ls_frames[0].Item1} - {ls_frames[0].Item2}");
+                            continue;
+                        }
                         Trace.WriteLine("Queuing frame..");
                         queue.Enqueue(frames);
                     }
@@ -170,7 +175,7 @@ namespace GymeeDestkopApp.Services
                 this.processing = false;
                 this.recording = RecordingState.BEFORE;
             });
-      //      EditFileNames();
+            //      EditFileNames();
         }
 
         public void EditFileNames()
@@ -190,7 +195,7 @@ namespace GymeeDestkopApp.Services
                               $"{pdnDirectory}/{st.VidName}_{fileNameIndex}{mark}.pdn");//rename
                 }
             }
-            foreach(var f in Directory.GetFiles(pdnDirectory))
+            foreach (var f in Directory.GetFiles(pdnDirectory))
             {
                 if (!f.Contains(mark))
                     File.Delete($"{pdnDirectory}/{f}");

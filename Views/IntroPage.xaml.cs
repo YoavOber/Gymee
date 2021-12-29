@@ -1,6 +1,5 @@
 ﻿using GymeeDestkopApp.Models;
 using Microsoft.Toolkit.Mvvm.Messaging;
-using NAudio.Wave;
 using System;
 using System.IO;
 using System.Media;
