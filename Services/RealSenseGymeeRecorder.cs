@@ -143,8 +143,8 @@ namespace GymeeDestkopApp.Services
             }
             this.recording = RecordingState.DONE;
             this.pipeline.Stop();
-            Task.Run(() =>
-            {
+          //  Task.Run(() =>
+        //    {
                 long index = 1;
                 var comparer = new BinarySearchComparer();
                 var ranges = getCropRanges();
@@ -174,7 +174,7 @@ namespace GymeeDestkopApp.Services
                 Process.Start(processStartInfo);
                 this.processing = false;
                 this.recording = RecordingState.BEFORE;
-            });
+        //    });
             //      EditFileNames();
         }
 
