@@ -101,18 +101,11 @@ namespace GymeeDestkopApp.Services
             this.pipeline.Start(cfg);
             Task.Run(() =>
             {
-                var comparer = new BinarySearchComparer();
-                var ranges = getCropRanges();
                 while (true)
                 {
                     FrameSet frames;
                     if (queue.PollForFrame(out frames))
                     {
-                        if (ranges.BinarySearch(new Tuple<long, long>(pngCount, 0), comparer) != 0)
-                        {
-                            pngCount++;
-                            continue;
-                        }
                         using (frames)
                         using (var color = frames.ColorFrame)
                         using (var depth = frames.DepthFrame)
@@ -141,7 +134,6 @@ namespace GymeeDestkopApp.Services
         }
 
 
-
         public void End()
         {
             if (this.recording != RecordingState.RECORDING)
@@ -156,7 +148,6 @@ namespace GymeeDestkopApp.Services
                 var pngFiles = Directory.GetFiles($"{this.pngDirectory}/{this.recordId}", "*.png");
                 foreach (var pngFileName in pngFiles)
                 {
-
                     using (var bitmap = new Bitmap(pngFileName))
                     {
                         GymeeTransforms.FixRealSenseBitmap(bitmap);
@@ -174,25 +165,8 @@ namespace GymeeDestkopApp.Services
                 this.processing = false;
                 this.recording = RecordingState.BEFORE;
             });
-            //      EditFileNames();
+      //      EditFileNames();
         }
-
-
-        private List<Tuple<long, long>> getCropRanges()
-        {
-            var stamps = FFmpegVideoService.GetAllStamps();
-            var converter = new Converter<FFmpegStamps, Tuple<long, long>>(st =>
-            {
-                TimeSpan timeSpan = TimeSpan.Parse(st.InitTimeStamp);
-
-                long start = fps * timeSpan.Ticks + 1;//this is the first file - +1 since pngCount is initialized to 1
-                long end = (long)(start + st.Duration * fps);
-                return new Tuple<long, long>(start, end);
-            });
-            var result = stamps.ConvertAll(converter);
-            return result;
-        }
-
 
         public void EditFileNames()
         {
@@ -211,23 +185,11 @@ namespace GymeeDestkopApp.Services
                               $"{pdnDirectory}/{st.VidName}_{fileNameIndex}{mark}.pdn");//rename
                 }
             }
-            foreach (var f in Directory.GetFiles(pdnDirectory))
+            foreach(var f in Directory.GetFiles(pdnDirectory))
             {
                 if (!f.Contains(mark))
                     File.Delete($"{pdnDirectory}/{f}");
             }
-        }
-    }
-    public class BinarySearchComparer : IComparer<Tuple<long, long>>
-    {
-
-        public int Compare(Tuple<long, long> x, Tuple<long, long> y)
-        {
-            if (x.Item1 > y.Item1)
-                return -1;
-            if (x.Item2 < y.Item1)
-                return 1;
-            return 0;
         }
     }
 }
