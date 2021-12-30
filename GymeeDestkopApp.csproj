@@ -23,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="GymeeConfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="VidConfig.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
