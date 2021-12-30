@@ -7,13 +7,6 @@
              mc:Ignorable="d" 
              Height="1920" Width="1080">
     <Canvas Background="Black" Height="1920" Width="1080" VerticalAlignment="Top" x:Name="Canvas">
-        <Button x:Name="BackBtn" Height="97" FontFamily="OpenSans" FontWeight="Light"
-            Foreground="#FFF" FontSize="37" Background="Black"
-            BorderThickness="0" materialDesign:ShadowAssist.ShadowDepth="Depth0"
-            materialDesign:RippleAssist.IsDisabled="True" Canvas.Left="949" Canvas.Top="10" Width="131" Click="HomeBtn_Click">
-            <materialDesign:PackIcon Kind="HomeOutline" materialDesign:RippleAssist.IsDisabled="False" 
-                                     Background="Black" Height="80" Width="116" VerticalAlignment="Center" />
-        </Button>
         <Image Panel.ZIndex="0" Source="pack://siteoforigin:,,/Views/Media/Logo.png"
                Canvas.Top="71" Height="139" Width="1074"></Image>
         <!--<Image Panel.ZIndex="0" Source="/Views/Logo.png" Canvas.Top="71" Height="139" Width="1074"></Image>-->
