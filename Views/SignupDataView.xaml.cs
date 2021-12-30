@@ -25,20 +25,20 @@ namespace GymeeDesktopApp.Views
         public SignupDataView()
         {
             InitializeComponent();
-            //   FullName.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            //  Password.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            //  EmailAddr.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            // PhoneNumber.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            FullName.PreviewTouchDown += (object sender, TouchEventArgs e) => { openOSK(); };
+            Password.PreviewTouchDown += (object sender, TouchEventArgs e) => { openOSK(); };
+            EmailAddr.PreviewTouchDown += (object sender, TouchEventArgs e) => { openOSK(); };
+            PhoneNumber.PreviewTouchDown += (object sender, TouchEventArgs e) => { openOSK(); };
             PreviewTouchDown += (object sender, TouchEventArgs e) =>
             {
                 renderView();
             };
 
-            //   FullName.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            //   Password.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            //  EmailAddr.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            //   PhoneNumber.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            //    ShowPassTxtBox.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            FullName.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
+            Password.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
+            EmailAddr.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
+            PhoneNumber.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
+            ShowPassTxtBox.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
             MouseDown += (object sender, MouseButtonEventArgs e) =>
             {
                 renderView();
@@ -47,7 +47,13 @@ namespace GymeeDesktopApp.Views
 
         private void renderView()
         {
-           // Osklib.OnScreenKeyboard.Close();
+            Osklib.OnScreenKeyboard.Close();
+        }
+
+        private void openOSK()
+        {
+            if (!Osklib.OnScreenKeyboard.IsOpened())
+                Osklib.OnScreenKeyboard.Show();
         }
 
         private void Password_PasswordChanged(object sender, RoutedEventArgs e)
@@ -70,5 +76,6 @@ namespace GymeeDesktopApp.Views
         {
             Password.Password = ShowPassTxtBox.Text;
         }
+
     }
 }

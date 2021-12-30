@@ -165,41 +165,43 @@ namespace GymeeDestkopApp.Services
                     }
                 }
                 this.pngCount = 1;
+                string vidPath = $"{this.videosDirectory }/{this.recordId}";
                 ProcessStartInfo processStartInfo = new()
                 {
                     FileName = "ffmpeg.exe",
                     Arguments = $"-framerate {this.fps} -i {this.pngDirectory}/{this.recordId}/{this.pngPrefix}%d.png " +
-                    $"-c:v libx264 -pix_fmt yuv420p -crf 25 {this.videosDirectory}/{this.recordId}.mp4",
+                    $"-c:v libx264 -pix_fmt yuv420p -crf 25 {vidPath}.mp4",
                 };
-                Process.Start(processStartInfo);
+                var p = Process.Start(processStartInfo);
                 this.processing = false;
                 this.recording = RecordingState.BEFORE;
+                p.WaitForExit();
+                FFmpegVideoService.CutVideo(vidPath);
+                string pdnPath = @$"{this.depthDirectory}\{this.recordId}";
+                EditFileNames(pdnPath,pdnPath); // use GetDepthFramesPath(); ?
             });
-            //      EditFileNames();
         }
 
-        public void EditFileNames()
+        public void EditFileNames(string currentPath, string targetPath)
         {
             char mark = '$';
-            string pdnDirectory = GetDepthFramesPath();
             var stamps = FFmpegVideoService.GetAllStamps();
             foreach (var st in stamps)
             {
                 TimeSpan timeSpan = TimeSpan.Parse(st.InitTimeStamp);
-                long start = timeSpan.Ticks + 1;//this is the first file - +1 since pngCount is initialized to 1
-                long end = (long)(start + st.Duration * fps);
+                long start = (long)timeSpan.TotalSeconds * this.fps + 1;//this is the first file - +1 since pngCount is initialized to 1
+                long end = (long)(start + st.Duration * this.fps);
                 int fileNameIndex = 1;
                 for (var i = start; i <= end; i++, fileNameIndex++)
                 {
-                    File.Move($"{pdnDirectory}/depth{i}.pdn",
-                              $"{pdnDirectory}/{st.VidName}_{fileNameIndex}{mark}.pdn");//rename
+                    File.Move(@$"{currentPath}\depth{i}.ndp",
+                              @$"{targetPath}\{st.VidName}_{fileNameIndex}{mark}.ndp");//rename
                 }
             }
-            foreach (var f in Directory.GetFiles(pdnDirectory))
-            {
-                if (!f.Contains(mark))
-                    File.Delete($"{pdnDirectory}/{f}");
-            }
+            DirectoryInfo d = new DirectoryInfo(currentPath);
+            foreach (var f in d.GetFiles())
+                if (!f.Name.Contains(mark) && f.Name.EndsWith("ndp"))
+                    f.Delete();
         }
     }
 }

@@ -14,15 +14,15 @@ namespace GymeeDesktopApp.Views
         public LoginView()
         {
             InitializeComponent();
-            //EmailAddr.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-            //PhoneNumber.PreviewTouchDown += (object sender, TouchEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            EmailAddr.PreviewTouchDown += (object sender, TouchEventArgs e) => { openOSK(); };
+            PhoneNumber.PreviewTouchDown += (object sender, TouchEventArgs e) => { openOSK(); };
             PreviewTouchDown += (object sender, TouchEventArgs e) =>
             {
                 renderView();
             };
 
-         //   EmailAddr.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
-           // PhoneNumber.MouseDown += (object sender, MouseButtonEventArgs e) => { Osklib.OnScreenKeyboard.Show(); };
+            EmailAddr.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
+            PhoneNumber.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
             MouseDown += (object sender, MouseButtonEventArgs e) =>
             {
                 renderView();
@@ -34,6 +34,11 @@ namespace GymeeDesktopApp.Views
             Osklib.OnScreenKeyboard.Close();
         }
 
+        private void openOSK()
+        {
+            if (!Osklib.OnScreenKeyboard.IsOpened())
+                Osklib.OnScreenKeyboard.Show();
+        }
 
     }
 }
