@@ -14,6 +14,8 @@ namespace GymeeDestkopApp.Services {
         public int camera_height;
         public int camera_fps;
         public bool greyscale;
+        public string drive_creds;
+        public string record_folder;
     }
 
     //this is a singleton.
@@ -40,6 +42,7 @@ namespace GymeeDestkopApp.Services {
         public int Height => cfg.camera_height;
         public int Fps => cfg.camera_fps;
         public bool IsGreyscale => cfg.greyscale;
-
+        public string DriveCreds => cfg.drive_creds;
+        public string RecordFolder => cfg.record_folder;
     }
 }

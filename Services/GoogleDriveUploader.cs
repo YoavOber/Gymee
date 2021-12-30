@@ -23,7 +23,7 @@ namespace GymeeDestkopApp.Services
         DriveService drive;
         void Initialize(string credsPath)
         {
-            this.creds = GoogleCredential.FromStream(new FileStream("creds.json", FileMode.Open, FileAccess.Read)).CreateScoped(Scopes);
+            this.creds = GoogleCredential.FromStream(new FileStream(credsPath, FileMode.Open, FileAccess.Read)).CreateScoped(Scopes);
             this.folderId = null;
 
             // Create Drive API service.
@@ -42,6 +42,8 @@ namespace GymeeDestkopApp.Services
             this.folderId = folderId;
         }
 
+        //for .mp4: video/mp4
+        //for .ndp: text/basic
         public async Task Upload(string filePath, string uploadName, string contentType)
         {
             using (var uploadThis = System.IO.File.OpenRead(filePath))

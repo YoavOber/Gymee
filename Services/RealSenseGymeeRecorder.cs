@@ -27,10 +27,11 @@ namespace GymeeDestkopApp.Services
     {
         RecordingState recording = RecordingState.BEFORE;
         Pipeline pipeline;
+        static string rootFolder = ConfigurationService.GetConfiguration().RecordFolder;
         bool processing = false;
-        string pngDirectory = "pngs";
-        string depthDirectory = "depths";
-        string videosDirectory = "videos";
+        string pngDirectory = $"{rootFolder}/pngs";
+        string depthDirectory = $"{rootFolder}/depths";
+        string videosDirectory = $"{rootFolder}/videos";
         int fps;
         string pngPrefix = "rgb";
         string recordId;
@@ -45,6 +46,7 @@ namespace GymeeDestkopApp.Services
             Directory.CreateDirectory(this.videosDirectory);
             this.fps = fps;
             this.cfg = new Config();
+            //don't change the format or this will crash :)
             cfg.EnableStream(Intel.RealSense.Stream.Depth, width, height, Format.Z16, fps);
             cfg.EnableStream(Intel.RealSense.Stream.Color, width, height, Format.Rgb8, fps);
             this.pipeline = new Pipeline();
@@ -111,7 +113,6 @@ namespace GymeeDestkopApp.Services
                         using (var depth = frames.DepthFrame)
                         //we save the least processed color and depth outputs and store them for post record processing
                         {
-                            Trace.WriteLine("Processing frame");
                             using var bitmap = GymeeTransforms.GenerateRGBBitmap(color);
                             bitmap.Save($"{this.pngDirectory}/{this.recordId}/{this.pngPrefix}{this.pngCount}.png");
                             GymeeTransforms.WriteDepthFrameToFile(depth, $"{this.depthDirectory}/{this.recordId}/depth{pngCount++}");
@@ -136,7 +137,6 @@ namespace GymeeDestkopApp.Services
                         //    Console.WriteLine($"Skipping frame {fCount}.Not {ls_frames[0].Item1} - {ls_frames[0].Item2}");
                         //    continue;
                         //}
-                        Trace.WriteLine("Queuing frame..");
                         queue.Enqueue(frames);
                     }
                 }
