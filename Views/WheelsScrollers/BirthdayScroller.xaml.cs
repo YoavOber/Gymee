@@ -47,7 +47,7 @@ namespace GymeeDestkopApp.Views
             if (name != "age")
                 return;
             if (Years.SelectedIndex == -1)
-                Years.ScrollIntoView(Years.Items.GetItemAt(60));
+                Years.ScrollIntoView(Years.Items.GetItemAt(60));//year 2000 ~
             else
             {
                 Years.ScrollIntoView(Years.SelectedItem);

@@ -11,15 +11,16 @@ namespace GymeeDestkopApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Timer Timer { get; set; }
+        private Timer NoTouchTimer { get; set; }
         private StrongReferenceMessenger Messenger { get; set; } = StrongReferenceMessenger.Default;
 
         public MainWindow()
         {
             InitializeComponent();
-            Timer = new Timer(1000 * 90);
-            Timer.Elapsed += Timer_Elapsed;
-            Timer.Start();
+            //screen timer
+            NoTouchTimer = new Timer(1000 * 90);//add configuration file
+            NoTouchTimer.Elapsed += Timer_Elapsed;
+            NoTouchTimer.Start();
             MainHost.PreviewTouchMove += ResetTimerFingerTouch;
             MainHost.PreviewMouseMove += ResetTimerMouseTouch;
             Messenger.Register<MainWindow, ChangePageMessage>(this, (r, m) => r.Receive(m));
@@ -29,26 +30,29 @@ namespace GymeeDestkopApp
         {
             if (MainHost.SelectedIndex == (int)PageIndex.WORKOUT_VIDEO)
                 return;
-            Timer.Stop();
-            Timer.Start();
+            NoTouchTimer.Stop();
+            NoTouchTimer.Start();
         }
 
         private void ResetTimerFingerTouch(object sender, TouchEventArgs e)
         {
             if (MainHost.SelectedIndex == (int)PageIndex.WORKOUT_VIDEO)
                 return;
-            Timer.Stop();
-            Timer.Start();
+            NoTouchTimer.Stop();
+            NoTouchTimer.Start();
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            if (MainHost.SelectedIndex == (int)PageIndex.WORKOUT_VIDEO)
-                return;
-            MainHost.SelectedIndex = 0;
-            ResetAllViews();
-            Messenger.Send("resetVM");
-            Osklib.OnScreenKeyboard.Close();
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                if (MainHost.SelectedIndex == (int)PageIndex.WORKOUT_VIDEO)
+                    return;
+                MainHost.SelectedIndex = 0;
+                ResetAllViews();
+                Messenger.Send("resetVM");
+                Osklib.OnScreenKeyboard.Close();
+            });
         }
 
         ~MainWindow()
@@ -67,17 +71,17 @@ namespace GymeeDestkopApp
                 case PageIndex.INTRO_PAGE:
                     Messenger.Send("resetVM");
                     ResetAllViews();
-                    Timer.Start();
+                    NoTouchTimer.Start();
                     Osklib.OnScreenKeyboard.Close();
                     break;
 
                 case PageIndex.WORKOUT_VIDEO:
-                    Timer.Stop();
+                    NoTouchTimer.Stop();
                     break;
 
                 default:
-                    Timer.Stop();
-                    Timer.Start();
+                    NoTouchTimer.Stop();
+                    NoTouchTimer.Start();
                     break;
             }
 
