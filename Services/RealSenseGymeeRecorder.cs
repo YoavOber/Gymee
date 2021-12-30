@@ -112,7 +112,7 @@ namespace GymeeDestkopApp.Services
                     if (queue.PollForFrame(out frames))
                     {
                         fCount++;
-                        if (ls_frames.BinarySearch(new Tuple<long, long>(fCount, 0), comparer) != 0)
+                        if (ls_frames.BinarySearch(new Tuple<long, long>(fCount, 0), comparer) < 0)
                         {
                             Console.WriteLine($"Skipping frame {fCount}");
                             continue;
