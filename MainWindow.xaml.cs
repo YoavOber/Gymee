@@ -44,12 +44,15 @@ namespace GymeeDestkopApp
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            if (MainHost.SelectedIndex == (int)PageIndex.WORKOUT_VIDEO)
-                return;
-            MainHost.SelectedIndex = 0;
-            ResetAllViews();
-            Messenger.Send("resetVM");
-            Osklib.OnScreenKeyboard.Close();
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                if (MainHost.SelectedIndex == (int)PageIndex.WORKOUT_VIDEO)
+                    return;
+                MainHost.SelectedIndex = 0;
+                ResetAllViews();
+                Messenger.Send("resetVM");
+                Osklib.OnScreenKeyboard.Close();
+            });
         }
 
         ~MainWindow()
