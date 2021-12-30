@@ -72,7 +72,7 @@
             </materialDesign:TransitionerSlide>
             
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect Kind=FadeIn}">
-                <local11:WorkoutVideoView></local11:WorkoutVideoView>
+                <local11:WorkoutVideoView x:Name="WorkoutView"></local11:WorkoutVideoView>
             </materialDesign:TransitionerSlide>
             
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect Kind=FadeIn}">

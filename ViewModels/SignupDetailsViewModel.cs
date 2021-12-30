@@ -14,6 +14,14 @@ namespace GymeeDesktopApp.ViewModels
 {
     public class SignupDetailsViewModel : ObservableObject
     {
+
+
+        #region Commands
+        public ICommand MoveNextCmd { get; set; }
+        public ICommand UserExistsCmd { get; set; }
+
+        public ICommand GoBackCmd { get; set; }
+        #endregion
         private StrongReferenceMessenger Messanger { get; set; } = StrongReferenceMessenger.Default;
         public SignupDetailsViewModel()
         {
@@ -86,7 +94,11 @@ namespace GymeeDesktopApp.ViewModels
 
         private bool isLoading;
 
-        public bool IsLoading { get => isLoading; set => SetProperty(ref isLoading, value); }
+        public bool IsLoading
+        {
+            get => isLoading;
+            set => SetProperty(ref isLoading, value);
+        }
 
         private string emailAddr;//user email
         public string EmailAddr
@@ -166,7 +178,7 @@ namespace GymeeDesktopApp.ViewModels
         }
 
         private bool canMoveNext;
-        public bool CanMoveNext
+        public bool CanMoveNext //binds to 'continue' btn
         {
             get => canMoveNext;
             set
@@ -185,17 +197,11 @@ namespace GymeeDesktopApp.ViewModels
         }
         #endregion
 
-        #region Commands
-        public ICommand MoveNextCmd { get; set; }
-        public ICommand UserExistsCmd { get; set; }
-
-        public ICommand GoBackCmd { get; set; }
 
         private void PerformGoBackCmd()
         {
             Messanger.Send(new ChangePageMessage(PageIndex.TERMS_OF_USE));
         }
 
-        #endregion
     }
 }

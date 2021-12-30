@@ -52,7 +52,7 @@ namespace GymeeDesktopApp.ViewModels
 
         public ICommand NewUserCmd { get; set; } //new user btn command
         public ICommand LoginCmd { get; set; } //login command 
-        public ICommand GoBackCmd { get; set; }
+        public ICommand GoBackCmd { get; set; } //go one page back command
 
         private StrongReferenceMessenger Messenger { get; set; } = StrongReferenceMessenger.Default;
         public LoginViewModel()
@@ -69,13 +69,10 @@ namespace GymeeDesktopApp.ViewModels
                 UserExists = true;
                 var result = await GymeeAuthenticateService.Login(PhoneNumber, EmailAddr.ToLower());
                 UserExists = result.loggedIn;
-                //note - email is tolower.
                 IsLoading = false;
                 if (UserExists)
                 {
-                    
                     Messenger.Send(new ChangePageMessage(PageIndex.PRE_WORKOUT,result));
-                    return;
                 }
             });
             Messenger.Register<LoginViewModel, string>(this, (r, m) =>
@@ -122,7 +119,7 @@ namespace GymeeDesktopApp.ViewModels
         }
 
         private bool canMoveNext;
-        public bool CanMoveNext
+        public bool CanMoveNext //binds to 'continue' button
         {
             get => canMoveNext;
             set
@@ -135,7 +132,7 @@ namespace GymeeDesktopApp.ViewModels
 
         private bool isLoading;
 
-        public bool IsLoading
+        public bool IsLoading//binds to progress wheel
         {
             get => isLoading;
             set => SetProperty(ref isLoading, value);

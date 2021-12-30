@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="GymeeDestkopApp.Views.MeasurementsSlide"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:GymeeDestkopApp.Views" xmlns:model="clr-namespace:GymeeDesktopApp.Models" 
@@ -33,7 +33,7 @@
     <Grid Background="Black">
         <TextBlock Panel.ZIndex="0" TextAlignment="Left" FontFamily="OpenSans" FontSize="82"
             FontStyle="Normal" FontWeight="Bold" FlowDirection="RightToLeft" Foreground="#FFFFFFFF" 
-            LineHeight="103" Margin="108,0,132,849" >
+            LineHeight="103" Margin="108,0,132,849">
             <Run Text="יש להזין את"/><LineBreak/>
             <Run Text="הנתונים הבאים"/>
         </TextBlock>
