@@ -61,7 +61,8 @@ namespace GymeeDestkopApp.Services
                                 $" -c copy {output}",
                     CreateNoWindow = true
                 };
-                Process.Start(processStartInfo);
+                var p = Process.Start(processStartInfo);
+                p.WaitForExit();
             }
             return outputs_ls;
         }
