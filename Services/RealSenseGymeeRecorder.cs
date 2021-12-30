@@ -167,9 +167,9 @@ namespace GymeeDestkopApp.Services
                 this.processing = false;
                 this.recording = RecordingState.BEFORE;
                 p.WaitForExit();
-                FFmpegVideoService.CutVideo(vidPath);
-                string pdnPath = @$"{this.depthDirectory}\{this.recordId}";
-                EditFileNames(pdnPath,pdnPath); // use GetDepthFramesPath(); ?
+                //   FFmpegVideoService.CutVideo(vidPath);
+                string ndpPath = @$"{this.depthDirectory}\{this.recordId}";
+                //  EditFileNames(ndpPath,ndpPath); // use GetDepthFramesPath(); ?
             });
         }
 
