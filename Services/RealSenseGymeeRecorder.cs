@@ -101,9 +101,6 @@ namespace GymeeDestkopApp.Services
             Directory.CreateDirectory($"{this.pngDirectory}/{this.recordId}");
 
             this.pipeline.Start(cfg);
-            int fCount = 0;//frame count
-            var ls_frames = FrameListHelper.GetCropRanges(this.fps);
-            var comparer = new FrameListHelper();
             Task.Run(() =>
             {
                 while (true)
@@ -111,12 +108,6 @@ namespace GymeeDestkopApp.Services
                     FrameSet frames;
                     if (queue.PollForFrame(out frames))
                     {
-                        fCount++;
-                        if (ls_frames.BinarySearch(new Tuple<long, long>(fCount, 0), comparer) < 0)
-                        {
-                            Console.WriteLine($"Skipping frame {fCount}");
-                            continue;
-                        }
                         using (frames)
                         using (var color = frames.ColorFrame)
                         using (var depth = frames.DepthFrame)
