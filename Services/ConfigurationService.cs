@@ -16,6 +16,7 @@ namespace GymeeDestkopApp.Services {
         public bool greyscale;
         public string drive_creds;
         public string record_folder;
+        public string drive_folder_id;
     }
 
     //this is a singleton.
@@ -44,5 +45,6 @@ namespace GymeeDestkopApp.Services {
         public bool IsGreyscale => cfg.greyscale;
         public string DriveCreds => cfg.drive_creds;
         public string RecordFolder => cfg.record_folder;
+        public string DriveFolderId => cfg.drive_folder_id;
     }
 }
