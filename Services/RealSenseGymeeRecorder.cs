@@ -162,14 +162,15 @@ namespace GymeeDestkopApp.Services
                     FileName = "ffmpeg.exe",
                     Arguments = $"-framerate {this.fps} -i {this.pngDirectory}/{this.recordId}/{this.pngPrefix}%d.png " +
                     $"-c:v libx264 -pix_fmt yuv420p -crf 25 {vidPath}.mp4",
+                    CreateNoWindow = true
                 };
                 var p = Process.Start(processStartInfo);
                 this.processing = false;
                 this.recording = RecordingState.BEFORE;
-                p.WaitForExit();
                 //   FFmpegVideoService.CutVideo(vidPath);
-                string ndpPath = @$"{this.depthDirectory}\{this.recordId}";
-                //  EditFileNames(ndpPath,ndpPath); // use GetDepthFramesPath(); ?
+                string ndpPath = GetDepthFramesPath(); ;
+                EditFileNames(ndpPath, ndpPath); // use GetDepthFramesPath(); ?
+                p.WaitForExit();
             });
         }
 
