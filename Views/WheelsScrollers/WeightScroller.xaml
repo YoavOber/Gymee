@@ -10,9 +10,11 @@
              Height="660" Width="1080">
     <Grid>
         <StackPanel Height="660" Width="1080" Name="WeightSelection" Background="#2d2e2d">
-            <TextBlock FlowDirection="RightToLeft" Height="115" Padding="29" TextAlignment="Center" Background="#ff9b53" FontSize="48" FontStyle="Normal"
-           FontWeight="Medium" FontFamily="OpenSans" Foreground="#FFFFFFFF" Text="משקל"
-                        Margin="0,0,0,30"></TextBlock>
+            <Button FlowDirection="RightToLeft" Height="115" Padding="29" HorizontalContentAlignment="Center" Background="#ff9b53" FontSize="48" FontStyle="Normal"
+           FontWeight="Medium" FontFamily="OpenSans" Foreground="#FFFFFFFF" Content="משקל"
+                        Margin="0,0,0,30"
+                    materialDesign:RippleAssist.IsDisabled="True" 
+                    Command="{Binding ShowSelectionWheelCmd}" CommandParameter="collapse"></Button>
             <ListView HorizontalContentAlignment="Center" FlowDirection="RightToLeft" x:Name="weights"
                 SelectionMode="Single" 
                 Height="462" Margin="0,0,80,0"

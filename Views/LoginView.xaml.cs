@@ -36,7 +36,7 @@ namespace GymeeDesktopApp.Views
         }
 
 
-        public void OpenOSK(object sender, EventArgs e)
+        public void OpenOSK(object sender, EventArgs e) //maybe remove
         {
             if (!Osklib.OnScreenKeyboard.IsOpened())
                 Osklib.OnScreenKeyboard.Show();

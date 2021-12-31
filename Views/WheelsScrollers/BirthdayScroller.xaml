@@ -36,9 +36,11 @@
     </UserControl.Resources>
     <Grid>
         <ItemsControl Height="660" Width="1080" Name="HeightSelection" Background="#2d2e2d">
-            <TextBlock FlowDirection="RightToLeft" Height="115" Padding="29" TextAlignment="Center" Background="#ff9b53" FontSize="48" FontStyle="Normal"
-           FontWeight="Medium" FontFamily="OpenSans" Foreground="#FFFFFFFF" Text="תאריך לידה"
-                       Margin="0,0,0,30"></TextBlock>
+            <Button FlowDirection="RightToLeft" Height="115" Padding="29" HorizontalContentAlignment="Center" Background="#ff9b53" FontSize="48" FontStyle="Normal"
+           FontWeight="Medium" FontFamily="OpenSans" Foreground="#FFFFFFFF" Content="תאריך לידה"
+                       Margin="0,0,0,30"
+                       materialDesign:RippleAssist.IsDisabled="True"
+                    Command="{Binding ShowSelectionWheelCmd}" CommandParameter="collapse"></Button>
             <ListView Margin="0,0,-600,0" HorizontalContentAlignment="Center" FlowDirection="RightToLeft"
                 x:Name="Days"
                 SelectionMode="Single" Height="462" 

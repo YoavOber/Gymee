@@ -9,9 +9,11 @@
              Height="660" Width="1080">
     <Grid>
         <StackPanel Height="660" Width="1080" Name="HeightSelection" Background="#2d2e2d">
-            <TextBlock FlowDirection="RightToLeft" Height="115" Padding="29" TextAlignment="Center" Background="#ff9b53" FontSize="48" FontStyle="Normal"
-           FontWeight="Medium" FontFamily="OpenSans" Foreground="#FFFFFFFF" Text="גובה"
-                        Margin="0,0,0,30"></TextBlock>
+            <Button FlowDirection="RightToLeft" Height="115" Padding="29" HorizontalContentAlignment="Center" Background="#ff9b53" FontSize="48" FontStyle="Normal"
+           FontWeight="Medium" FontFamily="OpenSans" Foreground="#FFFFFFFF" Content="גובה"
+                 Margin="0,0,0,30"
+                    materialDesign:RippleAssist.IsDisabled="True"
+                    Command="{Binding ShowSelectionWheelCmd}" CommandParameter="collapse"></Button>
             <ListView Margin="0,0,65,0" HorizontalContentAlignment="Center" FlowDirection="RightToLeft" x:Name="heights"
                   SelectionMode="Single" Height="462" BorderThickness="0" 
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" 
