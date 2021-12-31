@@ -36,7 +36,7 @@ namespace GymeeDesktopApp.Views
 
         private void openOSK()
         {
-            if (!Osklib.OnScreenKeyboard.IsOpened())
+           // if (!Osklib.OnScreenKeyboard.IsOpened())
                 Osklib.OnScreenKeyboard.Show();
         }
 

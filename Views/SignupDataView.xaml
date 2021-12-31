@@ -26,14 +26,14 @@
         <TextBlock Text="הרשמה" FontFamily="OpenSans" FontSize="82" FontStyle="Normal"
            FontWeight="Bold" Foreground="#FFFFFFFF" LineHeight="103" Margin="661,443,132,1365"/>
 
-        <TextBox InputScope="PersonalFullName" x:Name="FullName" Margin="0,607,0,1172" Width="816" VerticalContentAlignment="Bottom" 
+        <TextBox x:Name="FullName" Margin="0,607,0,1172" Width="816" VerticalContentAlignment="Bottom" 
             Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
             FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="שם מלא" FontWeight="Light"
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50" 
             FontFamily="{DynamicResource MaterialDesignFont}"
             BorderBrush="#FFF" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
-        <TextBox InputScope="EmailSmtpAddress" x:Name="EmailAddr"  Margin="0,800,0,979" Width="816"  VerticalContentAlignment="Bottom"
+        <TextBox x:Name="EmailAddr"  Margin="0,800,0,979" Width="816"  VerticalContentAlignment="Bottom"
             Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
             FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="כתובת אימייל" 
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50" FontWeight="Light"
@@ -41,7 +41,7 @@
             FontFamily="{DynamicResource MaterialDesignFont}"  
            BorderBrush="#FFF"/>
 
-        <TextBox InputScope="TelephoneNumber" x:Name="PhoneNumber"  Margin="0,994,0,785" Width="816"  VerticalContentAlignment="Bottom"
+        <TextBox x:Name="PhoneNumber"  Margin="0,994,0,785" Width="816"  VerticalContentAlignment="Bottom"
             Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
             FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="טלפון נייד" 
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50"
