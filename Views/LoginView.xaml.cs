@@ -1,5 +1,6 @@
 ﻿using GymeeDesktopApp.ViewModels;
 using System;
+using System.Drawing;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -14,15 +15,15 @@ namespace GymeeDesktopApp.Views
         public LoginView()
         {
             InitializeComponent();
-            EmailAddr.PreviewTouchDown += (object sender, TouchEventArgs e) => { openOSK(); };
-            PhoneNumber.PreviewTouchDown += (object sender, TouchEventArgs e) => { openOSK(); };
+            EmailAddr.PreviewTouchDown += OpenOSK;
+            PhoneNumber.PreviewTouchDown += OpenOSK;
             PreviewTouchDown += (object sender, TouchEventArgs e) =>
             {
                 renderView();
             };
 
-            EmailAddr.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
-            PhoneNumber.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
+            EmailAddr.PreviewMouseDown += OpenOSK;
+            PhoneNumber.PreviewMouseDown += OpenOSK;
             MouseDown += (object sender, MouseButtonEventArgs e) =>
             {
                 renderView();
@@ -34,11 +35,11 @@ namespace GymeeDesktopApp.Views
             Osklib.OnScreenKeyboard.Close();
         }
 
-        private void openOSK()
+
+        public void OpenOSK(object sender, EventArgs e)
         {
-           // if (!Osklib.OnScreenKeyboard.IsOpened())
+            if (!Osklib.OnScreenKeyboard.IsOpened())
                 Osklib.OnScreenKeyboard.Show();
         }
-
     }
 }

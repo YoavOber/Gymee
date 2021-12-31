@@ -25,34 +25,36 @@ namespace GymeeDesktopApp.Views
         public SignupDataView()
         {
             InitializeComponent();
-            FullName.PreviewTouchDown += (object sender, TouchEventArgs e) => { openOSK(); };
-            Password.PreviewTouchDown += (object sender, TouchEventArgs e) => { openOSK(); };
-            EmailAddr.PreviewTouchDown += (object sender, TouchEventArgs e) => { openOSK(); };
-            PhoneNumber.PreviewTouchDown += (object sender, TouchEventArgs e) => { openOSK(); };
+            FullName.PreviewTouchDown += OpenOSK;
+            Password.PreviewTouchDown += OpenOSK;
+            EmailAddr.PreviewTouchDown += OpenOSK;
+            PhoneNumber.PreviewTouchDown += OpenOSK;
+            ShowPassTxtBox.PreviewTouchDown += OpenOSK;
             PreviewTouchDown += (object sender, TouchEventArgs e) =>
             {
                 renderView();
             };
 
-            FullName.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
-            Password.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
-            EmailAddr.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
-            PhoneNumber.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
-            ShowPassTxtBox.MouseDown += (object sender, MouseButtonEventArgs e) => { openOSK(); };
-            MouseDown += (object sender, MouseButtonEventArgs e) =>
+            FullName.PreviewMouseDown += OpenOSK;
+            Password.PreviewMouseDown += OpenOSK;
+            EmailAddr.PreviewMouseDown += OpenOSK;
+            PhoneNumber.PreviewMouseDown += OpenOSK;
+            ShowPassTxtBox.PreviewMouseDown += OpenOSK;
+            PreviewMouseDown += (object sender, MouseButtonEventArgs e) =>
             {
                 renderView();
             };
         }
+
 
         private void renderView()
         {
             Osklib.OnScreenKeyboard.Close();
         }
 
-        private void openOSK()
+        public void OpenOSK(object sender, EventArgs e)
         {
-           // if (!Osklib.OnScreenKeyboard.IsOpened())
+            if (!Osklib.OnScreenKeyboard.IsOpened())
                 Osklib.OnScreenKeyboard.Show();
         }
 

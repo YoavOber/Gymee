@@ -26,41 +26,43 @@
         <TextBlock Text="הרשמה" FontFamily="OpenSans" FontSize="82" FontStyle="Normal"
            FontWeight="Bold" Foreground="#FFFFFFFF" LineHeight="103" Margin="661,443,132,1365"/>
 
-        <TextBox x:Name="FullName" Margin="0,607,0,1172" Width="816" VerticalContentAlignment="Bottom" 
+        <TextBox InputScope="PersonalFullName" x:Name="FullName" Margin="0,607,0,1172" Width="816" VerticalContentAlignment="Bottom" 
             Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
             FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="שם מלא" FontWeight="Light"
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50" 
             FontFamily="{DynamicResource MaterialDesignFont}"
-            BorderBrush="#FFF" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}">
+            BorderBrush="#FFF" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
+            TouchDown="OpenOSK"
+                 >
         </TextBox>
-        <TextBox x:Name="EmailAddr"  Margin="0,800,0,979" Width="816"  VerticalContentAlignment="Bottom"
+        <TextBox InputScope="EmailSmtpAddress" x:Name="EmailAddr"  Margin="0,800,0,979" Width="816"  VerticalContentAlignment="Bottom"
             Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
             FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="כתובת אימייל" 
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50" FontWeight="Light"
                  Text="{Binding EmailAddr , UpdateSourceTrigger=PropertyChanged}"
             FontFamily="{DynamicResource MaterialDesignFont}"  
-           BorderBrush="#FFF"/>
+           BorderBrush="#FFF" TouchDown="OpenOSK"/>
 
-        <TextBox x:Name="PhoneNumber"  Margin="0,994,0,785" Width="816"  VerticalContentAlignment="Bottom"
+        <TextBox InputScope="TelephoneNumber" x:Name="PhoneNumber"  Margin="0,994,0,785" Width="816"  VerticalContentAlignment="Bottom"
             Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
             FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="טלפון נייד" 
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50"
                  Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
             FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
-                  BorderBrush="#FFF"/>
+                  BorderBrush="#FFF" TouchDown="OpenOSK"/>
         <PasswordBox x:Name="Password" Margin="0,1188,0,596.5" Width="816"  VerticalContentAlignment="Bottom"
             Foreground="#FFF" Style="{StaticResource MaterialDesignFilledPasswordBox}" PasswordChanged="Password_PasswordChanged" 
             FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="סיסמא" 
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50"
             FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
-            BorderBrush="#FFF" Visibility="Visible"/>
+            BorderBrush="#FFF" Visibility="Visible" TouchDown="OpenOSK"/>
         <TextBox x:Name="ShowPassTxtBox"  Margin="132,1182,132,596" Width="816"  VerticalContentAlignment="Bottom"
             Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
             FlowDirection="RightToLeft" TextChanged="ShowPassTxtBox_TextChanged"
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50"
             Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"
             FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
-            BorderBrush="#FFF"/>
+            BorderBrush="#FFF" TouchDown="OpenOSK"/>
         <CheckBox Margin="110,1328,804,540" Content="הצג סיסמא" FontWeight="UltraLight" HorizontalContentAlignment="Left"
                   Style="{StaticResource MaterialDesignAccentCheckBox}" Foreground="White" FontSize="25" Checked="CheckBox_Checked" 
                   Unchecked="CheckBox_UnChecked" Background="Black"></CheckBox>
