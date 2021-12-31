@@ -21,6 +21,7 @@ namespace GymeeDestkopApp.Services
         GoogleCredential creds;
         string folderId;
         DriveService drive;
+        string credsPath = ConfigurationService.GetConfiguration().DriveCreds;
         void Initialize(string credsPath)
         {
             this.creds = GoogleCredential.FromStream(new FileStream(credsPath, FileMode.Open, FileAccess.Read)).CreateScoped(Scopes);
@@ -32,11 +33,11 @@ namespace GymeeDestkopApp.Services
                 HttpClientInitializer = creds
             });
         }
-        public GoogleDriveUploader(string credsPath)
+        public GoogleDriveUploader()
         {
             this.Initialize(credsPath);
         }
-        public GoogleDriveUploader(string credsPath, string folderId)
+        public GoogleDriveUploader(string folderId)
         {
             this.Initialize(credsPath);
             this.folderId = folderId;
