@@ -46,19 +46,19 @@ namespace GymeeDestkopApp.Services
             return stamps;
         }
 
-        public static List<string> CutVideo(string videoPath,string format)
+        public static List<string> CutVideo(string vidName,string format,string vidDirectory)
         {
             List<string> outputs_ls = new List<string>();
             var stamps = GetAllStamps();
             foreach (var ts in stamps)
             {
-                string output = $"{ Identifier }{ ts.VidName}.{ format}";
+                string output = $"{Identifier}{ts.VidName}";
                 outputs_ls.Add(output);
                 ProcessStartInfo processStartInfo = new()
                 {
                     FileName = "ffmpeg.exe",
-                    Arguments = $"-ss {ts.InitTimeStamp} -i {videoPath}.{format} -t {ts.Duration}" +
-                                $" -c copy {output}",
+                    Arguments = @$"-ss {ts.InitTimeStamp} -i {vidDirectory}\{vidName}.{format} -t {ts.Duration}" +
+                                @$" -c copy {vidDirectory}\{output}.{format}",
                     CreateNoWindow = true
                 };
                 var p = Process.Start(processStartInfo);

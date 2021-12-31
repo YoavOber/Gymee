@@ -157,12 +157,11 @@ namespace GymeeDestkopApp.Services
                     }
                 }
                 this.pngCount = 1;
-                string vidPath = $"{this.videosDirectory }/{this.recordId}";
                 ProcessStartInfo processStartInfo = new()
                 {
                     FileName = "ffmpeg.exe",
                     Arguments = $"-framerate {this.fps} -i {this.pngDirectory}/{this.recordId}/{this.pngPrefix}%d.png " +
-                    $"-c:v libx264 -pix_fmt yuv420p -crf 25 {vidPath}.mp4",
+                    $"-c:v libx264 -pix_fmt yuv420p -crf 25 {this.videosDirectory }/{this.recordId}.mp4",
                     CreateNoWindow = true
                 };
                 var p = Process.Start(processStartInfo);
@@ -171,7 +170,7 @@ namespace GymeeDestkopApp.Services
                 string ndpPath = GetDepthFramesPath(); ;
                 EditFileNames(ndpPath); // use GetDepthFramesPath(); ?
                 p.WaitForExit();
-                FFmpegVideoService.CutVideo(vidPath,"mp4");
+                FFmpegVideoService.CutVideo(this.recordId,"mp4",this.videosDirectory);
             });
         }
 
