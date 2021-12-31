@@ -54,8 +54,8 @@ namespace GymeeDesktopApp.Views
 
         public void OpenOSK(object sender, EventArgs e)
         {
-         //   if (!Osklib.OnScreenKeyboard.IsOpened())
-             //   Osklib.OnScreenKeyboard.Show();
+            if (!Osklib.OnScreenKeyboard.IsOpened())
+                Osklib.OnScreenKeyboard.Show();
         }
 
         private void Password_PasswordChanged(object sender, RoutedEventArgs e)
