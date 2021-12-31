@@ -168,14 +168,14 @@ namespace GymeeDestkopApp.Services
                 var p = Process.Start(processStartInfo);
                 this.processing = false;
                 this.recording = RecordingState.BEFORE;
-                //   FFmpegVideoService.CutVideo(vidPath);
                 string ndpPath = GetDepthFramesPath(); ;
-                EditFileNames(ndpPath, ndpPath); // use GetDepthFramesPath(); ?
+                EditFileNames(ndpPath); // use GetDepthFramesPath(); ?
                 p.WaitForExit();
+                FFmpegVideoService.CutVideo(vidPath,"mp4");
             });
         }
 
-        public void EditFileNames(string currentPath, string targetPath)
+        public void EditFileNames(string path)
         {
             char mark = '$';
             var stamps = FFmpegVideoService.GetAllStamps();
@@ -187,11 +187,11 @@ namespace GymeeDestkopApp.Services
                 int fileNameIndex = 1;
                 for (var i = start; i <= end; i++, fileNameIndex++)
                 {
-                    File.Move(@$"{currentPath}\depth{i}.ndp",
-                              @$"{targetPath}\{st.VidName}_{fileNameIndex}{mark}.ndp");//rename
+                    File.Move(@$"{path}\depth{i}.ndp",
+                              @$"{path}\{st.VidName}_{fileNameIndex}{mark}.ndp");//rename
                 }
             }
-            DirectoryInfo d = new DirectoryInfo(currentPath);
+            DirectoryInfo d = new DirectoryInfo(path);
             foreach (var f in d.GetFiles())
                 if (!f.Name.Contains(mark) && f.Name.EndsWith("ndp"))
                     f.Delete();

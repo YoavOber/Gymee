@@ -26,7 +26,7 @@
             <LineBreak/>
             <Run Text="במהלך 24 השעות הקרובות GYMEE יסיים לנתח את היכולת שהצגת באימון וכלל האימונים שלך יהיו מותאמים אלייך אישית."/>
         </TextBlock>
-        <Image Source="C:\Users\USER\projects\GymeeFinal\Views\Media\QRCode.png" Margin="440,1303,440,417"/>
+        <Image Source="pack://siteoforigin:,,/Views/Media/QRCode.png" Margin="440,1303,440,417"/>
         <Button IsEnabled="True" Width="423"
             Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="329,1584,328,220"
             materialDesign:ButtonAssist.CornerRadius="58"

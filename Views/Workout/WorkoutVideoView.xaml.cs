@@ -108,7 +108,7 @@ namespace GymeeDestkopApp.Views
             else
             {
                 //handle ? Never reaches here!
-            } 
+            }
         }
 
         private async void exitButton_Click(object sender, RoutedEventArgs e)

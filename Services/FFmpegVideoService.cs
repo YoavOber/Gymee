@@ -46,18 +46,18 @@ namespace GymeeDestkopApp.Services
             return stamps;
         }
 
-        public static List<string> CutVideo(string videoPath)
+        public static List<string> CutVideo(string videoPath,string format)
         {
             List<string> outputs_ls = new List<string>();
             var stamps = GetAllStamps();
             foreach (var ts in stamps)
             {
-                string output = $"{ Identifier }{ ts.VidName}.{ FORMAT}";
+                string output = $"{ Identifier }{ ts.VidName}.{ format}";
                 outputs_ls.Add(output);
                 ProcessStartInfo processStartInfo = new()
                 {
                     FileName = "ffmpeg.exe",
-                    Arguments = $"-ss {ts.InitTimeStamp} -i {videoPath} -t {ts.Duration}" +
+                    Arguments = $"-ss {ts.InitTimeStamp} -i {videoPath}.{format} -t {ts.Duration}" +
                                 $" -c copy {output}",
                     CreateNoWindow = true
                 };
@@ -66,6 +66,6 @@ namespace GymeeDestkopApp.Services
             }
             return outputs_ls;
         }
-        //ffmpeg 
+        //ffmpeg -ss 00:00:00 -i [] -t 300 -c copy output.mov
     }
 }
