@@ -115,7 +115,8 @@ namespace GymeeDestkopApp.Services
                         {
                             using var bitmap = GymeeTransforms.GenerateRGBBitmap(color);
                             bitmap.Save($"{this.pngDirectory}/{this.recordId}/{this.pngPrefix}{this.pngCount}.png");
-                            GymeeTransforms.WriteDepthFrameToFile(depth, $"{this.depthDirectory}/{this.recordId}/depth{pngCount++}");
+                            GymeeTransforms.WriteDepthFrameToFile(depth, $"{this.depthDirectory}/{this.recordId}/depth{this.pngCount}");
+                            this.pngCount++;
                         }
                     }
                 }
