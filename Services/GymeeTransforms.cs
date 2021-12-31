@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -21,16 +22,31 @@ namespace GymeeDestkopApp.Services
             );
         }
 
-        public static void FixRealSenseBitmap(Bitmap bitmap)
+        private static void RGBtoBGR(Bitmap bmp)
         {
-            for (int x = 0; x < bitmap.Width; x++)
+            var data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height),
+                                        ImageLockMode.ReadWrite, bmp.PixelFormat);
+
+            int length = Math.Abs(data.Stride) * bmp.Height;
+
+            unsafe
             {
-                for (int y = 0; y < bitmap.Height; y++)
+                byte* rgbValues = (byte*)data.Scan0.ToPointer();
+
+                for (int i = 0; i < length; i += 3)
                 {
-                    var pixel = bitmap.GetPixel(x, y);
-                    bitmap.SetPixel(x, y, Color.FromArgb(pixel.B, pixel.G, pixel.R));
+                    byte dummy = rgbValues[i];
+                    rgbValues[i] = rgbValues[i + 2];
+                    rgbValues[i + 2] = dummy;
                 }
             }
+
+            bmp.UnlockBits(data);
+        }
+
+        public static void FixRealSenseBitmap(Bitmap bitmap)
+        {
+            RGBtoBGR(bitmap);
             bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
         }
 
