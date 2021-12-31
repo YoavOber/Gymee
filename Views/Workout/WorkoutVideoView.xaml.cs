@@ -82,7 +82,7 @@ namespace GymeeDestkopApp.Views
 
         private void Video_Loaded(object sender, RoutedEventArgs e) //used to synchronize sound and picture
         {
-         //   GymeeRecorder.Start(userData.email);
+            GymeeRecorder.Start(userData.email);
             VideoPlayer.Play();
             PlayRandomTrack();
         }
@@ -98,7 +98,7 @@ namespace GymeeDestkopApp.Views
         private async void Video_MediaEnded(object sender, RoutedEventArgs e)
         {
             SoundPlayer.Stop();
-           // GymeeRecorder.End();
+            GymeeRecorder.End();
             var result = await GymeeAuthenticateService.onAssessmentDone(userData.email, userData.name);
             if (result)
             {
