@@ -27,6 +27,9 @@
     <None Update="GymeeConfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="HebTerms.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="VidConfig.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
