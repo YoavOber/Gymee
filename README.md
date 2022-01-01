@@ -16,6 +16,7 @@ The Gymee Station has a few external dependencies as follows:
 3. There must be a copy of ffmpeg.exe at the root level near the binary. ffmpeg can be downloaded [here](https://www.ffmpeg.org/download.html).
 4. The Camera SDK must be installed (currently only Intel RealSense is supported).
 5. Media is required to function properly. The default media can be found [here](https://google.com) with corresponding documentation.
+6. There must be a json credential file for google drive, it's location can be configured in the  `drive_creds` field in GymeeConfig.json.
 
 In addition, two configuration files must be present at the root level:  
 1. GymeeConfig.json - includes general configuration data for various parts of the project
