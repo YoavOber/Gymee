@@ -36,7 +36,7 @@
            TextWrapping="WrapWithOverflow" FlowDirection="RightToLeft" TextAlignment="Center" LineHeight="49"
            Width="673" Margin="71,95,71,153"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,254,0,0" Width="815">
-                    <Button BorderBrush="#707070" BorderThickness="0" Background="#1c1c1c"
+                    <Button BorderBrush="#707070" BorderThickness="1" Background="#1c1c1c"
                             Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Height="150" Width="407">
                         <Button.CommandParameter>
                             <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
@@ -48,7 +48,7 @@
                             FontWeight="SemiBold" Foreground="#c7c7c7" LineHeight="49" />
                         </Button.Content>
                     </Button>
-                    <Button  BorderBrush="#707070" BorderThickness="0" Background="#1c1c1c"  
+                    <Button  BorderBrush="#707070" BorderThickness="1" Background="#1c1c1c"  
                              Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Height="150" Width="407">
                         <Button.CommandParameter>
                             <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">

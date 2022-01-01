@@ -32,8 +32,8 @@ namespace GymeeDestkopApp.Views
         {
             InitializeComponent();
             QuitDialogBox.Visibility = Visibility.Collapsed;
-            var config = ConfigurationService.GetConfiguration();
-            GymeeRecorder = new RealSenseGymeeRecorder(config.Width, config.Height, config.Fps);
+         //   var config = ConfigurationService.GetConfiguration();
+         //   GymeeRecorder = new RealSenseGymeeRecorder(config.Width, config.Height, config.Fps);
             SoundPlayer = new MediaPlayer();
             Messenger.Register<WorkoutVideoView, ChangePageMessage>(this, (r, m) =>
              {
@@ -82,7 +82,7 @@ namespace GymeeDestkopApp.Views
 
         private void Video_Loaded(object sender, RoutedEventArgs e) //used to synchronize sound and picture
         {
-            GymeeRecorder.Start(userData.email);
+         //   GymeeRecorder.Start(userData.email);
             VideoPlayer.Play();
             PlayRandomTrack();
         }
@@ -98,7 +98,7 @@ namespace GymeeDestkopApp.Views
         private async void Video_MediaEnded(object sender, RoutedEventArgs e)
         {
             SoundPlayer.Stop();
-            GymeeRecorder.End();
+    //        GymeeRecorder.End();
             var result = await GymeeAuthenticateService.onAssessmentDone(userData.email, userData.name);
             if (result)
             {
@@ -132,10 +132,10 @@ namespace GymeeDestkopApp.Views
             VideoPlayer.Stop();
             SoundPlayer.Stop();
             Messenger.Send(new ChangePageMessage(workoutTerminated ? PageIndex.INTRO_PAGE : PageIndex.POST_WORKOUT_VIEW));
-            if(workoutTerminated) {
+          /*  if(workoutTerminated) {
                 GymeeRecorder.DeleteRecordingData();
             }
-            GymeeRecorder.End();
+            GymeeRecorder.End();*/
             //reset icon and unmute
             PackIcon icon = muteBtn.Content as PackIcon;
             icon.Kind = PackIconKind.VolumeHigh;
