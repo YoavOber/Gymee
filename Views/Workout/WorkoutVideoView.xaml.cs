@@ -134,8 +134,8 @@ namespace GymeeDestkopApp.Views
             Messenger.Send(new ChangePageMessage(workoutTerminated ? PageIndex.INTRO_PAGE : PageIndex.POST_WORKOUT_VIEW));
           /*  if(workoutTerminated) {
                 GymeeRecorder.DeleteRecordingData();
-            }*/
-            GymeeRecorder.End();
+            }
+            GymeeRecorder.End();*/
             //reset icon and unmute
             PackIcon icon = muteBtn.Content as PackIcon;
             icon.Kind = PackIconKind.VolumeHigh;
