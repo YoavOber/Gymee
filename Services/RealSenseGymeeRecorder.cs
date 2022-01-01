@@ -103,6 +103,11 @@ namespace GymeeDestkopApp.Services
             this.pipeline.Start(cfg);
             Task.Run(() =>
             {
+                using (var process = Process.GetCurrentProcess())
+                {
+                    // only run on core number 1
+                    process.ProcessorAffinity = (IntPtr)0x0001;
+                }
                 while (true)
                 {
                     FrameSet frames;
