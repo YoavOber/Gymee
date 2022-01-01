@@ -1,5 +1,7 @@
 ﻿using GymeeDestkopApp.Models;
 using Microsoft.Toolkit.Mvvm.Messaging;
+using System;
+using System.Diagnostics;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
@@ -24,6 +26,11 @@ namespace GymeeDestkopApp
             MainHost.PreviewTouchMove += ResetTimerFingerTouch;
             MainHost.PreviewMouseMove += ResetTimerMouseTouch;
             Messenger.Register<MainWindow, ChangePageMessage>(this, (r, m) => r.Receive(m));
+            using (var process = Process.GetCurrentProcess())
+            {
+                // only run on core number 1
+                process.ProcessorAffinity = (IntPtr)0x0002;
+            }
         }
 
         private void ResetTimerMouseTouch(object sender, MouseEventArgs e)
