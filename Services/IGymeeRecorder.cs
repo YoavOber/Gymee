@@ -22,5 +22,6 @@ namespace GymeeDestkopApp.Services
         bool IsProcessing();
         void Start(string recordId);
         void End();
+        void DeleteRecordingData();
     }
 }

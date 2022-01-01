@@ -157,20 +157,22 @@ namespace GymeeDestkopApp.Services
                     }
                 }
                 this.pngCount = 1;
-                ProcessStartInfo processStartInfo = new()
-                {
-                    FileName = "ffmpeg.exe",
-                    Arguments = $"-framerate {this.fps} -i {this.pngDirectory}/{this.recordId}/{this.pngPrefix}%d.png " +
-                    $"-c:v libx264 -pix_fmt yuv420p -crf 25 {this.videosDirectory }/{this.recordId}.mp4",
-                    CreateNoWindow = true
-                };
-                var p = Process.Start(processStartInfo);
-                this.processing = false;
-                this.recording = RecordingState.BEFORE;
-                string ndpPath = GetDepthFramesPath(); ;
-                EditFileNames(ndpPath); // use GetDepthFramesPath(); ?
-                p.WaitForExit();
-                FFmpegVideoService.CutVideo(this.recordId,"mp4",this.videosDirectory);
+                if(pngFiles.Length > 0) {
+                    ProcessStartInfo processStartInfo = new()
+                    {
+                        FileName = "ffmpeg.exe",
+                        Arguments = $"-framerate {this.fps} -i {this.pngDirectory}/{this.recordId}/{this.pngPrefix}%d.png " +
+                        $"-c:v libx264 -pix_fmt yuv420p -crf 25 {this.videosDirectory }/{this.recordId}.mp4",
+                        CreateNoWindow = true
+                    };
+                    var p = Process.Start(processStartInfo);
+                    this.processing = false;
+                    this.recording = RecordingState.BEFORE;
+                    string ndpPath = GetDepthFramesPath(); ;
+                    EditFileNames(ndpPath); // use GetDepthFramesPath(); ?
+                    p.WaitForExit();
+                    FFmpegVideoService.CutVideo(this.recordId,"mp4",this.videosDirectory);
+                }
             });
         }
 
@@ -194,6 +196,11 @@ namespace GymeeDestkopApp.Services
             foreach (var f in d.GetFiles())
                 if (!f.Name.Contains(mark) && f.Name.EndsWith("ndp"))
                     f.Delete();
+        }
+
+        public void DeleteRecordingData() {
+            Directory.Delete($"{this.pngDirectory}/{this.recordId}");
+            Directory.Delete($"{this.depthDirectory}/{this.recordId}");
         }
     }
 }
