@@ -21,7 +21,7 @@
             העוזר האישי<LineBreak/>
             שלך בחדר כושר
                     </TextBlock>
-                    <TextBlock FontFamily="OpenSans" TextAlignment="Justify" FontSize="42"
+                    <TextBlock FontFamily="OpenSans" TextAlignment="Left" FontSize="42"
            FontStyle="Normal"  FontWeight="Light" Foreground="#FFFFFFFF" TextWrapping="WrapWithOverflow" 
                                FlowDirection="RightToLeft" LineHeight="52" 
                                Canvas.Top="897" Canvas.Left="189" Width="791">
@@ -38,7 +38,7 @@
            LineHeight="92" Canvas.Top="650" Canvas.Left="181" Width="798" Height="238">
             טכנולוגיה חדשנית לניתוח היכולות שלך
                     </TextBlock>
-                    <TextBlock TextAlignment="Justify" FlowDirection="RightToLeft" TextWrapping="WrapWithOverflow"
+                    <TextBlock TextAlignment="Left" FlowDirection="RightToLeft" TextWrapping="WrapWithOverflow"
                                FontSize="42" FontFamily="OpenSans" 
                                FontStyle="Normal"  FontWeight="Light" Foreground="#FFFFFFFF"
                                LineHeight="52" Canvas.Top="906" Canvas.Left="159" Width="796">
