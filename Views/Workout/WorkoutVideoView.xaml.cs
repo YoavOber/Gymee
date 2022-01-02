@@ -73,11 +73,11 @@ namespace GymeeDestkopApp.Views
                     uri += BEGGINER_VID;
                     break;
             }
+            VideoPlayer.Loaded += Video_Loaded;
             VideoPlayer.Source = new Uri(uri);
             VideoPlayer.Position = TimeSpan.Zero;
-            VideoPlayer.Loaded += Video_Loaded;
-            if (VideoPlayer.IsLoaded)
-                Video_Loaded(null, null);
+            //if (VideoPlayer.IsLoaded)
+            //    Video_Loaded(null, null);
         }
 
         private void Video_Loaded(object sender, RoutedEventArgs e) //used to synchronize sound and picture

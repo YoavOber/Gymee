@@ -6,12 +6,11 @@
         xmlns:local="clr-namespace:GymeeDestkopApp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local1="clr-namespace:GymeeDesktopApp.Views" xmlns:local11="clr-namespace:GymeeDestkopApp.Views"
-        mc:Ignorable="d" WindowState="Maximized" WindowStyle="None"
+        mc:Ignorable="d" WindowState="Maximized" WindowStyle="None" Topmost="True" ResizeMode="NoResize"
         Title="MainWindow" Height="2203" Width="1808" Background="Black">
-    <Window.Resources>
-
-    </Window.Resources>
-    <Grid Height="1920" Width="1080" Background="Black">
+    <Grid Height="1920" Width="1080" Background="Black"
+          Stylus.IsTapFeedbackEnabled="False" Stylus.IsTouchFeedbackEnabled="False"
+         Stylus.IsPressAndHoldEnabled="False" Stylus.IsFlicksEnabled="False" >
         <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="False"
                                      x:Name="MainHost">
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect Kind=FadeIn}">

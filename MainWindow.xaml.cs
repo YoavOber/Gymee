@@ -19,6 +19,7 @@ namespace GymeeDestkopApp
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
             //screen timer
             NoTouchTimer = new Timer(1000 * 90);//add configuration file
             NoTouchTimer.Elapsed += Timer_Elapsed;
@@ -31,6 +32,19 @@ namespace GymeeDestkopApp
                 // only run on core number 1
                 process.ProcessorAffinity = (IntPtr)0x0002;
             }
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            //// Create a ProcessStartInfo, otherwise Explorer comes back to haunt you.
+            //ProcessStartInfo TaskKillPSI = new ProcessStartInfo("taskkill", "/F /IM explorer.exe");
+            //// Don't show a window
+            //TaskKillPSI.WindowStyle = ProcessWindowStyle.Hidden;
+            //// Create and start the process, then wait for it to exit.
+            //Process process = new Process();
+            //process.StartInfo = TaskKillPSI;
+            //process.Start();
+            //process.WaitForExit();
         }
 
         private void ResetTimerMouseTouch(object sender, MouseEventArgs e)
