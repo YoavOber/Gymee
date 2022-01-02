@@ -33,5 +33,10 @@ namespace GymeeDestkopApp.Views
         {
             StrongReferenceMessenger.Default.Send(new SignupVMMessage(SignupProperty.Gender, gender.SelectedItem));
         }
+
+        private void gender_ManipulationBoundaryFeedback(object sender, ManipulationBoundaryFeedbackEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

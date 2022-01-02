@@ -62,7 +62,7 @@
             Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"
             FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
             BorderBrush="#FFF" TouchDown="OpenOSK"/>
-        <CheckBox Margin="110,1328,804,540" Content="הצג סיסמא" FontWeight="UltraLight" HorizontalContentAlignment="Left"
+        <CheckBox x:Name="CheckBx" Margin="110,1328,804,540" Content="הצג סיסמא" FontWeight="UltraLight" HorizontalContentAlignment="Left"
                   Style="{StaticResource MaterialDesignAccentCheckBox}" Foreground="White" FontSize="25" Checked="CheckBox_Checked" 
                   Unchecked="CheckBox_UnChecked" Background="Black"></CheckBox>
         <Button
@@ -100,7 +100,7 @@
                    Visibility="{Binding IsValidPhone,Converter={StaticResource BoolToVisibility}}"/>
         <TextBlock x:Name="PassErrTxt" Text="על הסיסמה להכיל לפחות 6 תווים" FontFamily="OpenSans" TextAlignment="Right" 
                    Visibility="{Binding IsValidPassword,Converter={StaticResource BoolToVisibility}}"
-            FontSize="40" FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" LineHeight="103" Height="55"  Margin="132,1328,132,536"/>
+            FontSize="40" FontStyle="Normal" FontWeight="Light" Foreground="#FFFF4040" LineHeight="103" Height="55"  Margin="281,1328,132,536"/>
         <Button x:Name="BackBtn" Margin="936,7,0,1813" Height="100" FontFamily="OpenSans" FontWeight="Light"
             Foreground="#FFF" FontSize="37" Background="Black"
             BorderThickness="0" materialDesign:ShadowAssist.ShadowDepth="Depth0"

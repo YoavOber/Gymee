@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              Height="660" Width="1080">
     <UserControl.Resources>
-        <Style x:Key="ListViewTemplate" TargetType="{x:Type ListViewItem}">
+        <Style x:Key="ListBoxTemplate" TargetType="{x:Type ListBoxItem}">
             <Setter Property="Width" Value="148"/>
             <Setter Property="Height" Value="65"/>
             <Setter Property="Background" Value="#2d2e2d"/>
@@ -22,7 +22,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
                         <ContentPresenter />
                     </ControlTemplate>
                 </Setter.Value>
@@ -41,30 +41,31 @@
                        Margin="0,0,0,30"
                        materialDesign:RippleAssist.IsDisabled="True"
                     Command="{Binding ShowSelectionWheelCmd}" CommandParameter="collapse"></Button>
-            <ListView Margin="0,0,-600,0" HorizontalContentAlignment="Center" FlowDirection="RightToLeft"
-                x:Name="Days"
+            <ListBox Margin="0,0,-600,0" HorizontalContentAlignment="Center" FlowDirection="RightToLeft"
+                x:Name="Days" ManipulationBoundaryFeedback="Days_ManipulationBoundaryFeedback"
                 SelectionMode="Single" Height="462" 
                 BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                      ItemContainerStyle="{StaticResource ListViewTemplate}"
+                      ItemContainerStyle="{StaticResource ListBoxTemplate}"
                 ScrollViewer.VerticalScrollBarVisibility="Hidden" Width="204" SelectionChanged="day_SelectionChanged">
-            </ListView>
-            <ListView Margin="0,-462,100,0" HorizontalContentAlignment="Center"
-                      FlowDirection="RightToLeft" x:Name="Month"
+            </ListBox>
+            <ListBox Margin="0,-462,100,0" HorizontalContentAlignment="Center"
+                      FlowDirection="RightToLeft" x:Name="Month" ManipulationBoundaryFeedback="Month_ManipulationBoundaryFeedback"
                   SelectionMode="Single" Height="462" 
                   BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                   ScrollViewer.VerticalScrollBarVisibility="Hidden" Width="324" 
                       SelectionChanged="month_SelectionChanged">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem" BasedOn="{StaticResource ResourceKey=ListViewTemplate}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource ResourceKey=ListBoxTemplate}">
                         <Setter Property="Width" Value="194"/>
                     </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
-            <ListView Margin="0,-462,700,0" HorizontalContentAlignment="Center" FlowDirection="RightToLeft" x:Name="Years"
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+            <ListBox
+                Margin="0,-462,700,0" HorizontalContentAlignment="Center" FlowDirection="RightToLeft" x:Name="Years"
                 SelectionMode="Single" Height="462"  BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
-                ItemsSource="{Binding YearList}"  ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                Width="240" ItemContainerStyle="{StaticResource ListViewTemplate}" SelectionChanged="year_SelectionChanged">
-            </ListView>
+                ItemsSource="{Binding YearList}"  ScrollViewer.VerticalScrollBarVisibility="Hidden" ManipulationBoundaryFeedback="Years_ManipulationBoundaryFeedback"
+                Width="240" ItemContainerStyle="{StaticResource ListBoxTemplate}" SelectionChanged="year_SelectionChanged">
+            </ListBox>
         </ItemsControl>
     </Grid>
 </UserControl>

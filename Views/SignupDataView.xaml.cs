@@ -67,11 +67,13 @@ namespace GymeeDesktopApp.Views
         {
             Password.Visibility = Visibility.Collapsed;
             ShowPassTxtBox.Visibility = Visibility.Visible;
+            CheckBx.Content = "הסתר סיסמא";
         }
         private void CheckBox_UnChecked(object sender, RoutedEventArgs e)
         {
             Password.Visibility = Visibility.Visible;
             ShowPassTxtBox.Visibility = Visibility.Collapsed;
+            CheckBx.Content = "הצג סיסמא";
         }
 
         private void ShowPassTxtBox_TextChanged(object sender, TextChangedEventArgs e)

@@ -42,7 +42,7 @@ namespace GymeeDestkopApp.Views
             ViewModels.SignupViewModel.OnChangeScreen += OnScrollerLoaded;
         }
 
-        private void OnScrollerLoaded(string name)//makes sure listview is on sensible value when opened
+        private void OnScrollerLoaded(string name)//makes sure ListBox is on sensible value when opened
         {
             if (name != "age")
                 return;
@@ -60,7 +60,7 @@ namespace GymeeDestkopApp.Views
         {
             App.Current.Dispatcher.Invoke(() =>
             {
-                ListView view = sender as ListView;
+                ListBox view = sender as ListBox;
                 view.ScrollIntoView(e.AddedItems[0]);
             });
             Messenger.Send(new SignupVMMessage(SignupProperty.BdDay, Days.SelectedItem));
@@ -70,7 +70,7 @@ namespace GymeeDestkopApp.Views
         {
             App.Current.Dispatcher.Invoke(() =>
             {
-                ListView view = sender as ListView;
+                ListBox view = sender as ListBox;
                 view.ScrollIntoView(e.AddedItems[0]);
             });
             Messenger.Send(new SignupVMMessage(SignupProperty.BdMonth, Month.SelectedIndex));
@@ -80,10 +80,26 @@ namespace GymeeDestkopApp.Views
         {
             App.Current.Dispatcher.Invoke(() =>
             {
-                ListView view = sender as ListView;
+                ListBox view = sender as ListBox;
                 view.ScrollIntoView(e.AddedItems[0]);
             });
             Messenger.Send(new SignupVMMessage(SignupProperty.BdYear, Years.SelectedItem));
         }
+
+        private void Month_ManipulationBoundaryFeedback(object sender, ManipulationBoundaryFeedbackEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void Days_ManipulationBoundaryFeedback(object sender, ManipulationBoundaryFeedbackEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void Years_ManipulationBoundaryFeedback(object sender, ManipulationBoundaryFeedbackEventArgs e)
+        {
+            e.Handled = true;
+        }
+
     }
 }

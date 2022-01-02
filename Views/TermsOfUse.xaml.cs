@@ -54,10 +54,6 @@ namespace GymeeDestkopApp.Views
             NextTxt.Foreground = (Brush)converter.ConvertFromString("#FF999999");
         }
 
-        private void TermsOfUseBlock_TouchDown(object sender, TouchEventArgs e)
-        {
-            Osklib.OnScreenKeyboard.Close();
-        }
 
         private void TermsOfUseBlock_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -72,6 +68,22 @@ namespace GymeeDestkopApp.Views
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
             StrongReferenceMessenger.Default.Send(new ChangePageMessage(PageIndex.START_SIGNUP_OR_LOGIN));
+        }
+
+        private void TermsOfUseBlock_ManipulationBoundaryFeedback(object sender, ManipulationBoundaryFeedbackEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void TermsOfUseBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            Osklib.OnScreenKeyboard.Close();
+            e.Handled=true;
+        }
+
+        private void TermsOfUseBlock_TouchDown(object sender, TouchEventArgs e)
+        {
+            Osklib.OnScreenKeyboard.Close();
         }
     }
 }

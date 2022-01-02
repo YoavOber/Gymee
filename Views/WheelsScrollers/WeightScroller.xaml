@@ -15,14 +15,14 @@
                         Margin="0,0,0,30"
                     materialDesign:RippleAssist.IsDisabled="True" 
                     Command="{Binding ShowSelectionWheelCmd}" CommandParameter="collapse"></Button>
-            <ListView HorizontalContentAlignment="Center" FlowDirection="RightToLeft" x:Name="weights"
-                SelectionMode="Single"
+            <ListBox HorizontalContentAlignment="Center" FlowDirection="RightToLeft" x:Name="weights"
+                SelectionMode="Single" ManipulationBoundaryFeedback="weights_ManipulationBoundaryFeedback"
                 Height="462" Margin="0,0,80,0"
                 BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden" 
                 SelectionChanged="heights_SelectionChanged_1"  Width="148">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
                         <Setter Property="Width" Value="148"/>
                         <Setter Property="Height" Value="65"/>
                         <Setter Property="Background" Value="#2d2e2d"/>
@@ -35,7 +35,7 @@
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
                         <Setter Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                     <ContentPresenter />
                                 </ControlTemplate>
                             </Setter.Value>
@@ -46,8 +46,8 @@
                             </Trigger>
                         </Style.Triggers>
                     </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
         </StackPanel>
         <TextBlock Text="ק''ג" Margin="350,345,638,254" FontFamily="OpenSans"  FontSize="48"
            FontStyle="Normal" FontWeight="Bold" Foreground="#FFFFFFFF" LineHeight="58"/>

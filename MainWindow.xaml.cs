@@ -16,14 +16,11 @@ namespace GymeeDestkopApp
         private Timer NoTouchTimer { get; set; }
         private StrongReferenceMessenger Messenger { get; set; } = StrongReferenceMessenger.Default;
 
+
         public MainWindow()
         {
             InitializeComponent();
             //screen timer
-            Loaded += (object sender, RoutedEventArgs e) =>
-            {
-                KioskModeHelper.BeginKioskMode();
-            };
             NoTouchTimer = new Timer(1000 * 90);//add configuration file
             NoTouchTimer.Elapsed += Timer_Elapsed;
             NoTouchTimer.Start();

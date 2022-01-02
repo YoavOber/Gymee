@@ -15,15 +15,16 @@
                   TextAlignment="Right" Margin="327,392,50,1447"/>
         <TextBox x:Name="TermsOfUseBlock" TouchDown="TermsOfUseBlock_TouchDown"
                  TouchEnter="TermsOfUseBlock_TouchDown" TouchLeave="TermsOfUseBlock_TouchDown"
-                 TouchUp="TermsOfUseBlock_TouchDown" PreviewTouchDown="TermsOfUseBlock_TouchDown"
+                 TouchUp="TermsOfUseBlock_TouchDown" SelectionLength="0" InputMethod.IsInputMethodEnabled="False"
+                 SelectionChanged="TermsOfUseBlock_SelectionChanged"
                  GotFocus="TermsOfUseBlock_GotFocus"
                    ScrollViewer.CanContentScroll="True"
                    FontFamily="Montserrat" FontSize="26" TextWrapping="WrapWithOverflow"
                    FontStyle="Normal" FontWeight="ExtraBold" Foreground="#FFFFFFFF"
-                   FlowDirection="RightToLeft" TextAlignment="Justify" Margin="50,525,50,552" 
+                   FlowDirection="RightToLeft" TextAlignment="Justify" Margin="50,525,50,552"
                    IsReadOnly="True" IsReadOnlyCaretVisible="False" 
+                 ManipulationBoundaryFeedback="TermsOfUseBlock_ManipulationBoundaryFeedback" 
                  />
-
         <StackPanel Margin="0,1424,0,244">
             <CheckBox FlowDirection="RightToLeft" IsChecked="False"
                       Content="קראתי ואני מאשר את תנאי השימוש ומדיניות הפרטיות" 

@@ -22,7 +22,7 @@ namespace GymeeDestkopApp.Views
         }
 
 
-        public void OnScrollerLoaded(string name) //makes sure listview is on sensible value when opened
+        public void OnScrollerLoaded(string name) //makes sure ListBox is on sensible value when opened
         {
             if (name != "height")
                 return;
@@ -36,11 +36,15 @@ namespace GymeeDestkopApp.Views
         {
             App.Current.Dispatcher.Invoke(() =>
             {
-                ListView view = sender as ListView;
+                ListBox view = sender as ListBox;
                 view.ScrollIntoView(e.AddedItems[0]);
             });
             StrongReferenceMessenger.Default.Send(new SignupVMMessage(SignupProperty.Height, heights.SelectedItem));
         }
 
+        private void heights_ManipulationBoundaryFeedback(object sender, System.Windows.Input.ManipulationBoundaryFeedbackEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

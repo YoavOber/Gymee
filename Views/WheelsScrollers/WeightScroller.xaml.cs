@@ -30,7 +30,7 @@ namespace GymeeDestkopApp.Views
             ViewModels.SignupViewModel.OnChangeScreen += OnScrollerLoaded;
         }
 
-        public void OnScrollerLoaded(string name)//makes sure listview is on sensible value when opened
+        public void OnScrollerLoaded(string name)//makes sure ListBox is on sensible value when opened
         {
             if (name != "weight")
                 return;
@@ -45,11 +45,15 @@ namespace GymeeDestkopApp.Views
         {
             App.Current.Dispatcher.Invoke(() =>
             {
-                ListView view = sender as ListView;
+                ListBox view = sender as ListBox;
                 view.ScrollIntoView(weights.SelectedItem);
             });
             StrongReferenceMessenger.Default.Send(new SignupVMMessage(SignupProperty.Weight, weights.SelectedItem));
         }
 
+        private void weights_ManipulationBoundaryFeedback(object sender, ManipulationBoundaryFeedbackEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }
