@@ -149,7 +149,7 @@ namespace GymeeDestkopApp.Services
             }
             this.recording = RecordingState.DONE;
             this.pipeline.Stop();
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 this.processing = true;
                 var pngFiles = Directory.GetFiles($"{this.pngDirectory}/{this.recordId}", "*.png");
@@ -176,7 +176,19 @@ namespace GymeeDestkopApp.Services
                     string ndpPath = GetDepthFramesPath(); ;
                     EditFileNames(ndpPath); // use GetDepthFramesPath(); ?
                     p.WaitForExit();
-                    FFmpegVideoService.CutVideo(this.recordId,"mp4",this.videosDirectory);
+                    FFmpegVideoService.CutVideo(this.recordId,"mp4",$"{this.videosDirectory}/{this.recordId}");
+                    var uploader = new GoogleDriveUploader();
+                    var videoFiles = Directory.GetFiles($"{this.videosDirectory}/{this.recordId}", "*.mp4");
+                    var depthFiles = Directory.GetFiles(this.GetDepthFramesPath(), "*.ndp");
+                    var recordingFolder = await uploader.CreateFolder(recordId);
+                    uploader.MoveFolder(recordingFolder);
+                    var depthFolder = await uploader.CreateFolder("depth");
+                    uploader.MoveFolder(depthFolder);
+                    Task.WaitAll(depthFiles.Select(file => uploader.Upload(file, file, "text/basic")).ToArray());
+                    uploader.MoveFolder(recordingFolder);
+                    var videoFolder = await uploader.CreateFolder("videos");
+                    uploader.MoveFolder(videoFolder);
+                    Task.WaitAll(videoFiles.Select(file => uploader.Upload(file, file, "video/mp4")).ToArray());
                 }
             });
         }
