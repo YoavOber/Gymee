@@ -8,8 +8,8 @@
         xmlns:local1="clr-namespace:GymeeDesktopApp.Views" xmlns:local11="clr-namespace:GymeeDestkopApp.Views"
         mc:Ignorable="d" WindowState="Maximized" WindowStyle="None" Topmost="True" ResizeMode="NoResize"
         Title="MainWindow" Height="2203" Width="1808" Background="Black"
-         Stylus.IsTapFeedbackEnabled="False" Stylus.IsTouchFeedbackEnabled="False"
-        Stylus.IsFlicksEnabled="False" Stylus.IsPressAndHoldEnabled="False" MinHeight="1920" MaxHeight="2204">
+         Stylus.IsTapFeedbackEnabled="False" Stylus.IsTouchFeedbackEnabled="False" Cursor="None"
+        Stylus.IsFlicksEnabled="False" Stylus.IsPressAndHoldEnabled="False">
     <Grid Height="1920" Width="1080" Background="Black"
          Stylus.IsTapFeedbackEnabled="False" Stylus.IsTouchFeedbackEnabled="False"
         Stylus.IsFlicksEnabled="False" Stylus.IsPressAndHoldEnabled="False">

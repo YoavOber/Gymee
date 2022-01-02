@@ -20,6 +20,10 @@ namespace GymeeDestkopApp
         {
             InitializeComponent();
             //screen timer
+            Loaded += (object sender, RoutedEventArgs e) =>
+            {
+                KioskModeHelper.BeginKioskMode();
+            };
             NoTouchTimer = new Timer(1000 * 90);//add configuration file
             NoTouchTimer.Elapsed += Timer_Elapsed;
             NoTouchTimer.Start();
