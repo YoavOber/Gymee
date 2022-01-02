@@ -174,7 +174,7 @@ namespace GymeeDestkopApp.Services
                     this.processing = false;
                     this.recording = RecordingState.BEFORE;
                     string ndpPath = GetDepthFramesPath(); ;
-                    EditFileNames(ndpPath); // use GetDepthFramesPath(); ?
+                    EditFileNames(ndpPath);
                     p.WaitForExit();
                     FFmpegVideoService.CutVideo(this.recordId,"mp4",$"{this.videosDirectory}/{this.recordId}");
                     var uploader = new GoogleDriveUploader();

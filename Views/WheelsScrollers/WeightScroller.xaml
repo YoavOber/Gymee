@@ -16,7 +16,7 @@
                     materialDesign:RippleAssist.IsDisabled="True" 
                     Command="{Binding ShowSelectionWheelCmd}" CommandParameter="collapse"></Button>
             <ListView HorizontalContentAlignment="Center" FlowDirection="RightToLeft" x:Name="weights"
-                SelectionMode="Single" 
+                SelectionMode="Single"
                 Height="462" Margin="0,0,80,0"
                 BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden" 

@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CypherBox" Version="1.0.0" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.55.0.2502" />
     <PackageReference Include="Intel.RealSenseWithNativeDll" Version="2.47.0" />
     <PackageReference Include="MaterialDesignColors" Version="2.0.3" />

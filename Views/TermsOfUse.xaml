@@ -51,7 +51,7 @@
         <Button Content="?משתמש קיים" Style="{StaticResource MaterialDesignFlatButton}"
             FontFamily="OpenSans" FontSize="41" FontStyle="Normal"
             Foreground="#FF999999" Margin="327,1698,324,166" Height="56" FontWeight="Light"
-                IsEnabled="False" Click="Button_Click"/>
+                IsEnabled="True" Click="Button_Click"/>
         <Button x:Name="BackBtn" Margin="936,7,0,1813" Height="100" FontFamily="OpenSans" FontWeight="Light"
             Foreground="#FFF" FontSize="37" Background="Black"
             BorderThickness="0" materialDesign:ShadowAssist.ShadowDepth="Depth0"
