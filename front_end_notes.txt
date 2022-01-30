@@ -1,0 +1,6 @@
+Front end Notes: 
+* Communication is done by StrongReferenceMessenger Library (https://docs.microsoft.com/en-us/dotnet/api/microsoft.toolkit.mvvm.messaging.strongreferencemessenger?view=win-comm-toolkit-dotnet-7.0)
+* Each run is ended by StrongReferenceMessenger.Default.Send('resetVM'). All ViewModels are registered(listening) to this message,
+ and are being reset when it is sent(on each program termination).
+*  Themes are by Material Design.
+* Navigation is done by materialDesign:Transitioner obnject (MainWindow.xaml) & StrongReferenceMessenger.Default.Send(ChangePageMessage())
