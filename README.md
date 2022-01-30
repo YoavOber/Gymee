@@ -23,3 +23,5 @@ The Gymee Station has a few external dependencies as follows:
 In addition, two configuration files must be present at the root level:  
 1. GymeeConfig.json - includes general configuration data for various parts of the project
 2. VidConfig.json - includes configuration data to split the training video (this is currently not in use)
+
+*On installation, run [dotnet restore](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-restore) 
