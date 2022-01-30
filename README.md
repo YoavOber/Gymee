@@ -8,6 +8,8 @@ The project has a MVVM architecture and is seperated to 4 categories with corres
 3. Models - Defines various data in the project and bussines logic relevant to it
 4. Services - Includes classes to perform communication with external web systems and the camera itself
 
+In cases of which a little viewmodel is required(or isn't at all), the code behind is used (*.cs classes).
+
 # Requirements
 The Gymee Station has a few external dependencies as follows:  
 
