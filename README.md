@@ -25,3 +25,4 @@ In addition, two configuration files must be present at the root level:
 2. VidConfig.json - includes configuration data to split the training video (this is currently not in use)
 
 *On installation, run [dotnet restore](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-restore) 
+*[For On Screen Keyboard]( https://support.microsoft.com/en-us/windows/use-the-on-screen-keyboard-osk-to-type-ecbb5e08-5b4e-d8c8-f794-81dbf896267a)
