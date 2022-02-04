@@ -13,7 +13,7 @@ In cases of which a little viewmodel is required(or isn't at all), the code behi
 # Requirements
 The Gymee Station has a few external dependencies as follows:  
 
-1. .NET Runtime 6 must be installed.
+1. .NET Runtime 5 must be installed.
 2. The Gymee Station requires Windows OS.
 3. There must be a copy of ffmpeg.exe at the root level near the binary. ffmpeg can be downloaded [here](https://www.ffmpeg.org/download.html).
 4. The Camera SDK must be installed (currently only Intel RealSense is supported).
