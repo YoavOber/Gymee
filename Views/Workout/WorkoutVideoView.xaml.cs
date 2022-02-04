@@ -18,9 +18,9 @@ namespace GymeeDestkopApp.Views
     public partial class WorkoutVideoView : UserControl
     {
         //video filenames by trainee's experience
-        const string BEGGINER_VID = "Workout Video.mov";
-        const string INTERMEDIATE_VID = "Workout Video.mov";
-        const string ADVENCED_VID = "Workout Video.mov";
+        const string BEGGINER_VID = "Workout Video-Beginner.mov";
+        const string INTERMEDIATE_VID = "Workout Video-Intermediate.mov";
+        const string ADVENCED_VID = "Workout Video-Advanced.mov";
 
         private IGymeeRecorder GymeeRecorder { get; set; }
         private MediaPlayer SoundPlayer { get; set; }
