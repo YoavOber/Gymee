@@ -15,7 +15,7 @@ namespace GymeeDestkopApp
     {
         private Timer NoTouchTimer { get; set; }
         private StrongReferenceMessenger Messenger { get; set; } = StrongReferenceMessenger.Default;
-
+        const int STARTER_INDEX = 1;
 
         public MainWindow()
         {
@@ -26,6 +26,7 @@ namespace GymeeDestkopApp
             NoTouchTimer.Start();
             MainHost.PreviewTouchMove += ResetTimerFingerTouch;
             MainHost.PreviewMouseMove += ResetTimerMouseTouch;
+            MainHost.SelectedIndex = STARTER_INDEX;
             Messenger.Register<MainWindow, ChangePageMessage>(this, (r, m) => r.Receive(m));
         }
 
@@ -51,7 +52,7 @@ namespace GymeeDestkopApp
             {
                 if (MainHost.SelectedIndex == (int)PageIndex.WORKOUT_VIDEO)
                     return;
-                MainHost.SelectedIndex = 0;
+                MainHost.SelectedIndex = STARTER_INDEX;
                 ResetAllViews();
                 Messenger.Send("resetVM");
                 Osklib.OnScreenKeyboard.Close();
@@ -65,7 +66,7 @@ namespace GymeeDestkopApp
 
         private void Receive(ChangePageMessage message)
         {
-            int index = (int)message.Index;
+            int index = (message.Index == PageIndex.INTRO_PAGE) ? STARTER_INDEX : (int)message.Index;
             if (MainHost.SelectedIndex == index)
                 return;
 
