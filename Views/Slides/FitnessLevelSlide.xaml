@@ -34,7 +34,7 @@
                     Height="151" Width="778" TextAlignment="Right" LineHeight="18">
                     <Run FontWeight="Bold" FontSize="48" Text="מנוסה"/><LineBreak/>
                     <LineBreak/>
-                    <Run FontWeight="Light" FontSize="30" Text="יצא לעשות בעיקר אימונים עם מכשירי הכוח אבל לא עם משקל חופשי"/>
+                    <Run FontWeight="Light" FontSize="30" Text="יצא לי לעשות בעיקר אימונים עם מכשירי הכוח אבל לא עם משקל חופשי"/>
                 </TextBlock>
             </Button>
             <Button x:Name="Advanced" Height="173" Width="812" Margin="30"
