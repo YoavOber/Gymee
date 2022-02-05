@@ -57,7 +57,7 @@ namespace GymeeDestkopApp.Views
         //as Tamir and Omri asked - video source uri is loaded according to level
         private void Start()
         {
-            string uri = "pack://siteoforigin:,,/Views/Media/";
+            string uri = "pack://siteoforigin:,,,/Views/Media/";
             switch (userData.fitnessLevel)
             {
                 case FitnessLevel.Beginner:
