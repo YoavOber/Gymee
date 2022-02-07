@@ -24,6 +24,17 @@ In addition, two configuration files must be present at the root level:
 1. GymeeConfig.json - includes general configuration data for various parts of the project
 2. VidConfig.json - includes configuration data to split the training video (this is currently not in use)
 
-*On installation, run [dotnet restore](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-restore) 
+# Installation
 
-*[For On Screen Keyboard]( https://support.microsoft.com/en-us/windows/use-the-on-screen-keyboard-osk-to-type-ecbb5e08-5b4e-d8c8-f794-81dbf896267a)
+1. Download the latest distributable version from the [releases](https://github.com/YoavOber/Gymee/releases)
+2. Unzip them where you wish
+3. Configure the `GymeeConfig.json` file
+4. Install the media according to the instructions
+
+# Updating
+
+1. Download the latest distributable version from the [releases](https://github.com/YoavOber/Gymee/releases)
+2. Unzip to the install location, making sure **NOT** to override the json config files or media.
+
+# On Screen Keyboard
+See [here](https://support.microsoft.com/en-us/windows/use-the-on-screen-keyboard-osk-to-type-ecbb5e08-5b4e-d8c8-f794-81dbf896267a)
