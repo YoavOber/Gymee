@@ -83,6 +83,15 @@ namespace GymeeDestkopApp.Services
             public string error;
         }
 
+        public static string Reverse(string text)
+        {
+            if (text == null) return null;
+
+            // this was posted by petebob as well 
+            char[] array = text.ToCharArray();
+            Array.Reverse(array);
+            return new String(array);
+        }
         public static async Task<SignUpResult> SignUp(User user)
         {
             var registerBody = new
@@ -91,7 +100,7 @@ namespace GymeeDestkopApp.Services
                 branch = user.Branch,
                 email = user.Email.ToLower(),
                 phoneNumber = user.PhoneNumber,
-                password = user.Password,//problem - encode ?
+                password = Reverse(user.Password),//problem - encode ?
                 dob = user.DateOfBirth,
                 gender = user.Gender.ToString(),
                 height = user.Height,
