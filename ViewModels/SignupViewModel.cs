@@ -250,7 +250,7 @@ namespace GymeeDestkopApp.ViewModels
                 }
                 else
                 {
-                    ErrorMessage = signUpResult.error; 
+                    ErrorMessage = "תקלה בהרשמה,יש לנסות שנית עם פרטים אחרים";//signUpResult.error; 
                 }
             }
         }
