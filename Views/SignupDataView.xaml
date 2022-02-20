@@ -51,13 +51,13 @@
                   BorderBrush="#FFF"/>
         <PasswordBox x:Name="Password" Margin="0,1188,0,596.5" Width="816"  VerticalContentAlignment="Bottom"
             Foreground="#FFF" Style="{StaticResource MaterialDesignFilledPasswordBox}" PasswordChanged="Password_PasswordChanged" 
-            FlowDirection="RightToLeft" materialDesign:HintAssist.Hint="סיסמא" 
+            FlowDirection="LeftToRight" materialDesign:HintAssist.Hint="סיסמא" HorizontalContentAlignment="Right"
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50"
             FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
             BorderBrush="#FFF" Visibility="Visible"/>
         <TextBox x:Name="ShowPassTxtBox"  Margin="132,1182,132,596" Width="816"  VerticalContentAlignment="Bottom"
             Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
-            FlowDirection="RightToLeft" TextChanged="ShowPassTxtBox_TextChanged"
+            FlowDirection="LeftToRight" HorizontalContentAlignment="Right" TextChanged="ShowPassTxtBox_TextChanged"
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50"
             Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"
             FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"

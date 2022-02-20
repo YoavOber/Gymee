@@ -44,6 +44,8 @@ namespace GymeeDesktopApp.Views
             {
                 renderView();
             };
+
+
         }
 
 
@@ -62,23 +64,23 @@ namespace GymeeDesktopApp.Views
         {
             ((SignupDetailsViewModel)DataContext).Password = ((PasswordBox)sender).Password;
         }
-
+        private void ShowPassTxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ((SignupDetailsViewModel)DataContext).Password = ((TextBox)sender).Text;
+        }
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            ShowPassTxtBox.Text = Password.Password;
             Password.Visibility = Visibility.Collapsed;
             ShowPassTxtBox.Visibility = Visibility.Visible;
             CheckBx.Content = "הסתר סיסמא";
         }
         private void CheckBox_UnChecked(object sender, RoutedEventArgs e)
         {
+            Password.Password = ShowPassTxtBox.Text;
             Password.Visibility = Visibility.Visible;
             ShowPassTxtBox.Visibility = Visibility.Collapsed;
             CheckBx.Content = "הצג סיסמא";
-        }
-
-        private void ShowPassTxtBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Password.Password = ShowPassTxtBox.Text;
         }
 
     }
