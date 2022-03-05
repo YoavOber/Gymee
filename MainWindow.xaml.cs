@@ -97,6 +97,7 @@ namespace GymeeDestkopApp
             FitnessDataView.Reset();
             LoginDataView = new GymeeDesktopApp.Views.LoginView();
             SignupDataView = new GymeeDesktopApp.Views.SignupDataView();
+            
         }
     }
 }

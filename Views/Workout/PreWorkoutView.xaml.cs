@@ -29,6 +29,7 @@ namespace GymeeDestkopApp.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //for password reset test -   StrongReferenceMessenger.Default.Send(new ChangePageMessage(PageIndex.POST_WORKOUT_VIEW));//starts countdown timer
             StrongReferenceMessenger.Default.Send(new ChangePageMessage(PageIndex.COUNT_DOWN_WORKOUT));//starts countdown timer
         }
     }

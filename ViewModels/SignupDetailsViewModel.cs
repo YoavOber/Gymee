@@ -77,6 +77,7 @@ namespace GymeeDesktopApp.ViewModels
             IsValidPassword = true;
             IsValidEmail = true;
             IsValidFullName = true;
+            
         }
 
         #region Properties

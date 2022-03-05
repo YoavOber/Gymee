@@ -36,7 +36,7 @@ namespace GymeeDestkopApp.Views
             };
             Month.ItemsSource = ls;
 
-            List<int> years = Enumerable.Range(1940, 80).ToList();
+            List<int> years = Enumerable.Range(1930, 90).ToList();
             Years.ItemsSource = years;
 
             ViewModels.SignupViewModel.OnChangeScreen += OnScrollerLoaded;
@@ -47,7 +47,7 @@ namespace GymeeDestkopApp.Views
             if (name != "age")
                 return;
             if (Years.SelectedIndex == -1)
-                Years.ScrollIntoView(Years.Items.GetItemAt(60));//year 2000 ~
+                Years.ScrollIntoView(Years.Items.GetItemAt(70));//year 2000 ~
             else
             {
                 Years.ScrollIntoView(Years.SelectedItem);
