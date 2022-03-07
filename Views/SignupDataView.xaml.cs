@@ -25,6 +25,8 @@ namespace GymeeDesktopApp.Views
         public SignupDataView()
         {
             InitializeComponent();
+            Password.Password = "";
+            ShowPassTxtBox.Text = "";
             FullName.PreviewTouchDown += OpenOSK;
             Password.PreviewTouchDown += OpenOSK;
             EmailAddr.PreviewTouchDown += OpenOSK;
@@ -65,12 +67,14 @@ namespace GymeeDesktopApp.Views
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            ShowPassTxtBox.Text = Password.Password;
             Password.Visibility = Visibility.Collapsed;
             ShowPassTxtBox.Visibility = Visibility.Visible;
             CheckBx.Content = "הסתר סיסמא";
         }
         private void CheckBox_UnChecked(object sender, RoutedEventArgs e)
         {
+            Password.Password = ShowPassTxtBox.Text;
             Password.Visibility = Visibility.Visible;
             ShowPassTxtBox.Visibility = Visibility.Collapsed;
             CheckBx.Content = "הצג סיסמא";
@@ -78,7 +82,7 @@ namespace GymeeDesktopApp.Views
 
         private void ShowPassTxtBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Password.Password = ShowPassTxtBox.Text;
+            ((SignupDetailsViewModel)DataContext).Password = ((TextBox)sender).Text;
         }
 
     }
