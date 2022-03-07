@@ -18,8 +18,8 @@
                                 FontFamily="OpenSans" FontSize="82" FontStyle="Normal" 
                                 FontWeight="Bold" Foreground="#FFFFFFFF" LineHeight="92"
                                 Canvas.Top="651" Canvas.Left="324" Height="238" Width="801">
-            העוזר האישי<LineBreak/>
-            שלך בחדר כושר
+            תוכנית אימונים<LineBreak/>
+            אישית בקליק
                     </TextBlock>
                     <TextBlock FontFamily="OpenSans" TextAlignment="Left" FontSize="42"
            FontStyle="Normal"  FontWeight="Light" Foreground="#FFFFFFFF" TextWrapping="WrapWithOverflow" 

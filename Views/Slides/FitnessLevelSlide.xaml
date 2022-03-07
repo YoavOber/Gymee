@@ -16,23 +16,23 @@
            FontStyle="Normal" FontWeight="Bold" FlowDirection="RightToLeft" Foreground="#FFFFFFFF" 
                    LineHeight="103" Height="215" Width="755">
                 <Run Text="מה הניסיון שלך"/><LineBreak/>
-                <Run Text="בהרמת משקולות?"/>
+                <Run Text="באימוני חדר כושר?"/>
             </TextBlock>
             <Button x:Name="Begginer" Height="173" Width="812" Margin="30"
                     materialDesign:ButtonAssist.CornerRadius="20"
                     Background="#2d2e2d" Click="Begginer_Click">
                 <TextBlock x:Name="BegginerTxt" FontFamily="OpenSans" Foreground="#959595" 
-                           Height="135" Width="778" TextAlignment="Right" LineHeight="78">
-                    <Run FontWeight="Bold" FontSize="48" Text="מתחיל"/><LineBreak/>
-                    <Run FontWeight="Light" FontSize="30" Text="פעם ראשונה שלי כמתאמן בחדר כושר"/>
+                           Height="135" Width="778" FlowDirection="RightToLeft" TextAlignment="Left" LineHeight="78">
+                    <Run FontWeight="Bold" FontSize="48" Text="0-3 חודשים"/><LineBreak/>
+                    <Run FontWeight="Light" FontSize="30" Text="התחלתי להתאמן היום או ממש לאחרונה בחדר הכושר"/>
                 </TextBlock>
             </Button>
             <Button x:Name="Intermediate" Height="173" Width="812" Margin="30"
                     materialDesign:ButtonAssist.CornerRadius="20"
                     Background="#2d2e2d" Click="Intermediate_Click">
-                <TextBlock x:Name="IntermTxt" FontFamily="OpenSans" TextWrapping="WrapWithOverflow" Foreground="#959595" 
-                    Height="151" Width="778" TextAlignment="Right" LineHeight="18">
-                    <Run FontWeight="Bold" FontSize="48" Text="מנוסה"/><LineBreak/>
+                <TextBlock x:Name="IntermTxt" FontFamily="OpenSans" FlowDirection="RightToLeft" TextWrapping="WrapWithOverflow" Foreground="#959595" 
+                    Height="151" Width="778" TextAlignment="Left" LineHeight="18">
+                    <Run FontWeight="Bold" FontSize="48" Text="4-12 חודשים"/><LineBreak/>
                     <LineBreak/>
                     <Run FontWeight="Light" FontSize="30" Text="יצא לי לעשות בעיקר אימונים עם מכשירי הכוח אבל לא עם משקל חופשי"/>
                 </TextBlock>
@@ -40,10 +40,10 @@
             <Button x:Name="Advanced" Height="173" Width="812" Margin="30"
                     materialDesign:ButtonAssist.CornerRadius="20"
                     Background="#2d2e2d" Click="Advanced_Click">
-                <TextBlock x:Name="AdvancedTxt" FontFamily="OpenSans" Foreground="#959595" 
-                    Height="118" Width="778" TextAlignment="Right" LineHeight="78">
-                    <Run FontWeight="Bold" FontSize="48" Text="מתקדם"/><LineBreak/>
-                    <Run FlowDirection="RightToLeft" FontWeight="Light" FontSize="30" Text="אני מנוסה עם כל סוגי הציוד בחדר הכושר"/>
+                <TextBlock x:Name="AdvancedTxt" FontFamily="OpenSans" FlowDirection="RightToLeft" Foreground="#959595" 
+                    Height="118" Width="778" TextAlignment="Left" LineHeight="78">
+                    <Run FontWeight="Bold" FontSize="48" Text="מעל שנה"/><LineBreak/>
+                    <Run FlowDirection="RightToLeft" FontWeight="Light" FontSize="30" Text="חדר הכושר זה הבית השני שלי!"/>
                 </TextBlock>
             </Button>
         </ListBox>

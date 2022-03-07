@@ -22,6 +22,8 @@ namespace GymeeDestkopApp.Views
     /// </summary>
     public partial class BirthdayScroller : UserControl
     {
+        int startYear = 1920;
+        int maxAge = 100;
         private StrongReferenceMessenger Messenger { get; set; } = StrongReferenceMessenger.Default;
         public BirthdayScroller()
         {
@@ -36,7 +38,7 @@ namespace GymeeDestkopApp.Views
             };
             Month.ItemsSource = ls;
 
-            List<int> years = Enumerable.Range(1940, 80).ToList();
+            List<int> years = Enumerable.Range(startYear, maxAge).ToList();
             Years.ItemsSource = years;
 
             ViewModels.SignupViewModel.OnChangeScreen += OnScrollerLoaded;
@@ -47,7 +49,7 @@ namespace GymeeDestkopApp.Views
             if (name != "age")
                 return;
             if (Years.SelectedIndex == -1)
-                Years.ScrollIntoView(Years.Items.GetItemAt(60));//year 2000 ~
+                Years.ScrollIntoView(Years.Items.GetItemAt(2000 - startYear));//year 2000 ~
             else
             {
                 Years.ScrollIntoView(Years.SelectedItem);
