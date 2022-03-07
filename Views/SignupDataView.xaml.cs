@@ -27,6 +27,9 @@ namespace GymeeDesktopApp.Views
             Password.Password = "";
             ShowPassTxtBox.Text = "";
             InitializeComponent();
+            Password.Password = "";
+            ShowPassTxtBox.Text = "";
+            CheckBx.Visibility = Visibility.Hidden;
             FullName.PreviewTouchDown += OpenOSK;
             Password.PreviewTouchDown += OpenOSK;
             EmailAddr.PreviewTouchDown += OpenOSK;
@@ -84,5 +87,6 @@ namespace GymeeDesktopApp.Views
             ShowPassTxtBox.Visibility = Visibility.Collapsed;
             CheckBx.Content = "הצג סיסמא";
         }
+
     }
 }

@@ -51,7 +51,7 @@
                   BorderBrush="#FFF"/>
         <PasswordBox x:Name="Password" Margin="0,1188,0,596.5" Width="816"  VerticalContentAlignment="Bottom"
             Foreground="#FFF" Style="{StaticResource MaterialDesignFilledPasswordBox}" PasswordChanged="Password_PasswordChanged" 
-            FlowDirection="LeftToRight" materialDesign:HintAssist.Hint="סיסמא" HorizontalContentAlignment="Right"
+            FlowDirection="LeftToRight" HorizontalContentAlignment="Right" materialDesign:HintAssist.Hint="סיסמא" 
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50"
             FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
             BorderBrush="#FFF" Visibility="Visible"/>
