@@ -24,6 +24,8 @@ namespace GymeeDesktopApp.Views
     {
         public SignupDataView()
         {
+            Password.Password = "";
+            ShowPassTxtBox.Text = "";
             InitializeComponent();
             FullName.PreviewTouchDown += OpenOSK;
             Password.PreviewTouchDown += OpenOSK;
@@ -81,15 +83,6 @@ namespace GymeeDesktopApp.Views
             Password.Visibility = Visibility.Visible;
             ShowPassTxtBox.Visibility = Visibility.Collapsed;
             CheckBx.Content = "הצג סיסמא";
-        }
-
-
-        private void moveNext_Click(object sender, RoutedEventArgs e)
-        {
-            //ensure reset
-           // Password.Password = "";
-            //ShowPassTxtBox.Text = "";
-           // PassErrTxt.Visibility = Visibility.Collapsed;
         }
     }
 }
