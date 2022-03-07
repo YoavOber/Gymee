@@ -22,6 +22,8 @@ namespace GymeeDestkopApp.Views
         const string INTERMEDIATE_VID = "Workout Video-Intermediate.mov";
         const string ADVENCED_VID = "Workout Video-Advanced.mov";
 
+        private bool playing;
+
         private IGymeeRecorder GymeeRecorder { get; set; }
         private MediaPlayer SoundPlayer { get; set; }
         private StrongReferenceMessenger Messenger { get; set; } = StrongReferenceMessenger.Default;
@@ -31,6 +33,7 @@ namespace GymeeDestkopApp.Views
         public WorkoutVideoView()
         {
             InitializeComponent();
+            playing = false;
             QuitDialogBox.Visibility = Visibility.Collapsed;
          //   var config = ConfigurationService.GetConfiguration();
          //   GymeeRecorder = new RealSenseGymeeRecorder(config.Width, config.Height, config.Fps);
@@ -49,7 +52,7 @@ namespace GymeeDestkopApp.Views
                  }
                  else if (m.Index == PageIndex.WORKOUT_VIDEO)
                  {
-                     Start();
+                    Start();
                  }
              });
         }
@@ -85,6 +88,7 @@ namespace GymeeDestkopApp.Views
          //   GymeeRecorder.Start(userData.email);
             VideoPlayer.Play();
             PlayRandomTrack();
+            playing = true;
         }
 
         private void PlayRandomTrack()
@@ -97,7 +101,10 @@ namespace GymeeDestkopApp.Views
 
         private async void Video_MediaEnded(object sender, RoutedEventArgs e)
         {
-            SoundPlayer.Stop();
+            if (playing) {
+                SoundPlayer.Stop();
+                playing = false;
+            }
     //        GymeeRecorder.End();
             var result = await GymeeAuthenticateService.onAssessmentDone(userData.email, userData.name);
             if (result)
@@ -131,6 +138,7 @@ namespace GymeeDestkopApp.Views
         {
             VideoPlayer.Stop();
             SoundPlayer.Stop();
+            playing = false;
             Messenger.Send(new ChangePageMessage(workoutTerminated ? PageIndex.INTRO_PAGE : PageIndex.POST_WORKOUT_VIEW));
           /*  if(workoutTerminated) {
                 GymeeRecorder.DeleteRecordingData();
