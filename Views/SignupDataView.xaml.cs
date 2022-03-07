@@ -87,8 +87,8 @@ namespace GymeeDesktopApp.Views
         private void moveNext_Click(object sender, RoutedEventArgs e)
         {
             //ensure reset
-            Password.Password = "";
-            ShowPassTxtBox.Text = "";
+           // Password.Password = "";
+            //ShowPassTxtBox.Text = "";
            // PassErrTxt.Visibility = Visibility.Collapsed;
         }
     }
