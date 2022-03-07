@@ -27,6 +27,7 @@ namespace GymeeDesktopApp.Views
             InitializeComponent();
             Password.Password = "";
             ShowPassTxtBox.Text = "";
+            CheckBx.Visibility = Visibility.Hidden;
             FullName.PreviewTouchDown += OpenOSK;
             Password.PreviewTouchDown += OpenOSK;
             EmailAddr.PreviewTouchDown += OpenOSK;
