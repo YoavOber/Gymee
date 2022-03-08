@@ -24,8 +24,6 @@ namespace GymeeDesktopApp.Views
     {
         public SignupDataView()
         {
-            Password.Password = "";
-            ShowPassTxtBox.Text = "";
             InitializeComponent();
             Password.Password = "";
             ShowPassTxtBox.Text = "";
