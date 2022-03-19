@@ -232,26 +232,34 @@ namespace GymeeDestkopApp.ViewModels
                     WeeklyWorkouts = this.WeeklyWorkouts,
                     Gender = gender
                 };
-
-                ErrorMessage = string.Empty;
-                IsLoading = true;
-                var signUpResult = await GymeeAuthenticateService.SignUp(user);
-                IsLoading = false;
-                if (signUpResult.success)
+                try
                 {
-                    var toLoginResult = new GymeeAuthenticateService.LoginResult //used by workout view
+                    ErrorMessage = string.Empty;
+                    IsLoading = true;
+                    var signUpResult = await GymeeAuthenticateService.SignUp(user);
+                    IsLoading = false;
+                    if (signUpResult.success)
                     {
-                        email = UserCredentials.EmailAddr,
-                        name = UserCredentials.FullName,
-                        fitnessLevel = FitnessLevel.Beginner //on sign up - user is always a beginner
-                    };
-                    Messenger.Send(new ChangePageMessage(PageIndex.PRE_WORKOUT,toLoginResult));
-                    return;
+                        var toLoginResult = new GymeeAuthenticateService.LoginResult //used by workout view
+                        {
+                            email = UserCredentials.EmailAddr,
+                            name = UserCredentials.FullName,
+                            fitnessLevel = FitnessLevel.Beginner //on sign up - user is always a beginner
+                        };
+                        Messenger.Send(new ChangePageMessage(PageIndex.PRE_WORKOUT, toLoginResult));
+                        return;
+                    }
+                    else
+                    {
+                        ErrorMessage = "תקלה בהרשמה,יש לנסות שנית עם פרטים אחרים";//signUpResult.error; 
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    ErrorMessage = "תקלה בהרשמה,יש לנסות שנית עם פרטים אחרים";//signUpResult.error; 
+                    ErrorMessage = "תקלה לא ידועה, נא לבדוק את חיבור הרשת";//signUpResult.error; 
+
                 }
+
             }
         }
         ~SignupViewModel()
@@ -261,6 +269,7 @@ namespace GymeeDestkopApp.ViewModels
 
         private void Reset()
         {
+           // UserCredentials = null;
             Progress = 25;
             CanMoveNext = false;
             TransitionerIndex = 0;

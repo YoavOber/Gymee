@@ -86,6 +86,7 @@ namespace GymeeDestkopApp.Services
       
         public static async Task<SignUpResult> SignUp(User user)
         {
+
             var registerBody = new
             {
                 name = user.FullName,
