@@ -51,7 +51,7 @@
                   BorderBrush="#FFF"/>
         <PasswordBox x:Name="Password" Margin="0,1188,0,596.5" Width="816"  VerticalContentAlignment="Bottom"
             Foreground="#FFF" Style="{StaticResource MaterialDesignFilledPasswordBox}" PasswordChanged="Password_PasswordChanged" 
-            FlowDirection="LeftToRight" materialDesign:HintAssist.Hint="סיסמא" HorizontalContentAlignment="Right"
+            FlowDirection="LeftToRight" HorizontalContentAlignment="Right" materialDesign:HintAssist.Hint="סיסמא" 
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50"
             FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
             BorderBrush="#FFF" Visibility="Visible"/>
@@ -67,7 +67,7 @@
                   Unchecked="CheckBox_UnChecked" Background="Black"></CheckBox>
         <Button
             IsEnabled="{Binding CanMoveNext}" Name="moveNext" 
-            Command="{Binding MoveNextCmd}" Click="moveNext_Click"
+            Command="{Binding MoveNextCmd}"
             Style="{StaticResource MaterialDesignRaisedAccentButton}" materialDesign:ButtonAssist.CornerRadius="58"
             Background="{Binding CanMoveNext,Converter={StaticResource BoolToFill}}" Margin="329,1584,328,220" Height="116">
             <TextBlock Text="הבא" FontFamily="OpenSans" FontSize="41" FontStyle="Normal" FontWeight="Medium" 
@@ -75,7 +75,7 @@
                 Height="58"/>
         </Button>
         <Button Content="?משתמש קיים" Style="{StaticResource MaterialDesignFlatButton}"
-                FontFamily="OpenSans" FontSize="41" Click="moveNext_Click"
+                FontFamily="OpenSans" FontSize="41"
                 Command="{Binding UserExistsCmd}"
                 Foreground="#FF999999" Margin="329,1728,328,136" Height="56" FontWeight="Light"/>
 

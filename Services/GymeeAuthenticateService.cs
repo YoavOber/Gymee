@@ -83,7 +83,6 @@ namespace GymeeDestkopApp.Services
             public string error;
         }
 
-      
         public static async Task<SignUpResult> SignUp(User user)
         {
 
