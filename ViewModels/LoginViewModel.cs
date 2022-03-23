@@ -67,12 +67,19 @@ namespace GymeeDesktopApp.ViewModels
             {
                 IsLoading = true;
                 UserExists = true;
-                var result = await GymeeAuthenticateService.Login(PhoneNumber, EmailAddr.ToLower());
-                UserExists = result.loggedIn;
-                IsLoading = false;
-                if (UserExists)
+                try
                 {
-                    Messenger.Send(new ChangePageMessage(PageIndex.PRE_WORKOUT,result));
+                    var result = await GymeeAuthenticateService.Login(PhoneNumber, EmailAddr.ToLower());
+                    UserExists = result.loggedIn;
+                    IsLoading = false;
+                    if (UserExists)
+                    {
+                        Messenger.Send(new ChangePageMessage(PageIndex.PRE_WORKOUT, result));
+                    }
+                }
+                catch
+                {
+                    UserExists = false;
                 }
             });
             Messenger.Register<LoginViewModel, string>(this, (r, m) =>

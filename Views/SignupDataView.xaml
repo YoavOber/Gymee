@@ -59,7 +59,7 @@
             Style="{StaticResource MaterialDesignFilledTextBox}" Foreground="#FFF" TextWrapping="Wrap" 
             FlowDirection="LeftToRight" HorizontalContentAlignment="Right" TextChanged="ShowPassTxtBox_TextChanged"
             materialDesign:HintAssist.FontFamily="OpenSans" FontSize="50"
-            Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"
+             Visibility="Collapsed"
             FontFamily="{DynamicResource MaterialDesignFont}" FontWeight="Light"
             BorderBrush="#FFF" TouchDown="OpenOSK"/>
         <CheckBox x:Name="CheckBx" Margin="110,1328,804,540" Content="הצג סיסמא" FontWeight="UltraLight" HorizontalContentAlignment="Left"

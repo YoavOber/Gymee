@@ -73,8 +73,8 @@ namespace GymeeDestkopApp
             switch (message.Index)
             {
                 case PageIndex.INTRO_PAGE:
-                    Messenger.Send("resetVM");
                     ResetAllViews();
+                    Messenger.Send("resetVM");
                     NoTouchTimer.Start();
                     Osklib.OnScreenKeyboard.Close();
                     break;

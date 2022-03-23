@@ -143,7 +143,7 @@ namespace GymeeDestkopApp.Views
           //  Messenger.Send(new ChangePageMessage(workoutTerminated ? PageIndex.INTRO_PAGE : PageIndex.POST_WORKOUT_VIEW));
             if (workoutTerminated)
             {
-                Messenger.Send("resetVM"); //make sure resets...although should work anyway
+            //    Messenger.Send("resetVM"); //make sure resets...although should work anyway
                 Messenger.Send(new ChangePageMessage(PageIndex.INTRO_PAGE));
             }
             else
