@@ -25,9 +25,9 @@ namespace GymeeDesktopApp.Views
         public SignupDataView()
         {
             InitializeComponent();
-          //  Password.Password = "";
-           // ShowPassTxtBox.Text = "";
-          //  CheckBx.Visibility = Visibility.Hidden;
+            //Password.Password = "";
+            //ShowPassTxtBox.Text = "";
+            //  CheckBx.Visibility = Visibility.Hidden;
             FullName.PreviewTouchDown += OpenOSK;
             Password.PreviewTouchDown += OpenOSK;
             EmailAddr.PreviewTouchDown += OpenOSK;
@@ -49,6 +49,15 @@ namespace GymeeDesktopApp.Views
             };
 
 
+        }
+
+        public void reset()
+        {
+            FullName.Text = "";
+            Password.Password = "";
+            ShowPassTxtBox.Text = "";
+            PhoneNumber.Text = "";
+            EmailAddr.Text = "";
         }
 
 

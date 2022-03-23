@@ -67,12 +67,13 @@ namespace GymeeDestkopApp
         private void Receive(ChangePageMessage message)
         {
             int index = (message.Index == PageIndex.INTRO_PAGE) ? STARTER_INDEX : (int)message.Index;
-            if (MainHost.SelectedIndex == index)
-                return;
+            //if (MainHost.SelectedIndex == index)
+            //    return;
 
             switch (message.Index)
             {
                 case PageIndex.INTRO_PAGE:
+                    SignupDataView.reset();
                     ResetAllViews();
                     Messenger.Send("resetVM");
                     NoTouchTimer.Start();
